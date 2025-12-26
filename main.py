@@ -12,7 +12,7 @@ page_4 = st.Page("page4.py", title="Page 4")
 # Create navigation menu
 pg = st.navigation(
     {
-        "Menu": [page_1, page_2, page_3]
+        "Menu": [page_1, page_2, page_3, page_4]
     }
 )
 
