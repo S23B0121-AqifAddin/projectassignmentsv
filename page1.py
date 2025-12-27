@@ -58,7 +58,7 @@ ax.set_ylabel('Monthly Income Range')
 
 st.pyplot(fig)
 
-# Title
+# Title app
 st.title("Relationship between Having a Budget and Regular Savings")
 
 # Load data dari GitHub
