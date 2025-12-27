@@ -61,15 +61,11 @@ st.pyplot(fig)
 # Title
 st.title("Relationship between Having a Budget and Regular Savings")
 
-# Load data from GitHub
+# Load data dari GitHub
 url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv"
 data = pd.read_csv(url)
 
-# Preview data
-st.subheader("Dataset Preview")
-st.dataframe(data.head())
-
-# Crosstab (normalized by index)
+# Crosstab (normalize ikut index)
 budget_savings_crosstab = pd.crosstab(
     data['Has_Budget'],
     data['Regular_Savings'],
@@ -93,5 +89,5 @@ ax.legend(title='Regular Savings')
 
 plt.tight_layout()
 
-# Display in Streamlit
+# Papar dalam Streamlit
 st.pyplot(fig)
