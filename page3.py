@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-
 # --- Data Loading and Caching ---
 DATA_URL = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv"
 
