@@ -57,5 +57,3 @@ ax.set_xlabel('Count')
 ax.set_ylabel('Monthly Income Range')
 
 st.pyplot(fig)
-
-
