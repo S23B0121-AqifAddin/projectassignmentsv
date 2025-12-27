@@ -30,7 +30,7 @@ except UnicodeDecodeError:
     df2 = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 df2
 
-# Title
+# Title Bar Chart
 st.title("Distribution of Monthly Income Range")
 
 # Load data 
@@ -58,36 +58,4 @@ ax.set_ylabel('Monthly Income Range')
 
 st.pyplot(fig)
 
-# Title app
-st.title("Relationship between Having a Budget and Regular Savings")
 
-# Load data dari GitHub
-url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv"
-data = pd.read_csv(url)
-
-# Crosstab (normalize ikut index)
-budget_savings_crosstab = pd.crosstab(
-    data['Has_Budget'],
-    data['Regular_Savings'],
-    normalize='index'
-)
-
-# Plot
-fig, ax = plt.subplots(figsize=(12, 7))
-budget_savings_crosstab.plot(
-    kind='bar',
-    stacked=True,
-    colormap='viridis',
-    ax=ax
-)
-
-ax.set_title('Relationship between Having a Budget and Regular Savings')
-ax.set_xlabel('Has Budget')
-ax.set_ylabel('Proportion')
-ax.set_xticklabels(ax.get_xticklabels(), rotation=0)
-ax.legend(title='Regular Savings')
-
-plt.tight_layout()
-
-# Papar dalam Streamlit
-st.pyplot(fig)
