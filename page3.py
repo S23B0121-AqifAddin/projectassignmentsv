@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 
+# Set Streamlit page configuration (must be the first Streamlit command)
+st.set_page_config(
+    page_title="Financial Behaviour among University Students",
+    layout="wide" # Set layout here for consistency
+)
+
+
 # --- Data Loading and Caching ---
 DATA_URL = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv"
 
