@@ -57,32 +57,3 @@ ax.set_xlabel('Count')
 ax.set_ylabel('Monthly Income Range')
 
 st.pyplot(fig)
-
-# Title
-st.title("Saver vs Spender by Gender")
-
-# Load dataset dari GitHub
-url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv"
-data = pd.read_csv(url)
-
-# Plot
-fig, ax = plt.subplots(figsize=(10, 6))
-
-sns.countplot(
-    data=data,
-    x='Gender',
-    hue='Saver_Spender',
-    palette='coolwarm',
-    ax=ax
-)
-
-ax.set_title('Saver vs. Spender by Gender')
-ax.set_xlabel('Gender')
-ax.set_ylabel('Number of Students')
-ax.legend(
-    title='Saver/Spender Rating',
-    bbox_to_anchor=(1.05, 1),
-    loc='upper left'
-)
-
-st.pyplot(fig)
