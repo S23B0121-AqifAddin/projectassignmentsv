@@ -57,32 +57,3 @@ ax.set_xlabel('Count')
 ax.set_ylabel('Monthly Income Range')
 
 st.pyplot(fig)
-
-# Title 2
-st.title("Relationship between Having a Budget and Regular Savings")
-
-# Create crosstab (normalized by index)
-budget_savings_crosstab = pd.crosstab(
-    data['Has_Budget'],
-    data['Regular_Savings'],
-    normalize='index'
-)
-
-# Plot stacked bar chart
-fig, ax = plt.subplots(figsize=(12, 7))
-budget_savings_crosstab.plot(
-    kind='bar',
-    stacked=True,
-    colormap='viridis',
-    ax=ax
-)
-
-ax.set_title('Relationship between Having a Budget and Regular Savings')
-ax.set_xlabel('Has Budget')
-ax.set_ylabel('Proportion')
-ax.set_xticklabels(ax.get_xticklabels(), rotation=0)
-ax.legend(title='Regular Savings')
-
-plt.tight_layout()
-
-st.pyplot(fig)
