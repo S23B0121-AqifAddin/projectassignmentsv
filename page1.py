@@ -89,5 +89,4 @@ ax.legend(title='Regular Savings')
 
 plt.tight_layout()
 
-# Display plot in Streamlit
 st.pyplot(fig)
