@@ -85,6 +85,4 @@ ax.legend(
     loc='upper left'
 )
 
-plt.tight_layout()
-
 st.pyplot(fig)
