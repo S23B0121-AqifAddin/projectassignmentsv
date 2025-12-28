@@ -58,7 +58,7 @@ ax.set_ylabel('Monthly Income Range')
 
 st.pyplot(fig)
 
-# Title Bar Chart
+# Title
 st.title("Saver vs Spender by Gender")
 
 # Load dataset dari GitHub
@@ -88,4 +88,3 @@ ax.legend(
 plt.tight_layout()
 
 st.pyplot(fig)
-
