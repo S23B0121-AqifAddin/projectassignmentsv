@@ -60,10 +60,10 @@ if st.checkbox("Show raw awareness data"):
 
 st.subheader("Buying Behavior Analysis")
 
-# 1. Create the figure and axis object
+# 2. Create the figure and axis objects
 fig, ax = plt.subplots(figsize=(8, 6))
 
-# 2. Plot using Seaborn (pass the 'ax' object)
+# 3. Generate the Seaborn plot on the specific axis (ax=ax)
 sns.countplot(
     data=df_awareness, 
     x='Search_Info_Before_Buying', 
@@ -71,10 +71,14 @@ sns.countplot(
     ax=ax
 )
 
-# 3. Standard Matplotlib styling
+# 4. Customizing the plot
 ax.set_title('Frequency of Searching Information Before Buying')
 ax.set_xlabel('')
 ax.set_ylabel('Count')
+plt.xticks(rotation=45, ha='right')
+
+# 5. Display the plot in Streamlit
+st.pyplot(fig)
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
 
