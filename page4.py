@@ -66,9 +66,8 @@ import plotly.express as px
 fig = px.histogram(
     df_awareness, 
     x='Search_Info_Before_Buying',
-    title='Frequency of Searching Information Before Buying',
+    color='Search_Info_Before_Buying',
     color_discrete_sequence=px.colors.sequential.Viridis,
-    # Optional: Sort categories if needed (e.g., by count)
     category_orders={"Search_Info_Before_Buying": df_awareness['Search_Info_Before_Buying'].value_counts().index.tolist()}
 )
 
