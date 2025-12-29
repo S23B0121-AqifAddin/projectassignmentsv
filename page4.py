@@ -87,3 +87,31 @@ fig.update_layout(
 
 # 4. Display in Streamlit
 st.plotly_chart(fig, use_container_width=True)
+
+import streamlit as st
+import plotly.express as px
+
+# 1. Header
+st.subheader("Product Comparison Trends")
+
+# 2. Create the Interactive Plotly Chart
+fig = px.histogram(
+    df_awareness, 
+    x='Compare_Products_Services',
+    title='Frequency of Comparing Products/Services',
+    color='Compare_Products_Services',
+    color_discrete_sequence=px.colors.sequential.Viridis,
+    # This sorts the bars from highest count to lowest
+    category_orders={"Compare_Products_Services": df_awareness['Compare_Products_Services'].value_counts().index.tolist()}
+)
+
+# 3. Styling the layout
+fig.update_layout(
+    xaxis_title=None,
+    yaxis_title="Count",
+    showlegend=False,
+    hovermode="x unified"
+)
+
+# 4. Render in Streamlit
+st.plotly_chart(fig, use_container_width=True)
