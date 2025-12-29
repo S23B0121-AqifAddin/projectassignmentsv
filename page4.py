@@ -61,57 +61,53 @@ if st.checkbox("Show raw awareness data"):
 #Visualization
 
 import streamlit as st
-import plotly.express as px
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-# 1. Header for the visualization
-st.subheader("Consumer Behavior Analysis")
+# Title of the dashboard
+st.title("Consumer Awareness Analysis")
 
-# 2. Create the Plotly figure
-# px.histogram automatically counts occurrences of the x-variable
-fig = px.histogram(
-    df_awareness, 
-    x='Search_Info_Before_Buying',
-    title='Frequency of Searching Information Before Buying',
-    color='Search_Info_Before_Buying',  # Mimics the palette effect
-    color_discrete_sequence=px.colors.sequential.Viridis,
-    category_orders={"Search_Info_Before_Buying": df_awareness['Search_Info_Before_Buying'].value_counts().index.tolist()} # Optional: keeps order consistent
-)
+# --- DATA LOADING ---
+# Assuming df_awareness is already defined or loaded:
+# df_awareness = pd.read_csv('your_data.csv')
 
-# 3. Customize layout to match original styling
-fig.update_layout(
-    xaxis_title="",
-    yaxis_title="Count",
-    showlegend=False,
-    xaxis={'categoryorder':'total descending'} # Sorts bars by frequency
-)
+# --- PLOTTING FUNCTION ---
+def plot_countplot(data, column, title):
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.countplot(data=data, x=column, palette='viridis', ax=ax)
+    ax.set_title(title)
+    ax.set_xlabel('')
+    ax.set_ylabel('Count')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    return fig
 
-# 4. Display in Streamlit
-st.plotly_chart(fig, use_container_width=True)
+# --- STREAMLIT LAYOUT ---
+# Using tabs to organize the 4 charts neatly
+tab1, tab2, tab3, tab4 = st.tabs([
+    "Search Info", 
+    "Compare Products", 
+    "Compare Prices", 
+    "Read Agreements"
+])
 
-import streamlit as st
-import plotly.express as px
+with tab1:
+    st.header("Search Information Frequency")
+    fig1 = plot_countplot(df_awareness, 'Search_Info_Before_Buying', 'Frequency of Searching Information Before Buying')
+    st.pyplot(fig1)
 
-# 1. Header
-st.subheader("Product Comparison Trends")
+with tab2:
+    st.header("Product Comparison Frequency")
+    fig2 = plot_countplot(df_awareness, 'Compare_Products_Services', 'Frequency of Comparing Products/Services')
+    st.pyplot(fig2)
 
-# 2. Create the Interactive Plotly Chart
-fig = px.histogram(
-    df_awareness, 
-    x='Compare_Products_Services',
-    title='Frequency of Comparing Products/Services',
-    color='Compare_Products_Services',
-    color_discrete_sequence=px.colors.sequential.Viridis,
-    # This sorts the bars from highest count to lowest
-    category_orders={"Compare_Products_Services": df_awareness['Compare_Products_Services'].value_counts().index.tolist()}
-)
+with tab3:
+    st.header("Price Comparison Frequency")
+    fig3 = plot_countplot(df_awareness, 'Compare_Prices_Before_Buying', 'Frequency of Comparing Prices Before Buying')
+    st.pyplot(fig3)
 
-# 3. Styling the layout
-fig.update_layout(
-    xaxis_title=None,
-    yaxis_title="Count",
-    showlegend=False,
-    hovermode="x unified"
-)
-
-# 4. Render in Streamlit
-st.plotly_chart(fig, use_container_width=True)
+with tab4:
+    st.header("Agreement Reading Frequency")
+    fig4 = plot_countplot(df_awareness, 'Read_Agreement_Carefully', 'Frequency of Reading Agreement Carefully')
+    st.pyplot(fig4)
