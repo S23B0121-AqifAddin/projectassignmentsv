@@ -38,7 +38,7 @@ df
 complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
 
 # Create the figure
-fig, ax = plt.subplots(figsize=(8, 8))
+fig, ax = plt.subplots(figsize=(4, 4))
 colors = plt.cm.Set3.colors  # Distinct qualitative colormap
 
 ax.pie(
