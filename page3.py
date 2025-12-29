@@ -57,3 +57,17 @@ ax.axis('equal')  # Ensures pie is a circle
 
 # Display in Streamlit
 st.pyplot(fig)
+
+#Violin Plot
+st.subheader("Age Distribution and Complaint Behaviour")
+st.write(
+    "The violin plot illustrates how age is distributed among consumers who did and did not "
+    "file complaints regarding unsuitable products, highlighting differences in complaint patterns."
+)
+
+st.subheader("Age Distribution and Complaint Behaviour")
+st.write(
+    "The violin plot illustrates how age is distributed among consumers who did and did not "
+    "file complaints regarding unsuitable products, highlighting differences in complaint patterns."
+)
+
