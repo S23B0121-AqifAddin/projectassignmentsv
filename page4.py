@@ -57,30 +57,3 @@ st.dataframe(df_awareness.describe())
 # 5. Optional: Add a toggle to see the raw data
 if st.checkbox("Show raw awareness data"):
     st.write(df_awareness)
-
-st.subheader("Buying Behavior Analysis")
-
-# 2. Create the figure and axis objects
-fig, ax = plt.subplots(figsize=(8, 6))
-
-# 3. Generate the Seaborn plot on the specific axis (ax=ax)
-sns.countplot(
-    data=df_awareness, 
-    x='Search_Info_Before_Buying', 
-    palette='viridis', 
-    ax=ax
-)
-
-# 4. Customizing the plot
-ax.set_title('Frequency of Searching Information Before Buying')
-ax.set_xlabel('')
-ax.set_ylabel('Count')
-plt.xticks(rotation=45, ha='right')
-
-# 5. Display the plot in Streamlit
-st.pyplot(fig)
-plt.xticks(rotation=45, ha='right')
-plt.tight_layout()
-
-# 4. Display the plot in Streamlit
-st.pyplot(fig)
