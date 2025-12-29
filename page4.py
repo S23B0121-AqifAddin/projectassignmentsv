@@ -58,56 +58,46 @@ st.dataframe(df_awareness.describe())
 if st.checkbox("Show raw awareness data"):
     st.write(df_awareness)
 
-#Visualization
-
 import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Title of the dashboard
-st.title("Consumer Awareness Analysis")
+# Page configuration
+st.set_page_config(page_title="Consumer Behavior Dashboard", layout="wide")
 
-# --- DATA LOADING ---
-# Assuming df_awareness is already defined or loaded:
-# df_awareness = pd.read_csv('your_data.csv')
+st.title("📊 Consumer Awareness Analysis")
 
-# --- PLOTTING FUNCTION ---
-def plot_countplot(data, column, title):
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.countplot(data=data, x=column, palette='viridis', ax=ax)
-    ax.set_title(title)
+# --- SIDEBAR FILTERS ---
+st.sidebar.header("Filter Data")
+# Replace 'Gender' with any actual column name in your df_awareness
+gender_list = df_awareness['Gender'].unique().tolist()
+selected_gender = st.sidebar.multiselect("Select Gender", gender_list, default=gender_list)
+
+# Filter the dataframe based on selection
+filtered_df = df_awareness[df_awareness['Gender'].isin(selected_gender)]
+
+# --- REUSABLE PLOTTING FUNCTION ---
+def render_chart(column, title):
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.countplot(data=filtered_df, x=column, palette='viridis', ax=ax)
+    ax.set_title(title, fontsize=14)
     ax.set_xlabel('')
     ax.set_ylabel('Count')
     plt.xticks(rotation=45, ha='right')
-    plt.tight_layout()
-    return fig
+    st.pyplot(fig)
 
-# --- STREAMLIT LAYOUT ---
-# Using tabs to organize the 4 charts neatly
-tab1, tab2, tab3, tab4 = st.tabs([
-    "Search Info", 
-    "Compare Products", 
-    "Compare Prices", 
-    "Read Agreements"
-])
+# --- 2x2 GRID LAYOUT ---
+col1, col2 = st.columns(2)
 
-with tab1:
-    st.header("Search Information Frequency")
-    fig1 = plot_countplot(df_awareness, 'Search_Info_Before_Buying', 'Frequency of Searching Information Before Buying')
-    st.pyplot(fig1)
+with col1:
+    render_chart('Search_Info_Before_Buying', '1. Searching Product Info')
+    render_chart('Compare_Prices_Before_Buying', '3. Comparing Prices')
 
-with tab2:
-    st.header("Product Comparison Frequency")
-    fig2 = plot_countplot(df_awareness, 'Compare_Products_Services', 'Frequency of Comparing Products/Services')
-    st.pyplot(fig2)
+with col2:
+    render_chart('Compare_Products_Services', '2. Comparing Alternatives')
+    render_chart('Read_Agreement_Carefully', '4. Reading Agreements')
 
-with tab3:
-    st.header("Price Comparison Frequency")
-    fig3 = plot_countplot(df_awareness, 'Compare_Prices_Before_Buying', 'Frequency of Comparing Prices Before Buying')
-    st.pyplot(fig3)
-
-with tab4:
-    st.header("Agreement Reading Frequency")
-    fig4 = plot_countplot(df_awareness, 'Read_Agreement_Carefully', 'Frequency of Reading Agreement Carefully')
-    st.pyplot(fig4)
+# Optional: Show raw data if the user wants
+if st.checkbox("Show Raw Filtered Data"):
+    st.dataframe(filtered_df)
