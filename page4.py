@@ -63,13 +63,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Title of the dashboard
-st.title("Consumer Awareness Analysis")
-
-# --- DATA LOADING ---
-# Assuming df_awareness is already defined or loaded:
-# df_awareness = pd.read_csv('your_data.csv')
-
 # --- PLOTTING FUNCTION ---
 def plot_countplot(data, column, title):
     fig, ax = plt.subplots(figsize=(8, 6))
