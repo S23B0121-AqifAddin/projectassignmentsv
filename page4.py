@@ -4,60 +4,48 @@ import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# --------------------------------------------------
-# PAGE CONFIG
-# --------------------------------------------------
+# ==================================================
+# PAGE CONFIGURATION
+# ==================================================
 st.set_page_config(
     page_title="Consumer Awareness & Information Seeking",
     layout="wide"
 )
 
 st.header("Consumer Awareness & Information Seeking", divider="grey")
+st.subheader("Before Buying Behaviour among University Students")
 
-# --------------------------------------------------
+st.write(
+    "This section examines students’ consumer awareness and information-seeking behaviour "
+    "before making purchasing decisions. The analysis focuses on whether students actively "
+    "seek information, compare alternatives, and read important product details prior to buying."
+)
+
+# ==================================================
 # LOAD DATASET
-# --------------------------------------------------
+# ==================================================
 url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv"
 df = pd.read_csv(url)
 
-# --------------------------------------------------
-# SIDEBAR FILTERS
-# --------------------------------------------------
-st.sidebar.subheader("Filter Respondents")
+# ==================================================
+# MEMBER B VARIABLES (BEFORE BUYING)
+# ==================================================
+# Mapping to dataset columns:
+# - Reading product information → Read_Agreement_Carefully
+# - Comparing alternatives → Compare_Products_Services
+# - Seeking information → Search_Info_Before_Buying
+# - Comparing prices → Compare_Prices_Before_Buying
 
-gender_options = df["Gender"].dropna().unique()
-faculty_options = df["Faculty"].dropna().unique()
-
-selected_gender = st.sidebar.multiselect(
-    "Gender",
-    options=gender_options,
-    default=gender_options
-)
-
-selected_faculty = st.sidebar.multiselect(
-    "Faculty",
-    options=faculty_options,
-    default=faculty_options
-)
-
-df_filtered = df[
-    (df["Gender"].isin(selected_gender)) &
-    (df["Faculty"].isin(selected_faculty))
-].copy()
-
-# --------------------------------------------------
-# CONSUMER AWARENESS VARIABLES
-# --------------------------------------------------
 awareness_cols = [
-    "Search_Info_Before_Buying",
-    "Compare_Prices_Before_Buying",
+    "Read_Agreement_Carefully",
     "Compare_Products_Services",
-    "Read_Agreement_Carefully"
+    "Search_Info_Before_Buying",
+    "Compare_Prices_Before_Buying"
 ]
 
-# --------------------------------------------------
-# LIKERT ENCODING (ROBUST)
-# --------------------------------------------------
+# ==================================================
+# LIKERT SCALE ENCODING
+# ==================================================
 likert_map = {
     "Never": 1,
     "Rarely": 2,
@@ -71,70 +59,69 @@ likert_map = {
     "Strongly agree": 5
 }
 
-df_filtered[awareness_cols] = df_filtered[awareness_cols].replace(likert_map)
+df[awareness_cols] = df[awareness_cols].replace(likert_map)
 
-# FORCE NUMERIC (FIXES TYPEERROR)
-df_filtered[awareness_cols] = df_filtered[awareness_cols].apply(
+# Force numeric to avoid TypeError
+df[awareness_cols] = df[awareness_cols].apply(
     pd.to_numeric, errors="coerce"
 )
 
-# --------------------------------------------------
-# COMPOSITE SCORE
-# --------------------------------------------------
-df_filtered["Consumer_Awareness_Score"] = (
-    df_filtered[awareness_cols].mean(axis=1, skipna=True)
-)
+# ==================================================
+# COMPOSITE AWARENESS SCORE
+# ==================================================
+df["Consumer_Awareness_Score"] = df[awareness_cols].mean(axis=1, skipna=True)
 
-# --------------------------------------------------
-# KPI SECTION
-# --------------------------------------------------
+# ==================================================
+# KPI SUMMARY BOXES
+# ==================================================
 k1, k2, k3 = st.columns(3)
 
 k1.metric(
     "Average Awareness Score",
-    f"{df_filtered['Consumer_Awareness_Score'].mean():.2f} / 5"
+    f"{df['Consumer_Awareness_Score'].mean():.2f} / 5"
 )
 
 k2.metric(
     "High Awareness (≥ 4)",
-    f"{(df_filtered['Consumer_Awareness_Score'] >= 4).mean() * 100:.1f}%"
+    f"{(df['Consumer_Awareness_Score'] >= 4).mean() * 100:.1f}%"
 )
 
 k3.metric(
-    "Number of Respondents",
-    df_filtered.shape[0]
+    "Total Respondents",
+    df.shape[0]
 )
 
-# --------------------------------------------------
+# ==================================================
 # VISUALIZATION 1: BAR CHART
-# --------------------------------------------------
-st.subheader("Average Information-Seeking Behaviour")
+# ==================================================
+st.subheader("Information-Seeking Behaviour Frequency")
 
-avg_scores = df_filtered[awareness_cols].mean().reset_index()
+avg_scores = df[awareness_cols].mean().reset_index()
 avg_scores.columns = ["Behaviour", "Average Score"]
 
 fig1 = px.bar(
     avg_scores,
     x="Behaviour",
     y="Average Score",
-    title="Average Scores of Consumer Awareness Behaviours",
-    text_auto=".2f"
+    text_auto=".2f",
+    title="Average Scores of Information-Seeking Behaviours"
 )
 
 st.plotly_chart(fig1, use_container_width=True)
 
 st.write(
-    "The results indicate that students generally engage in information-seeking behaviours "
-    "before making purchases, particularly in comparing prices and searching for information."
+    "Students show relatively strong tendencies to compare prices and search for information "
+    "before purchasing. However, careful reading of agreements and detailed product comparison "
+    "are slightly less consistent."
 )
 
-# --------------------------------------------------
+# ==================================================
 # VISUALIZATION 2: HISTOGRAM
-# --------------------------------------------------
+# ==================================================
 st.subheader("Distribution of Consumer Awareness Score")
 
 fig2 = px.histogram(
-    df_filtered,
+    df,
     x="Consumer_Awareness_Score",
     nbins=10,
     title="Distribution of Consumer Awareness Scores"
@@ -143,17 +130,17 @@ fig2 = px.histogram(
 st.plotly_chart(fig2, use_container_width=True)
 
 st.write(
-    "Most respondents fall within the moderate to high awareness range, suggesting that "
-    "students are somewhat informed consumers but may not consistently apply these behaviours."
+    "The distribution indicates that most students fall within the moderate to high awareness range, "
+    "suggesting that while many students are informed consumers, there is still room for improvement."
 )
 
-# --------------------------------------------------
+# ==================================================
 # VISUALIZATION 3: BOX PLOT (AGE)
-# --------------------------------------------------
-st.subheader("Consumer Awareness Score by Age")
+# ==================================================
+st.subheader("Consumer Awareness vs Age")
 
 fig3 = px.box(
-    df_filtered,
+    df,
     x="Age",
     y="Consumer_Awareness_Score",
     title="Consumer Awareness Score Across Age Groups"
@@ -162,18 +149,17 @@ fig3 = px.box(
 st.plotly_chart(fig3, use_container_width=True)
 
 st.write(
-    "A slight increase in consumer awareness is observed among older students, indicating "
-    "that experience may contribute to more informed purchasing decisions."
+    "Older students generally demonstrate slightly higher consumer awareness scores, "
+    "indicating that experience may contribute to more informed purchasing behaviour."
 )
 
-# --------------------------------------------------
+# ==================================================
 # VISUALIZATION 4: GROUPED BAR (FACULTY)
-# --------------------------------------------------
+# ==================================================
 st.subheader("Consumer Awareness by Faculty")
 
 faculty_avg = (
-    df_filtered
-    .groupby("Faculty", as_index=False)["Consumer_Awareness_Score"]
+    df.groupby("Faculty", as_index=False)["Consumer_Awareness_Score"]
     .mean()
 )
 
@@ -181,23 +167,23 @@ fig4 = px.bar(
     faculty_avg,
     x="Faculty",
     y="Consumer_Awareness_Score",
-    title="Average Consumer Awareness Score by Faculty",
-    text_auto=".2f"
+    text_auto=".2f",
+    title="Average Consumer Awareness Score by Faculty"
 )
 
 st.plotly_chart(fig4, use_container_width=True)
 
 st.write(
-    "Differences in awareness scores across faculties suggest that academic background may "
-    "influence students’ tendency to seek information before making purchasing decisions."
+    "Differences in awareness scores across faculties suggest that academic background "
+    "may influence how actively students seek information before making purchases."
 )
 
-# --------------------------------------------------
+# ==================================================
 # VISUALIZATION 5: CORRELATION HEATMAP
-# --------------------------------------------------
+# ==================================================
 st.subheader("Correlation Between Consumer Awareness Behaviours")
 
-corr = df_filtered[awareness_cols].corr()
+corr = df[awareness_cols].corr()
 
 fig5, ax = plt.subplots(figsize=(8, 6))
 sns.heatmap(corr, annot=True, cmap="coolwarm", ax=ax)
@@ -207,6 +193,17 @@ st.pyplot(fig5)
 
 st.write(
     "Strong positive correlations indicate that students who actively search for information "
-    "also tend to compare prices and read agreements carefully, reflecting consistent "
+    "also tend to compare alternatives and read agreements carefully, reflecting consistent "
     "information-seeking behaviour."
+)
+
+# ==================================================
+# DATA COLLECTION EXPLANATION
+# ==================================================
+st.subheader("Data Collection")
+
+st.write(
+    "The data used in this analysis were collected through a group-administered survey "
+    "targeting university students. As Member B, approximately 25 responses were contributed, "
+    "focusing on consumer awareness and information-seeking behaviour prior to purchasing."
 )
