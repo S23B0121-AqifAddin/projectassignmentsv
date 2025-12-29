@@ -196,14 +196,3 @@ st.write(
     "also tend to compare alternatives and read agreements carefully, reflecting consistent "
     "information-seeking behaviour."
 )
-
-# ==================================================
-# DATA COLLECTION EXPLANATION
-# ==================================================
-st.subheader("Data Collection")
-
-st.write(
-    "The data used in this analysis were collected through a group-administered survey "
-    "targeting university students. As Member B, approximately 25 responses were contributed, "
-    "focusing on consumer awareness and information-seeking behaviour prior to purchasing."
-)
