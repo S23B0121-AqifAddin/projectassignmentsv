@@ -57,3 +57,28 @@ st.dataframe(df_awareness.describe())
 # 5. Optional: Add a toggle to see the raw data
 if st.checkbox("Show raw awareness data"):
     st.write(df_awareness)
+
+import streamlit as st
+import plotly.express as px
+
+# 1. Create the Plotly figure
+# px.histogram with a categorical x-axis behaves like sns.countplot
+fig = px.histogram(
+    df_awareness, 
+    x='Search_Info_Before_Buying',
+    title='Frequency of Searching Information Before Buying',
+    color_discrete_sequence=px.colors.sequential.Viridis,
+    # Optional: Sort categories if needed (e.g., by count)
+    category_orders={"Search_Info_Before_Buying": df_awareness['Search_Info_Before_Buying'].value_counts().index.tolist()}
+)
+
+# 2. Update Layout to match your styling
+fig.update_layout(
+    xaxis_title="",
+    yaxis_title="Count",
+    showlegend=False,
+    bargap=0.2, # Adjust gap between bars
+)
+
+# 3. Display in Streamlit
+st.plotly_chart(fig, use_container_width=True)
