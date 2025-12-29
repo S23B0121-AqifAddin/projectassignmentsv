@@ -12,9 +12,6 @@ st.set_page_config(
     layout="wide"
 )
 
-
-st.header("Consumer Awareness & Information Seeking", divider="grey")
-
 col1, col2, col3, col4 = st.columns(4)
 
 col1.metric(label="PLO 2", value="3.3", help="Cognitive Skill", border=True)
