@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import matplotlib.pyplot as plt
 
 
+# DATASET UPLOAD AND SUMMARY BOX
 # --- Corrected Imports ---
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
@@ -28,3 +30,27 @@ try:
 except UnicodeDecodeError:
     df2 = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 df2
+
+
+# DISPLAY VISUALIZATION
+#Pie Chart
+# Calculate the value counts for 'Complaint_for_Unsuitable_Product'
+complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
+
+# Create the figure
+fig, ax = plt.subplots(figsize=(8, 8))
+colors = plt.cm.Set3.colors  # Distinct qualitative colormap
+
+ax.pie(
+    complaint_counts,
+    labels=complaint_counts.index,
+    autopct='%1.1f%%',
+    startangle=90,
+    colors=colors
+)
+
+ax.set_title('Distribution of Complaint Behavior for Unsuitable Products')
+ax.axis('equal')  # Ensures pie is a circle
+
+# Display in Streamlit
+st.pyplot(fig)
