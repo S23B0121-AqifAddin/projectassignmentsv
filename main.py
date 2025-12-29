@@ -8,7 +8,7 @@ st.set_page_config(
 page_1 = st.Page("page1.py", title="(Aisyah) Budgeting & Spending Behavior")
 page_2 = st.Page("page2.py", title="(Aqif) Financial Decision-Making")
 page_3 = st.Page("page3.py", title="(Khadijah) Consumer Rights", icon=":material/balance:")
-page_4 = st.Page("page4.py", title="Page 4")
+page_4 = st.Page("page4.py", title="(Kisantini) Consumer Awareness & Information Seeking")
 
 # Create navigation menu
 pg = st.navigation(
