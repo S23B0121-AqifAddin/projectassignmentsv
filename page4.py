@@ -27,9 +27,8 @@ st.write(
 url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv"
 df = pd.read_csv(url)
 
-# ==================================================
-# MEMBER B VARIABLES (BEFORE BUYING)
-# ==================================================
+# VARIABLES (BEFORE BUYING)
+
 # Mapping to dataset columns:
 # - Reading product information → Read_Agreement_Carefully
 # - Comparing alternatives → Compare_Products_Services
@@ -37,11 +36,27 @@ df = pd.read_csv(url)
 # - Comparing prices → Compare_Prices_Before_Buying
 
 awareness_cols = [
+    "Compare_Prices_Before_Buying",
+    "Search_Info_Before_Buying",
     "Read_Agreement_Carefully",
     "Compare_Products_Services",
-    "Search_Info_Before_Buying",
-    "Compare_Prices_Before_Buying"
+    "Increase_Financial_Knowledge",
+    "Complaint_for_Unsuitable_Product",
+    "Age",
+    "Faculty"
 ]
+
+# 3. Create/Filter the dataframe
+# (Assuming 'df' is already loaded in your environment)
+df_awareness = df[awareness_cols]
+
+# 4. Display Descriptive Statistics
+st.subheader("Descriptive Statistics")
+st.dataframe(df_awareness.describe())
+
+# 5. Optional: Add a toggle to see the raw data
+if st.checkbox("Show raw awareness data"):
+    st.write(df_awareness)
 
 # ==================================================
 # LIKERT SCALE ENCODING
