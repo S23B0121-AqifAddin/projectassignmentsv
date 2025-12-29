@@ -6,13 +6,13 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 
-# ---------------- PAGE CONFIG ----------------
+
 st.set_page_config(
     page_title="Consumer Awareness & Information Seeking",
     layout="wide"
 )
 
-# ---------------- PAGE HEADER ----------------
+
 st.header("Consumer Awareness & Information Seeking", divider="grey")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -22,7 +22,7 @@ col2.metric(label="PLO 3", value="3.5", help="Digital Skill", border=True)
 col3.metric(label="PLO 4", value="4.0", help="Interpersonal Skill", border=True)
 col4.metric(label="PLO 5", value="4.3", help="Communication Skill", border=True)
 
-# ---------------- LOAD DATA ----------------
+
 try:
     df = pd.read_csv(
         "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv",
@@ -37,7 +37,6 @@ except UnicodeDecodeError:
 st.subheader("Dataset Preview")
 st.dataframe(df.head())
 
-# ---------------- FILTERS ----------------
 st.subheader("Filters")
 
 col_f1, col_f2 = st.columns(2)
@@ -60,7 +59,7 @@ if gender_filter != "All":
 if faculty_filter != "All":
     filtered_df = filtered_df[filtered_df["Faculty"] == faculty_filter]
 
-# ---------------- AWARENESS SCORE ----------------
+
 awareness_cols = [
     "Read_Product_Information",
     "Compare_Alternatives",
@@ -70,7 +69,7 @@ awareness_cols = [
 
 filtered_df["Awareness_Score"] = filtered_df[awareness_cols].mean(axis=1)
 
-# ---------------- KPI SUMMARY ----------------
+
 st.subheader("Key Performance Indicators")
 
 k1, k2, k3, k4 = st.columns(4)
@@ -80,9 +79,9 @@ k2.metric("Highest Score", round(filtered_df["Awareness_Score"].max(), 2))
 k3.metric("Lowest Score", round(filtered_df["Awareness_Score"].min(), 2))
 k4.metric("Total Respondents", filtered_df.shape[0])
 
-# ======================================================
-# VISUALIZATION 1 — BAR CHART (INFO SEEKING FREQUENCY)
-# ======================================================
+
+# VISUALIZATION 1 — BAR CHART 
+
 st.subheader("Information-Seeking Behaviour Frequency")
 
 mean_scores = filtered_df[awareness_cols].mean().reset_index()
@@ -104,9 +103,9 @@ st.write(
     "alternatives and reading product information being the most common."
 )
 
-# ======================================================
-# VISUALIZATION 2 — HISTOGRAM (AWARENESS SCORE)
-# ======================================================
+
+# VISUALIZATION 2 — HISTOGRAM 
+
 st.subheader("Distribution of Consumer Awareness Score")
 
 fig2, ax2 = plt.subplots(figsize=(8, 5))
@@ -123,9 +122,9 @@ st.write(
     "consumer awareness score, suggesting generally proactive pre-purchase behaviour."
 )
 
-# ======================================================
-# VISUALIZATION 3 — BOX PLOT (AWARENESS VS AGE)
-# ======================================================
+
+# VISUALIZATION 3 — BOX PLOT
+
 st.subheader("Consumer Awareness by Age Group")
 
 fig3, ax3 = plt.subplots(figsize=(8, 5))
@@ -145,9 +144,9 @@ st.write(
     "which may be influenced by greater purchasing experience."
 )
 
-# ======================================================
-# VISUALIZATION 4 — GROUPED BAR (FACULTY)
-# ======================================================
+
+# VISUALIZATION 4 — GROUPED BAR
+
 st.subheader("Consumer Awareness by Faculty")
 
 faculty_mean = (
@@ -170,9 +169,9 @@ st.write(
     "educational background may influence consumer information-seeking behaviour."
 )
 
-# ======================================================
+
 # VISUALIZATION 5 — CORRELATION HEATMAP
-# ======================================================
+
 st.subheader("Correlation between Awareness Variables")
 
 corr = filtered_df[awareness_cols].corr()
