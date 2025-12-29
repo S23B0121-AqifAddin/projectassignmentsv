@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 # DATASET UPLOAD AND SUMMARY BOX
@@ -65,9 +66,24 @@ st.write(
     "file complaints regarding unsuitable products, highlighting differences in complaint patterns."
 )
 
-st.subheader("Age Distribution and Complaint Behaviour")
-st.write(
-    "The violin plot illustrates how age is distributed among consumers who did and did not "
-    "file complaints regarding unsuitable products, highlighting differences in complaint patterns."
+# Create the figure
+fig, ax = plt.subplots(figsize=(10, 6))
+
+sns.violinplot(
+    x='Complaint_for_Unsuitable_Product',
+    y='Age',
+    data=df,
+    hue='Complaint_for_Unsuitable_Product',
+    palette='viridis',
+    legend=False,
+    ax=ax
 )
 
+ax.set_title('Age Distribution by Complaint Behavior for Unsuitable Products (Violin Plot)')
+ax.set_xlabel('Complaint_for_Unsuitable_Product')
+ax.set_ylabel('Age')
+
+plt.tight_layout()
+
+# Display in Streamlit
+st.pyplot(fig)
