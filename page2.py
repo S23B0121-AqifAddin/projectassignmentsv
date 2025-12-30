@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
+import matplotlib.pyplot as plt
 
 # --- Corrected Imports ---
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
@@ -30,7 +30,7 @@ except UnicodeDecodeError:
 df2
 
 #OBJECTIVE, PROBLEM AND VARIABLE USED
-st.header("🛒Consumer Rights & Complaint Behaviour")
+st.header("Financial Capability and Consumer Behaviour among University Students)
 
 # =========================
 # 1. Individual Goal
@@ -38,8 +38,8 @@ st.header("🛒Consumer Rights & Complaint Behaviour")
 st.subheader("Objective")
 st.write(
     """
-    To investigate student's awareness of consumer rights and their complaint
-    behaviour after purchasing products.
+    To evaluate the financial capability of university students and analyze its influence on their consumer behavior patterns, 
+    identifying key gaps in knowledge and decision-making via survey data.
     """
 )
 
@@ -49,9 +49,8 @@ st.write(
 st.subheader("Problem Definition")
 st.write(
     """
-   Although being involved as buyers, many students might not be completely aware of their rights as consumers.
-   As a result, dissatisfaction with products or services may not lead to formal complaints or refund requests. 
-   The Problem is do students understand their consumer rights?
+   University students' low financial literacy creates a pressing problem of poor money management, which this case study addresses through targeted analysis. 
+   Its relevance to industries stems from actionable insights for better products and policies, while scientific visualization is justified by its ability to reveal patterns efficiently.
     """
 )
 
@@ -80,3 +79,6 @@ if 'df' in locals() or 'df' in globals():
     plot_price_comparison(df)
 else:
     st.error("Dataframe 'df' not found. Please ensure your data is loaded.")
+
+
+
