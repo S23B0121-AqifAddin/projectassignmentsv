@@ -453,8 +453,8 @@ st.pyplot(fig)
 #Faceted Bar Plot
 st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
 st.write(
-    "This faceted bar plot compares complaint behaviour across different levels of financial knowledge increase. "
-    "Each subplot represents a level of financial knowledge, showing how student's complaint patterns. "
+    "This faceted bar compares complaint behaviour across different levels of financial knowledge increase. "
+    "Each faceted bar represents a level of financial knowledge, showing how student's complaint patterns. "
     "It helps to evaluate whether higher financial knowledge influences students to submit complaints more frequently."
 )
 # Define the order for Increase_Financial_Knowledge categories
