@@ -124,7 +124,7 @@ col2.metric(
 )
 
 col3.metric(
-    label="Complain by Knowledge",
+    label="Complaint by Knowledge",
     value=plo3_score,
     help="Calculated from analysis of complaint behaviour across financial knowledge levels",
     border=True
