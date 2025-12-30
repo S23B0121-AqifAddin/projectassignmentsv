@@ -13,15 +13,15 @@ st.markdown("""
 [data-testid="stPlotlyChart"] > div,
 [data-testid="stImage"] {
     display: flex !important;
-    justify-content: center !important;  /* center horizontally */
+    justify-content: center !important;  /* horizontal center */
 }
 
-/* Force all figure canvases / images to same width */
+/* Shrink all figure canvases/images to the same width */
 [data-testid="stPyplot"] canvas,
 [data-testid="stPlotlyChart"] canvas,
 [data-testid="stImage"] img {
-    max-width: 600px !important;  /* force all figures to same width */
-    width: 100% !important;       /* responsive inside container */
+    max-width: 600px !important;  /* adjust this to make figures smaller or bigger */
+    width: 100% !important;       /* scale to fit container */
     height: auto !important;      /* maintain aspect ratio */
 }
 </style>
