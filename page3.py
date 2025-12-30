@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
+# SETTING PREFERENCE
+FIG_WIDTH = 7
+FIG_HEIGHT = 5
 
 # DATASET UPLOAD AND SUMMARY BOX
 
