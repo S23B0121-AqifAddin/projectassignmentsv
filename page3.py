@@ -8,21 +8,21 @@ import plotly.graph_objects as go # Keep this if you need go, though px handles 
 # SETTING PREFERENCE
 st.markdown("""
 <style>
-/* Center all figure containers */
-[data-testid="stPyplot"] > div,
-[data-testid="stPlotlyChart"] > div,
-[data-testid="stImage"] {
-    display: flex !important;
-    justify-content: center !important;  /* horizontal center */
+/* === FORCE SAME SIZE FOR ALL FIGURES === */
+[data-testid="stPyplot"] {
+    width: 100% !important;
 }
 
-/* Shrink all figure canvases/images to the same width */
-[data-testid="stPyplot"] canvas,
-[data-testid="stPlotlyChart"] canvas,
-[data-testid="stImage"] img {
-    max-width: 600px !important;  /* adjust this to make figures smaller or bigger */
-    width: 100% !important;       /* scale to fit container */
-    height: auto !important;      /* maintain aspect ratio */
+/* control the actual canvas size */
+[data-testid="stPyplot"] canvas {
+    width: 400px !important;   /* CHANGE THIS NUMBER ONLY */
+    height: auto !important;
+}
+
+/* remove weird vertical gaps */
+[data-testid="stPyplot"] > div {
+    padding: 0 !important;
+    margin: 0 auto !important;
 }
 </style>
 """, unsafe_allow_html=True)
