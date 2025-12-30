@@ -169,6 +169,13 @@ st.pyplot(fig)
 st.subheader("Relationship between Budget Following and Monthly Savings")
 fig, ax = plt.subplots(figsize=(10, 6))
 
+# Cross-tabulation
+budget_savings_crosstab = pd.crosstab(
+    data['Follow_Budget'],
+    data['Monthly_Savings'],
+    normalize='index'   # untuk proportion
+)
+
 budget_savings_crosstab.plot(
     kind='bar',
     stacked=True,
