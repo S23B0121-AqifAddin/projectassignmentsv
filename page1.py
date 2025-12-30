@@ -127,6 +127,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Distribution of Gender")
+st.write("To visualize the overall distribution of 'Gender' using a pie chart")
 
 # Kiraan jantina
 gender_counts = data['Gender'].value_counts()
@@ -150,6 +151,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Organised Money Management vs Saver/Spender by Gender")
+st.write("Create a scatter plot to visualize the relationship between 'Organised_Money_Management' and 'Saver_or_Spender', colored by 'Gender'")
 
 # Plot scatter
 fig, ax = plt.subplots(figsize=(10, 6))
