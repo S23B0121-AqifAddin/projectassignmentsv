@@ -8,25 +8,34 @@ import plotly.graph_objects as go # Keep this if you need go, though px handles 
 # SETTING PREFERENCE
 st.markdown("""
 <style>
-
-/* Center & limit width of ALL figures */
-[data-testid="stImage"],
-[data-testid="stPlotlyChart"],
+/* -------------------------
+   Center all figures and tables
+   ------------------------- */
 [data-testid="stPyplot"],
+[data-testid="stPlotlyChart"],
+[data-testid="stImage"],
 [data-testid="stTable"],
 [data-testid="stDataFrame"] {
-    max-width: 720px;
-    margin-left: auto;
+    max-width: 700px;      /* Set desired width */
+    margin-left: auto;      /* Center horizontally */
     margin-right: auto;
+    display: block;
 }
 
-/* Reduce page content width */
-[data-testid="stAppViewContainer"] > .main {
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+/* -------------------------
+   Justify text inside tables
+   ------------------------- */
+[data-testid="stTable"] td,
+[data-testid="stDataFrame"] td {
+    text-align: justify;    /* Justify table cell text */
 }
 
+/* Optional: make headers bold and centered */
+[data-testid="stTable"] th,
+[data-testid="stDataFrame"] th {
+    text-align: center;
+    font-weight: bold;
+}
 </style>
 """, unsafe_allow_html=True)
         
