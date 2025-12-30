@@ -95,3 +95,32 @@ plt.tight_layout()
 
 # Papar graf dalam Streamlit
 st.pyplot(fig)
+
+# Tajuk aplikasi
+st.title("Relationship between Budget Following and Monthly Savings")
+
+# Crosstab (normalize ikut baris / index)
+budget_savings_crosstab = pd.crosstab(
+    data['Has_Budget'],
+    data['Monthly_Savings'],
+    normalize='index'
+)
+
+# Plot stacked bar chart
+fig, ax = plt.subplots(figsize=(10, 6))
+budget_savings_crosstab.plot.bar(
+    stacked=True,
+    colormap='viridis',
+    ax=ax
+)
+
+ax.set_title('Relationship between Budget Following and Monthly Savings')
+ax.set_xlabel('Follow Budget')
+ax.set_ylabel('Proportion of Monthly Savings')
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+ax.legend(title='Monthly Savings')
+
+plt.tight_layout()
+
+# Papar graf dalam Streamlit
+st.pyplot(fig)
