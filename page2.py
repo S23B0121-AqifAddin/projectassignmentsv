@@ -15,18 +15,99 @@ st.set_page_config(
 # Page header
 st.header("💷Financial Behaviour among University Students", divider="grey")
 
-col1, col2, col3, col4 = st.columns(4)
-    
-col1.metric(label="PLO 2", value=f"3.3", help="PLO 2: Cognitive Skill", border=True)
-col2.metric(label="PLO 3", value=f"3.5", help="PLO 3: Digital Skill", border=True)
-col3.metric(label="PLO 4", value=f"4.0", help="PLO 4: Interpersonal Skill", border=True)
-col4.metric(label="PLO 5", value=f"4.3", help="PLO 5: Communication Skill", border=True)
 # Load your data
 try:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
 except UnicodeDecodeError:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 df
+
+# =========================================================
+# PLO DATA CALCULATIONS: Financial Responsibility & Decision-Making
+# =========================================================
+
+total_students = len(df)
+
+# 1. Standardize the Responsibility Score (using Complaint Behavior as a Proxy)
+# High frequency of complaining about unsuitable products indicates higher financial assertiveness/responsibility.
+responsibility_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
+}
+df['Responsibility_Score'] = df['Complaint_for_Unsuitable_Product'].map(responsibility_mapping)
+
+# ---------------------------------------------------------
+# PLO 1 – Cognitive Skill: Financial Responsibility Index
+# Measures the overall level of proactive financial behavior.
+# ---------------------------------------------------------
+plo1_score = round(df['Responsibility_Score'].mean(), 1)
+
+# ---------------------------------------------------------
+# PLO 2 – Digital Skill: Decision Maturity (Age-linked)
+# Analyzes how financial responsibility/decision-making evolves with age.
+# ---------------------------------------------------------
+df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
+age_responsibility = (
+    df.dropna(subset=['Age', 'Responsibility_Score'])
+      .groupby('Age')['Responsibility_Score']
+      .mean()
+)
+plo2_score = round(age_responsibility.mean(), 1)
+
+# ---------------------------------------------------------
+# PLO 3 – Interpersonal Skill: Knowledge-Driven Responsibility
+# Measures how financial knowledge acquisition impacts decision-making quality.
+# ---------------------------------------------------------
+knowledge_responsibility = (
+    df.dropna(subset=['Increase_Financial_Knowledge', 'Responsibility_Score'])
+      .groupby('Increase_Financial_Knowledge')['Responsibility_Score']
+      .mean()
+)
+plo3_score = round(knowledge_responsibility.mean(), 1)
+
+# ---------------------------------------------------------
+# PLO 4 – Interpersonal Skill: Economic Decision Capability
+# Analyzes the relationship between income levels and financial responsibility.
+# ---------------------------------------------------------
+income_responsibility = (
+    df.dropna(subset=['Monthly_Income', 'Responsibility_Score'])
+      .groupby('Monthly_Income')['Responsibility_Score']
+      .mean()
+)
+plo4_score = round(income_responsibility.mean(), 1)
+
+# =========================
+# DISPLAY METRICS
+# =========================
+
+col1.metric(
+    label="Financial Responsibility Index",
+    value=plo1_score,
+    help="Measures proactive behavior and assertiveness regarding unsuitable financial products.",
+    border=True
+)
+
+col2.metric(
+    label="Decision Maturity (Age)",
+    value=plo2_score,
+    help="Average financial responsibility score normalized across different age groups.",
+    border=True
+)
+
+col3.metric(
+    label="Knowledge-Driven Actions",
+    value=plo3_score,
+    help="Reflects how financial knowledge levels correlate with responsible financial decisions.",
+    border=True
+)
+
+col4.metric(
+    label="Economic Decision Power",
+    value=plo4_score,
+    help="Evaluates financial responsibility scores across various monthly income brackets.",
+    border=True
+)
 # --- 2. HEADER & METRICS ---
 st.header("Financial Responsibility & Decision-Making", divider="grey")
 
