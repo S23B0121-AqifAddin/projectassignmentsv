@@ -31,6 +31,7 @@ except UnicodeDecodeError:
 data
 
 #Objective
+st.title("Objective")
 st.write("To analyze budgeting and spending behaviour among students and its impact on financial management")
 
 # Tajuk aplikasi
