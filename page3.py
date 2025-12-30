@@ -200,6 +200,11 @@ st.write(
 # DISPLAY VISUALIZATION
 #Distribution Demographic Graph
 st.subheader("Demographic of Students")
+st.write(
+    "This section provides an overview of the students' demographics, "
+    "including age, gender, faculty, housing arrangement, main income source, and monthly income. "
+    "Use the selector below to choose which demographic graph to display."
+)
 # Main page container
 with st.container():
     # Selector INSIDE the page
