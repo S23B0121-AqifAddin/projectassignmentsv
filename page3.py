@@ -21,7 +21,6 @@ st.markdown("""
 [data-testid="stPlotlyChart"] canvas,
 [data-testid="stImage"] img {
     transform: scale(0.7);    /* shrink to 70% of original size */
-    transform-origin: top center; /* shrink from center horizontally */
 }
 </style>
 """, unsafe_allow_html=True)
