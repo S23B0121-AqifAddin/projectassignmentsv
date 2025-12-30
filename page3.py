@@ -6,33 +6,24 @@ import seaborn as sns
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
 # SETTING PREFERENCE
-# -------------------
-# CSS to center all figures
-# -------------------
 st.markdown("""
 <style>
-/* Center the figure container */
+/* Center all Matplotlib/Seaborn figures and Plotly charts using flex */
 [data-testid="stPyplot"],
 [data-testid="stPlotlyChart"],
 [data-testid="stImage"] {
+    max-width: 700px;   /* Same width for all figures */
+    margin: 0 auto;     /* shorthand for auto left/right */
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 700px;  /* adjust to match table width */
+}
+
+/* Extra wrapper div for Streamlit Pyplot */
+[data-testid="stPyplot"] > div {
+    display: flex;
+    justify-content: center;   /* Force figure to center inside wrapper */
 }
 </style>
 """, unsafe_allow_html=True)
-
-# -------------------
-# Example live figure
-# -------------------
-fig, ax = plt.subplots(figsize=(6,3))
-sns.histplot([1,2,3,4,5,5,4,3,2,1], ax=ax)
-
-# Force left-aligned title
-ax.set_title("Figure Title Left-Aligned", loc='left')
-
-st.pyplot(fig)
         
 
 # DATASET UPLOAD AND SUMMARY BOX
