@@ -15,7 +15,7 @@ st.markdown("""
 
 /* control the actual canvas size */
 [data-testid="stPyplot"] canvas {
-    width: 400px !important;   /* CHANGE THIS NUMBER ONLY */
+    width: 700px !important;   /* CHANGE THIS NUMBER ONLY */
     height: auto !important;
 }
 
