@@ -167,14 +167,6 @@ st.write(
 
 
 # DISPLAY VISUALIZATION
-# ===== GLOBAL FIGURE CONTROL =====
-mpl.rcParams.update({
-    "figure.figsize": (6, 4),   # 🔧 controls ALL figures
-    "figure.dpi": 100,
-    "figure.autolayout": True,
-    "axes.titlesize": 12,
-    "axes.labelsize": 10
-})
 #Distribution Demographic Graph
 st.subheader("Demographic of Students")
 # Main page container
@@ -193,7 +185,7 @@ with st.container():
     )
     # 1. Age Distribution
     if chart_option == "Age Distribution":
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(6, 4))
         sns.histplot(df['Age'], kde=True, ax=ax)
         ax.set_title("Distribution of Age")
         ax.set_xlabel("Age")
@@ -201,7 +193,7 @@ with st.container():
         st.pyplot(fig)
     # 2. Gender Distribution
     elif chart_option == "Gender Distribution":
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(6, 4))
         gender_counts = df['Gender'].value_counts()
         ax.pie(
             gender_counts,
@@ -215,7 +207,7 @@ with st.container():
         st.pyplot(fig)
     # 3. Faculty Distribution
     elif chart_option == "Faculty Distribution":
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(6, 4))
         sns.countplot(
             y=df['Faculty'],
             order=df['Faculty'].value_counts().index,
@@ -230,7 +222,7 @@ with st.container():
         st.pyplot(fig)
     # 4. Housing Arrangement Distribution
     elif chart_option == "Housing Arrangement Distribution":
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(6, 4))
         sns.countplot(
             y=df['Housing_Arrangement'],
             order=df['Housing_Arrangement'].value_counts().index,
@@ -245,7 +237,7 @@ with st.container():
         st.pyplot(fig)
     # 5. Main Income Source Distribution
     elif chart_option == "Main Income Source Distribution":
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(6, 4))
         sns.countplot(
             y=df['Main_Income_Source'],
             order=df['Main_Income_Source'].value_counts().index,
@@ -266,7 +258,7 @@ with st.container():
             'Above RM 600'
         ]
 
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(6, 4))
         sns.countplot(
             y=df['Monthly_Income'],
             order=monthly_income_order,
@@ -303,7 +295,7 @@ selected_numerical_cols = [
 # Calculate correlation matrix
 correlation_matrix = df[selected_numerical_cols].corr()
 # Create figure
-fig, ax = plt.subplots(figsize=(12, 10))
+fig, ax = plt.subplots(figsize=(6, 4))
 
 sns.heatmap(
     correlation_matrix,
@@ -326,7 +318,7 @@ st.write("This pie chart shows the proportion of consumers who submit complaints
 # Calculate the value counts for 'Complaint_for_Unsuitable_Product'
 complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
 # Create the figure
-fig, ax = plt.subplots(figsize=(4, 4))
+fig, ax = plt.subplots(figsize=(6, 4))
 colors = plt.cm.Set3.colors  # Distinct qualitative colormap
 
 ax.pie(
@@ -349,7 +341,7 @@ st.write(
     "file complaints regarding unsuitable products, highlighting differences in complaint patterns."
 )
 # Create the figure
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(6, 4))
 
 sns.violinplot(
     x='Complaint_for_Unsuitable_Product',
@@ -376,7 +368,7 @@ st.write(
     "highlighting potential differences in reporting patterns."
 )
 # Create figure
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(6, 4))
 
 sns.countplot(
     x='Complaint_for_Unsuitable_Product',
@@ -405,7 +397,7 @@ contingency_table = contingency_table.reindex(monthly_income_order)
 # Normalize the table to show proportions within each 'Monthly_Income' category
 contingency_table_normalized = contingency_table.div(contingency_table.sum(1).astype(float), axis=0)
 # Plot the stacked bar chart using matplotlib
-fig, ax = plt.subplots(figsize=(12, 8))
+fig, ax = plt.subplots(figsize=(6, 4))
 contingency_table_normalized.plot(kind='bar', stacked=True, colormap='viridis', ax=ax)
 
 ax.set_xlabel('Monthly Income')
