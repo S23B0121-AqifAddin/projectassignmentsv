@@ -196,7 +196,7 @@ plt.tight_layout()
 st.pyplot(fig)
 
 #Faceted Bar Plot
-st.subheader("Complaint Behavior by Financial Knowledge Increase")
+st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
 # Define the order for Increase_Financial_Knowledge categories
 financial_knowledge_order = df['Increase_Financial_Knowledge'].value_counts().index.tolist()
 # Define the order for Complaint_for_Unsuitable_Product categories
