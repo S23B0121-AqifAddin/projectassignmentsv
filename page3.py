@@ -22,7 +22,7 @@ st.markdown("""
 [data-testid="stImage"] img {
     max-width: 700px !important;  /* Match table width */
     width: 100% !important;       /* Responsive */
-    height: auto !important;      /* Maintain aspect ratio */
+    height: 100% !important;      /* Maintain aspect ratio */
 }
 </style>
 """, unsafe_allow_html=True)
