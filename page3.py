@@ -8,15 +8,18 @@ import plotly.graph_objects as go # Keep this if you need go, though px handles 
 # SETTING PREFERENCE
 st.markdown("""
 <style>
-/* Center all figures and tables */
+/* -------------------------------
+   Center and unify size for all figures & tables
+   ------------------------------- */
 [data-testid="stPyplot"],
 [data-testid="stPlotlyChart"],
 [data-testid="stImage"],
 [data-testid="stTable"],
 [data-testid="stDataFrame"] {
-    display: block;       /* Make it a block element */
-    margin-left: auto;    /* Center horizontally */
+    max-width: 700px;       /* Adjust to match table width */
+    margin-left: auto;       /* Center horizontally */
     margin-right: auto;
+    display: block;
 }
 </style>
 """, unsafe_allow_html=True)
