@@ -71,7 +71,6 @@ plo2_score = round(age_complaint_score.mean(), 1)
 # PLO 3 – Interpersonal Skill
 # Financial Knowledge × Complaint Behaviour
 # -------------------------
-
 # Map complaint behaviour to numeric values
 complaint_mapping = {
     'Never': 1,
@@ -80,14 +79,12 @@ complaint_mapping = {
 }
 
 df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
-
 # Calculate mean complaint score by financial knowledge level
 knowledge_complaint_score = (
     df.dropna(subset=['Increase_Financial_Knowledge', 'Complaint_Score'])
       .groupby('Increase_Financial_Knowledge')['Complaint_Score']
       .mean()
 )
-
 # Final PLO 3 score
 plo3_score = round(knowledge_complaint_score.mean(), 1)
 # -------------------------
@@ -102,7 +99,6 @@ complaint_mapping = {
 }
 
 df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
-
 # Calculate mean complaint score by monthly income group
 income_complaint_score = (
     df.dropna(subset=['Monthly_Income', 'Complaint_Score'])
