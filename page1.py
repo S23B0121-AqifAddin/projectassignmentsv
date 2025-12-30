@@ -39,10 +39,12 @@ st.write("To analyze budgeting and spending behaviour among students and its imp
 st.title("Problem Statement")
 st.write(
     """
-Budgeting and spending behaviour play a critical role in financial capability, yet many students struggle with effective expense management and financial planning. 
-Poor budgeting habits and uncontrolled spending can lead to financial stress and instability. Therefore, it is important to examine budgeting and spending behaviour 
-to understand its impact on financial decision-making and financial capability.
-   """
+   Budgeting and spending behaviour play a critical role in financial capability,
+   yet many students struggle with effective expense management and financial planning.
+   Poor budgeting habits and uncontrolled spending can lead to financial stress and instability.
+   Therefore, it is important to examine budgeting and spending behaviour to understand its impact
+   on financial decision-making and financial capability.
+    """
 )
 
 # Tajuk aplikasi
