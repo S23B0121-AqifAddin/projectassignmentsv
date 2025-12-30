@@ -72,28 +72,28 @@ df['Knowledge_Score'] = df['Increase_Financial_Knowledge'].map(knowledge_mapping
 plo5_score = round(df['Knowledge_Score'].mean(), 1)
 # PLO Display
 col1.metric(
-    label="PLO 2",
+    label="Calculated from complaint behaviour analysis",
     value=plo2_score,
     help="Calculated from complaint behaviour analysis",
     border=True
 )
 
 col2.metric(
-    label="PLO 3",
+    label="Based on number of visualizations implemented",
     value=plo3_score,
     help="Based on number of visualizations implemented",
     border=True
 )
 
 col3.metric(
-    label="PLO 4",
+    label="Derived from gender & income complaint diversity",
     value=plo4_score,
     help="Derived from gender & income complaint diversity",
     border=True
 )
 
 col4.metric(
-    label="PLO 5",
+    label="Based on increase in financial knowledge",
     value=plo5_score,
     help="Based on increase in financial knowledge",
     border=True
