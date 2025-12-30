@@ -39,8 +39,7 @@ st.header("🛒Consumer Rights & Complaint Behaviour")
 st.subheader("Objective")
 st.write(
     """
-    To investigate student's awareness of consumer rights and their complaint
-    behaviour after purchasing products.
+    Study about student's awareness of consumer rights and their complaint behaviour after purchasing products.
     """
 )
 
@@ -50,9 +49,9 @@ st.write(
 st.subheader("Problem Definition")
 st.write(
     """
-   Although being involved as buyers, many students might not be completely aware of their rights as consumers.
-   As a result, dissatisfaction with products or services may not lead to formal complaints or refund requests. 
-   The Problem is do students understand their consumer rights?
+   Even though being involved as buyers, many students might not be completely aware of their rights as consumers.
+   As a result, dissatisfaction with products or services may not lead to formal complaints or refund requests.
+   The Problem is, did students understand their consumer rights?
     """
 )
 
