@@ -3,12 +3,12 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
 
 # DATASET UPLOAD AND SUMMARY BOX
 
 # --- Corrected Imports ---
-import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 # Set Streamlit page configuration (must be the first Streamlit command)
 st.set_page_config(
     page_title="💷Financial Behaviour among University Students",
