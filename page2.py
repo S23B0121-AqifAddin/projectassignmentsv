@@ -28,3 +28,29 @@ try:
 except UnicodeDecodeError:
     df2 = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 df2
+
+
+# Create the countplot
+    sns.countplot(
+        data=data, 
+        x='Compare_Prices_Before_Buying', 
+        order=data['Compare_Prices_Before_Buying'].value_counts().index, 
+        palette='viridis',
+        ax=ax  # It is best practice to specify the axis in Streamlit
+    )
+    
+    # Customizing labels
+    ax.set_title('Decision Planning Frequency (Compare Prices Before Buying)', fontsize=14)
+    ax.set_xlabel('Response', fontsize=12)
+    ax.set_ylabel('Count', fontsize=12)
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    
+    # 4. Display the plot in Streamlit
+    st.pyplot(fig)
+
+# Call the function
+if 'df' in locals() or 'df' in globals():
+    plot_price_comparison(df)
+else:
+    st.error("Dataframe 'df' not found. Please ensure your data is loaded.")
