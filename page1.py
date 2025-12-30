@@ -31,7 +31,7 @@ except UnicodeDecodeError:
 data
 
 #Objective
-st.write("To analyze budgeting and spending behaviour among individuals and its impact on financial management")
+st.write("To analyze budgeting and spending behaviour among students and its impact on financial management")
 
 # Tajuk aplikasi
 st.title("Correlation Heatmap of Financial Attitudes")
