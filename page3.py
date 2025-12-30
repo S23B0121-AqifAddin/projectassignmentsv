@@ -6,8 +6,21 @@ import seaborn as sns
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
 # SETTING PREFERENCE
-FIG_WIDTH = 5
-FIG_HEIGHT = 3
+# =========================
+# GLOBAL FIGURE SETTINGS
+# =========================
+import matplotlib as mpl
+
+mpl.rcParams.update({
+    "figure.figsize": (6, 4),   # global size (smaller)
+    "figure.dpi": 80,           # global dpi (key part)
+    "axes.titlesize": 11,
+    "axes.labelsize": 9,
+    "xtick.labelsize": 8,
+    "ytick.labelsize": 8,
+    "legend.fontsize": 8
+})
+
 
 # DATASET UPLOAD AND SUMMARY BOX
 
