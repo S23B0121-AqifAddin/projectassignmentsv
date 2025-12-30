@@ -31,6 +31,84 @@ except UnicodeDecodeError:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 df
 
+# =========================
+# PLO DATA CALCULATIONS
+# =========================
+
+total_students = len(df)
+# -------------------------
+# PLO 2 – Cognitive Skill
+# Complaint awareness level
+# -------------------------
+complaint_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
+}
+
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+plo2_score = round(df['Complaint_Score'].mean(), 1)
+# -------------------------
+# PLO 3 – Digital Skill
+# Based on number of visualizations used
+# -------------------------
+num_visualizations = 7  # Heatmap, Pie, Violin, Bar, Stacked Bar, Facet, Metrics
+plo3_score = min(round((num_visualizations / 8) * 5, 1), 5)
+# -------------------------
+# PLO 4 – Interpersonal Skill
+# Diversity of complaint behaviour by gender & income
+# -------------------------
+gender_diversity = df.groupby('Gender')['Complaint_for_Unsuitable_Product'].nunique().mean()
+income_diversity = df.groupby('Monthly_Income')['Complaint_for_Unsuitable_Product'].nunique().mean()
+
+plo4_score = round(((gender_diversity + income_diversity) / 2), 1)
+# -------------------------
+# PLO 5 – Communication Skill
+# Based on financial knowledge improvement
+# -------------------------
+knowledge_mapping = {
+    'No Increase': 1,
+    'Slight Increase': 3,
+    'Significant Increase': 5
+}
+
+df['Knowledge_Score'] = df['Increase_Financial_Knowledge'].map(knowledge_mapping)
+plo5_score = round(df['Knowledge_Score'].mean(), 1)
+
+st.markdown("---")
+st.subheader("📈 Programme Learning Outcomes (Data-Driven)")
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric(
+    label="PLO 2",
+    value=plo2_score,
+    help="Calculated from complaint behaviour analysis",
+    border=True
+)
+
+col2.metric(
+    label="PLO 3",
+    value=plo3_score,
+    help="Based on number of visualizations implemented",
+    border=True
+)
+
+col3.metric(
+    label="PLO 4",
+    value=plo4_score,
+    help="Derived from gender & income complaint diversity",
+    border=True
+)
+
+col4.metric(
+    label="PLO 5",
+    value=plo5_score,
+    help="Based on increase in financial knowledge",
+    border=True
+)
+
+
 #OBJECTIVE, PROBLEM AND VARIABLE USED
 st.header("🛒Consumer Rights & Complaint Behaviour")
 st.markdown("---")  # this creates a horizontal line
