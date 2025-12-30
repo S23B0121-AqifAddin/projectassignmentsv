@@ -30,6 +30,32 @@ except UnicodeDecodeError:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 df
 
+#OBJECTIVE, PROBLEM AND VARIABLE USED
+st.subheader("Consumer Rights & Complaint Behaviour")
+
+# =========================
+# 1. Individual Goal
+# =========================
+st.title("1. Objective")
+st.write(
+    """
+    To investigate student's awareness of consumer rights and their complaint
+    behaviour after purchasing products.
+    """
+)
+
+# =========================
+# 2. Problem Definition
+# =========================
+st.header("2. Problem Definition")
+st.write(
+    """
+   Although being involved as buyers, many students might not be completely aware of their rights as consumers.
+   As a result, dissatisfaction with products or services may not lead to formal complaints or refund requests. 
+   The Problem is do students understand their consumer rights?
+    """
+)
+
 
 # DISPLAY VISUALIZATION
 
