@@ -30,15 +30,20 @@ except UnicodeDecodeError:
     data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 data
 
+st.header("Budgeting and spending behavior")
 #Objective
 st.title("Objective")
 st.write("To analyze budgeting and spending behaviour among students and its impact on financial management.")
 
 #Problem statement
 st.title("Problem Statement")
-st.write("Budgeting and spending behaviour play a critical role in financial capability, yet many students struggle with effective expense management and financial planning. 
+st.write(
+    """
+Budgeting and spending behaviour play a critical role in financial capability, yet many students struggle with effective expense management and financial planning. 
 Poor budgeting habits and uncontrolled spending can lead to financial stress and instability. Therefore, it is important to examine budgeting and spending behaviour 
-to understand its impact on financial decision-making and financial capability.")
+to understand its impact on financial decision-making and financial capability.
+   """
+)
 
 # Tajuk aplikasi
 st.title("Correlation Heatmap of Financial Attitudes")
