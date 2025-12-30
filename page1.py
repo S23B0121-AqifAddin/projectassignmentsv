@@ -59,21 +59,25 @@ ax.set_ylabel('Monthly Income Range')
 
 st.pyplot(fig)
 
-# App title
+# Title
 st.title("Relationship between Having a Budget and Regular Savings")
 
-# Load dataset from GitHub
+# Load data from GitHub
 url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv"
 data = pd.read_csv(url)
 
-# Create crosstab (normalized by index)
+# Preview data
+st.subheader("Dataset Preview")
+st.dataframe(data.head())
+
+# Crosstab (normalized by index)
 budget_savings_crosstab = pd.crosstab(
     data['Has_Budget'],
     data['Regular_Savings'],
     normalize='index'
 )
 
-# Plot stacked bar chart
+# Plot
 fig, ax = plt.subplots(figsize=(12, 7))
 budget_savings_crosstab.plot(
     kind='bar',
@@ -90,6 +94,7 @@ ax.legend(title='Regular Savings')
 
 plt.tight_layout()
 
-# Display plot in Streamlit
+# Display in Streamlit
 st.pyplot(fig)
+
 
