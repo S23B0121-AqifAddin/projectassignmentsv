@@ -16,6 +16,7 @@ st.set_page_config(
 )
 # Page header
 st.title("💷Financial Behaviour among University Students")
+st.markdown("---")  # this creates a horizontal line
 
 col1, col2, col3, col4 = st.columns(4)
     
@@ -32,6 +33,7 @@ df
 
 #OBJECTIVE, PROBLEM AND VARIABLE USED
 st.header("🛒Consumer Rights & Complaint Behaviour")
+st.markdown("---")  # this creates a horizontal line
 
 # =========================
 # 1. Individual Goal
