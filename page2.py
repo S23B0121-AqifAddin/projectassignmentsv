@@ -6,15 +6,11 @@ import matplotlib.pyplot as plt
 # --- 1. SETUP & DATA LOADING ---
 st.set_page_config(page_title="Financial Behaviour Dashboard", layout="wide")
 
-@st.cache_data
-def load_data():
-    url = 'https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv'
-    try:
-        return pd.read_csv(url, encoding='utf-8')
-    except:
-        return pd.read_csv(url, encoding='latin-1')
-
-df = load_data()
+try:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
+df
 
 # --- 2. HEADER & METRICS ---
 st.header("Financial Behaviour among University Students", divider="grey")
