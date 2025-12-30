@@ -30,6 +30,81 @@ except UnicodeDecodeError:
     data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 data
 
+# calculate summary box 
+# ---------------- PLO MATRIX CALCULATION ----------------
+
+# Define PLO column mapping
+plo_mapping = {
+    "PLO 2": {
+        "label": "Money Management",
+        "columns": [
+            "Organised_Money_Management",
+            "Plan_for_Old_Age_Care"
+        ]
+    },
+    "PLO 3": {
+        "label": "Buy on Credit",
+        "columns": [
+            "Buy_on_Credit",
+            "Avoid_Credit_Debt"
+        ]
+    },
+    "PLO 4": {
+        "label": "Saving live Changes",
+        "columns": [
+            "Savings_for_Life_Changes",
+            "Live_for_Today"
+        ]
+    },
+    "PLO 5": {
+        "label": "Saver or Spender",
+        "columns": [
+            "Saver_or_Spender",
+            "Follow_Budget"
+        ]
+    }
+}
+
+# Calculate PLO scores (mean)
+plo_scores = {}
+for plo, info in plo_mapping.items():
+    plo_scores[plo] = round(
+        data[info["columns"]].mean(axis=1).mean(),
+        2
+    )
+
+# ---------------- DISPLAY METRICS ----------------
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric(
+    label="PLO 2",
+    value=plo_scores["PLO 2"],
+    help="PLO 2: Money Management",
+    border=True
+)
+
+col2.metric(
+    label="PLO 3",
+    value=plo_scores["PLO 3"],
+    help="PLO 3: Buy on Credit",
+    border=True
+)
+
+col3.metric(
+    label="PLO 4",
+    value=plo_scores["PLO 4"],
+    help="PLO 4: Saving live Changes",
+    border=True
+)
+
+col4.metric(
+    label="PLO 5",
+    value=plo_scores["PLO 5"],
+    help="PLO 5: Saver or Spender",
+    border=True
+)
+
+
 st.header("Budgeting and spending behavior")
 #Objective
 st.title("Objective")
