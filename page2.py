@@ -13,17 +13,13 @@ st.set_page_config(
 st.title("💷 Financial Behaviour among University Students")
 st.markdown("---")
 
-# 2. DATASET LOADING
-@st.cache_data
-def load_data():
-    url = 'https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv'
-    try:
-        data = pd.read_csv(url, encoding='utf-8')
-    except:
-        data = pd.read_csv(url, encoding='latin-1')
-    return data
+# Load your data
+try:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
+df
 
-df = load_data()
 
 # 3. CALCULATIONS (Financial Responsibility & Decision-Making)
 responsibility_mapping = {'Never': 1, 'Sometimes': 3, 'Always': 5}
