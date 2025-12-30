@@ -124,3 +124,26 @@ plt.tight_layout()
 
 # Papar graf dalam Streamlit
 st.pyplot(fig)
+
+# Tajuk aplikasi
+st.title("Money Management Difficulty by Age Group")
+
+# Plot
+fig, ax = plt.subplots(figsize=(12, 7))
+
+sns.countplot(
+    x='Age',
+    hue='Money_Management_Difficulty',
+    data=data,
+    palette='viridis',
+    ax=ax
+)
+
+ax.set_title('Money Management Difficulty by Age Group')
+ax.set_xlabel('Age')
+ax.set_ylabel('Count')
+
+plt.tight_layout()
+
+# Papar graf dalam Streamlit
+st.pyplot(fig)
