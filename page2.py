@@ -14,6 +14,8 @@ st.set_page_config(
 )
 # Page header
 st.header("💷Financial Behaviour among University Students", divider="grey")
+# Summary Box
+col1, col2, col3, col4 = st.columns(4)
 
 # Load your data
 try:
