@@ -28,10 +28,25 @@ except UnicodeDecodeError:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 df
 # --- 2. HEADER & METRICS ---
-st.header("Financial Behaviour among University Students", divider="grey")
+st.header("Financial Responsibility & Decision-Making", divider="grey")
 
 # --- 3. GRAPH 1: PRICE COMPARISON (RESIZED) ---
-st.subheader("Decision Planning Frequency")
+st.subheader("Objective")
+st.write(
+    """
+    To investigate how financial responsibility influences decision-making in university students, evaluating literacy levels, 
+    spending patterns, and risk factors through survey analysis for targeted interventions.
+
+    """
+)
+
+st.subheader("Problem Definition")
+st.write(
+    """
+   University students exhibit poor financial responsibility, marked by impulsive decisions like credit misuse and overspending, due to inadequate knowledge of budgeting and investments. 
+   This results in debt burdens (e.g., 40%+ with loans struggle), food insecurity, and long-term unpreparedness, exacerbated by limited education access.
+    """
+)
 
 # We create columns to "squeeze" the graph so it isn't full-width
 col_left, col_mid, col_right = st.columns([1, 2, 1]) 
