@@ -33,7 +33,7 @@ df
 
 total_students = len(df)
 # -------------------------
-# PLO 2 – Cognitive Skill
+# PLO 1 – Cognitive Skill
 # Complaint awareness level
 # -------------------------
 complaint_mapping = {
@@ -43,21 +43,93 @@ complaint_mapping = {
 }
 
 df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
-plo2_score = round(df['Complaint_Score'].mean(), 1)
+plo1_score = round(df['Complaint_Score'].mean(), 1)
 # -------------------------
-# PLO 3 – Digital Skill
-# Based on number of visualizations used
-# -------------------------
-num_visualizations = 7  # Heatmap, Pie, Violin, Bar, Stacked Bar, Facet, Metrics
-plo3_score = min(round((num_visualizations / 8) * 5, 1), 5)
-# -------------------------
-# PLO 4 – Interpersonal Skill
-# Diversity of complaint behaviour by gender & income
-# -------------------------
-gender_diversity = df.groupby('Gender')['Complaint_for_Unsuitable_Product'].nunique().mean()
-income_diversity = df.groupby('Monthly_Income')['Complaint_for_Unsuitable_Product'].nunique().mean()
+# ==================================================
+# PLO 2 – Digital Skill
+# Based on Age and Complaint Behaviour Analysis
+# ==================================================
+# 1. Ensure correct data types
+df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
+df['Complaint_for_Unsuitable_Product'] = (
+    df['Complaint_for_Unsuitable_Product']
+    .astype(str)
+    .str.strip()
+)
+# 2. Remove rows with missing Age or Complaint values
+age_complaint_df = df.dropna(subset=['Age', 'Complaint_for_Unsuitable_Product'])
+# 3. Digital analysis operations applied (Age × Complaint)
+digital_ops_age_complaint = {
+    'data_cleaning': age_complaint_df.shape[0] > 0,
+    'groupby_analysis': age_complaint_df.groupby(
+        'Complaint_for_Unsuitable_Product'
+    )['Age'].mean().shape[0] > 1,
+    'descriptive_statistics': age_complaint_df['Age'].describe().shape[0] > 0,
+    'advanced_visualization': True,  # Violin plot implemented
+    'categorical_handling': age_complaint_df[
+        'Complaint_for_Unsuitable_Product'
+    ].nunique() > 1
+}
+# 4. Count successful digital operations
+num_operations = sum(digital_ops_age_complaint.values())
+# 5. Normalize score to 0–5 scale
+max_operations = 5
+plo2_score = round((num_operations / max_operations) * 5, 1)
+# ==================================================
+# PLO 3 – Interpersonal Skill
+# Based on Complaint Behaviour by Financial Knowledge
+# ==================================================
+# 1. Clean and standardize relevant columns
+df['Increase_Financial_Knowledge'] = (
+    df['Increase_Financial_Knowledge']
+    .astype(str)
+    .str.strip()
+)
 
-plo4_score = round(((gender_diversity + income_diversity) / 2), 1)
+df['Complaint_for_Unsuitable_Product'] = (
+    df['Complaint_for_Unsuitable_Product']
+    .astype(str)
+    .str.strip()
+)
+# 2. Remove rows with missing values in key columns
+knowledge_complaint_df = df.dropna(
+    subset=['Increase_Financial_Knowledge', 'Complaint_for_Unsuitable_Product']
+)
+# 3. Interpersonal analysis indicators
+# Each indicator represents an interpersonal / social analysis skill
+interpersonal_ops = {
+    # Ability to compare behaviour across different knowledge groups
+    'group_comparison': (
+        knowledge_complaint_df.groupby('Increase_Financial_Knowledge')
+        ['Complaint_for_Unsuitable_Product']
+        .nunique()
+        .mean() > 1
+    ),
+    # Awareness of behavioural diversity (Never / Sometimes / Always)
+    'behavioural_variation': (
+        knowledge_complaint_df['Complaint_for_Unsuitable_Product']
+        .nunique() > 1
+    ),
+    # Recognition of different financial knowledge levels in society
+    'social_awareness': (
+        knowledge_complaint_df['Increase_Financial_Knowledge']
+        .nunique() > 1
+    ),
+    # Understanding interaction between knowledge and behaviour
+    'interaction_analysis': (
+        pd.crosstab(
+            knowledge_complaint_df['Increase_Financial_Knowledge'],
+            knowledge_complaint_df['Complaint_for_Unsuitable_Product']
+        ).shape[0] > 1
+    ),
+    # Use of visual comparison (faceted bar plot)
+    'visual_interpretation': True
+}
+# 4. Count achieved interpersonal skill indicators
+num_interpersonal_ops = sum(interpersonal_ops.values())
+# 5. Normalize score to 0–5 scale
+max_interpersonal_ops = 5
+plo3_score = round((num_interpersonal_ops / max_interpersonal_ops) * 5, 1)
 # -------------------------
 # PLO 5 – Communication Skill
 # Based on financial knowledge improvement
@@ -72,28 +144,28 @@ df['Knowledge_Score'] = df['Increase_Financial_Knowledge'].map(knowledge_mapping
 plo5_score = round(df['Knowledge_Score'].mean(), 1)
 # PLO Display
 col1.metric(
-    label="Calculated from complaint behaviour analysis",
-    value=plo2_score,
+    label="Complaint Behaviour",
+    value=plo1_score,
     help="Calculated from complaint behaviour analysis",
     border=True
 )
 
 col2.metric(
-    label="Based on number of visualizations implemented",
-    value=plo3_score,
-    help="Based on number of visualizations implemented",
+    label="Age and Complaint Behaviour",
+    value=plo2_score,
+    help="Calculated from digital analysis of Age and Complaint Behaviour",
     border=True
 )
 
 col3.metric(
-    label="Derived from gender & income complaint diversity",
-    value=plo4_score,
-    help="Derived from gender & income complaint diversity",
+    label="PLO 3 – Interpersonal Skill",
+    value=plo3_score,
+    help="Calculated from analysis of complaint behaviour across financial knowledge levels",
     border=True
 )
 
 col4.metric(
-    label="Based on increase in financial knowledge",
+    label="Financial Knowledge",
     value=plo5_score,
     help="Based on increase in financial knowledge",
     border=True
