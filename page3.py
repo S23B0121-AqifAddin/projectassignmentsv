@@ -8,16 +8,21 @@ import plotly.graph_objects as go # Keep this if you need go, though px handles 
 # SETTING PREFERENCE
 st.markdown("""
 <style>
-/* Center all Matplotlib/Seaborn figures */
-[data-testid="stPyplot"] > div {
-    display: flex !important;         /* Force flex layout */
-    justify-content: center !important; /* Center horizontally */
+/* Center all Matplotlib/Seaborn/Plotly figures */
+[data-testid="stPyplot"] > div,
+[data-testid="stPlotlyChart"] > div,
+[data-testid="stImage"] {
+    display: flex !important;
+    justify-content: center !important;  /* Center horizontally */
 }
 
-/* Limit width of figures */
-[data-testid="stPyplot"] canvas {
-    max-width: 700px; /* Width same as tables */
-    width: 100%;      /* Make it responsive inside container */
+/* Force all figure canvases to same width */
+[data-testid="stPyplot"] canvas,
+[data-testid="stPlotlyChart"] canvas,
+[data-testid="stImage"] img {
+    max-width: 700px !important;  /* Match table width */
+    width: 100% !important;       /* Responsive */
+    height: auto !important;      /* Maintain aspect ratio */
 }
 </style>
 """, unsafe_allow_html=True)
