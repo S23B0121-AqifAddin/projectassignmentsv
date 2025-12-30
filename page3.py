@@ -9,18 +9,11 @@ import plotly.graph_objects as go # Keep this if you need go, though px handles 
 # =========================
 # GLOBAL FIGURE SETTINGS
 # =========================
-import matplotlib as mpl
-
-mpl.rcParams.update({
-    "figure.figsize": (6, 4),   # global size (smaller)
-    "figure.dpi": 80,           # global dpi (key part)
-    "axes.titlesize": 11,
-    "axes.labelsize": 9,
-    "xtick.labelsize": 8,
-    "ytick.labelsize": 8,
-    "legend.fontsize": 8
-})
-
+def show_small_fig(fig):
+    _, center, _ = st.columns([1, 3, 1])  # middle column is narrow
+    with center:
+        st.pyplot(fig)
+        
 
 # DATASET UPLOAD AND SUMMARY BOX
 
