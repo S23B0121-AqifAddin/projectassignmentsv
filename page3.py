@@ -31,7 +31,7 @@ except UnicodeDecodeError:
 df
 
 #OBJECTIVE, PROBLEM AND VARIABLE USED
-st.header("🛒Consumer Rights & Complaint Behaviour", divider="purple")
+st.header("🛒Consumer Rights & Complaint Behaviour")
 
 # =========================
 # 1. Individual Goal
