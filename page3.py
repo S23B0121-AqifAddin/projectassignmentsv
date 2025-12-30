@@ -420,6 +420,12 @@ st.pyplot(fig)
 #Stacked Bar Plot
 # Streamlit section
 st.subheader("Complaint Behavior by Monthly Income")
+st.write(
+    "This stacked bar chart shows the proportion of students who file complaints about unsuitable products, "
+    "segmented by their monthly income. Each bar represents a different income group, "
+    "and the colors indicate the frequency of complaint behaviour (Never, Sometimes, Always). "
+    "It helps to identify if income level influences students' likelihood to submit complaints."
+)
 # Create a cross-tabulation (contingency table) of the two categorical variables
 contingency_table = pd.crosstab(df['Monthly_Income'], df['Complaint_for_Unsuitable_Product'])
 # Define the order for Monthly_Income categories
@@ -441,6 +447,11 @@ st.pyplot(fig)
 
 #Faceted Bar Plot
 st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
+st.write(
+    "This faceted bar plot compares complaint behaviour across different levels of financial knowledge increase. "
+    "Each subplot represents a level of financial knowledge, showing how student's complaint patterns. "
+    "It helps to evaluate whether higher financial knowledge influences students to submit complaints more frequently."
+)
 # Define the order for Increase_Financial_Knowledge categories
 financial_knowledge_order = df['Increase_Financial_Knowledge'].value_counts().index.tolist()
 # Define the order for Complaint_for_Unsuitable_Product categories
