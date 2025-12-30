@@ -72,3 +72,26 @@ plt.tight_layout()
 # Papar dalam Streamlit
 st.pyplot(fig)
 
+# Tajuk aplikasi
+st.title("Distribution of Monthly Income")
+
+# Plot
+fig, ax = plt.subplots(figsize=(10, 6))
+
+sns.countplot(
+    x='Monthly_Income',
+    data=data,
+    order=data['Monthly_Income'].value_counts().index,
+    hue='Monthly_Income',
+    palette='viridis',
+    legend=False,
+    ax=ax
+)
+
+ax.set_title('Distribution of Monthly Income')
+ax.set_xlabel('Monthly Income')
+ax.set_ylabel('Count')
+plt.tight_layout()
+
+# Papar graf dalam Streamlit
+st.pyplot(fig)
