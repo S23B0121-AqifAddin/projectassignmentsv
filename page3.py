@@ -45,37 +45,28 @@ complaint_mapping = {
 df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
 plo1_score = round(df['Complaint_Score'].mean(), 1)
 # -------------------------
-# ==================================================
+# -------------------------
 # PLO 2 – Digital Skill
-# Based on Age and Complaint Behaviour Analysis
-# ==================================================
-# 1. Ensure correct data types
+# Age × Complaint Behaviour
+# -------------------------
+# Convert Age to numeric (safety)
 df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
-df['Complaint_for_Unsuitable_Product'] = (
-    df['Complaint_for_Unsuitable_Product']
-    .astype(str)
-    .str.strip()
-)
-# 2. Remove rows with missing Age or Complaint values
-age_complaint_df = df.dropna(subset=['Age', 'Complaint_for_Unsuitable_Product'])
-# 3. Digital analysis operations applied (Age × Complaint)
-digital_ops_age_complaint = {
-    'data_cleaning': age_complaint_df.shape[0] > 0,
-    'groupby_analysis': age_complaint_df.groupby(
-        'Complaint_for_Unsuitable_Product'
-    )['Age'].mean().shape[0] > 1,
-    'descriptive_statistics': age_complaint_df['Age'].describe().shape[0] > 0,
-    'advanced_visualization': True,  # Violin plot implemented
-    'categorical_handling': age_complaint_df[
-        'Complaint_for_Unsuitable_Product'
-    ].nunique() > 1
+# Map complaint behaviour to numeric values
+complaint_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
 }
-# 4. Count successful digital operations
-num_operations = sum(digital_ops_age_complaint.values())
-# 5. Normalize score to 0–5 scale
-max_operations = 5
-plo2_score = round((num_operations / max_operations) * 5, 1)
-# ==================================================
+
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+# Calculate mean complaint score by age group
+age_complaint_score = (
+    df.dropna(subset=['Age', 'Complaint_Score'])
+      .groupby('Age')['Complaint_Score']
+      .mean()
+)
+# Final PLO 2 score
+plo2_score = round(age_complaint_score.mean(), 1)
 # PLO 3 – Interpersonal Skill
 # Based on Complaint Behaviour by Financial Knowledge
 # ==================================================
