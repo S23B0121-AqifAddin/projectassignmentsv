@@ -40,6 +40,7 @@ data = pd.read_csv(url)
 # Check column name
 st.write("Dataset Preview:")
 st.dataframe(data.head())
+st.write("Visualize the distribution of 'Monthly_Income_Range' using a bar chart to understand students' income levels")
 
 # Plot
 fig, ax = plt.subplots(figsize=(10, 6))
