@@ -169,7 +169,7 @@ st.write(
 # DISPLAY VISUALIZATION
 # ===== GLOBAL FIGURE CONTROL =====
 mpl.rcParams.update({
-    "figure.figsize": (7, 5),   # 🔧 controls ALL figures
+    "figure.figsize": (6, 4),   # 🔧 controls ALL figures
     "figure.dpi": 100,
     "figure.autolayout": True,
     "axes.titlesize": 12,
