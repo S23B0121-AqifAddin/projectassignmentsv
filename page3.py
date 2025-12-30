@@ -6,13 +6,29 @@ import seaborn as sns
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
 # SETTING PREFERENCE
-# =========================
-# GLOBAL FIGURE SETTINGS
-# =========================
-def show_small_fig(fig):
-    _, center, _ = st.columns([1, 3, 1])  # middle column is narrow
-    with center:
-        st.pyplot(fig)
+st.markdown("""
+<style>
+
+/* Center & limit width of ALL figures */
+[data-testid="stImage"],
+[data-testid="stPlotlyChart"],
+[data-testid="stPyplot"],
+[data-testid="stTable"],
+[data-testid="stDataFrame"] {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Reduce page content width */
+[data-testid="stAppViewContainer"] > .main {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+</style>
+""", unsafe_allow_html=True)
         
 
 # DATASET UPLOAD AND SUMMARY BOX
