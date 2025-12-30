@@ -67,72 +67,50 @@ age_complaint_score = (
 )
 # Final PLO 2 score
 plo2_score = round(age_complaint_score.mean(), 1)
+# -------------------------
 # PLO 3 – Interpersonal Skill
-# Based on Complaint Behaviour by Financial Knowledge
-# ==================================================
-# 1. Clean and standardize relevant columns
-df['Increase_Financial_Knowledge'] = (
-    df['Increase_Financial_Knowledge']
-    .astype(str)
-    .str.strip()
-)
+# Financial Knowledge × Complaint Behaviour
+# -------------------------
 
-df['Complaint_for_Unsuitable_Product'] = (
-    df['Complaint_for_Unsuitable_Product']
-    .astype(str)
-    .str.strip()
-)
-# 2. Remove rows with missing values in key columns
-knowledge_complaint_df = df.dropna(
-    subset=['Increase_Financial_Knowledge', 'Complaint_for_Unsuitable_Product']
-)
-# 3. Interpersonal analysis indicators
-# Each indicator represents an interpersonal / social analysis skill
-interpersonal_ops = {
-    # Ability to compare behaviour across different knowledge groups
-    'group_comparison': (
-        knowledge_complaint_df.groupby('Increase_Financial_Knowledge')
-        ['Complaint_for_Unsuitable_Product']
-        .nunique()
-        .mean() > 1
-    ),
-    # Awareness of behavioural diversity (Never / Sometimes / Always)
-    'behavioural_variation': (
-        knowledge_complaint_df['Complaint_for_Unsuitable_Product']
-        .nunique() > 1
-    ),
-    # Recognition of different financial knowledge levels in society
-    'social_awareness': (
-        knowledge_complaint_df['Increase_Financial_Knowledge']
-        .nunique() > 1
-    ),
-    # Understanding interaction between knowledge and behaviour
-    'interaction_analysis': (
-        pd.crosstab(
-            knowledge_complaint_df['Increase_Financial_Knowledge'],
-            knowledge_complaint_df['Complaint_for_Unsuitable_Product']
-        ).shape[0] > 1
-    ),
-    # Use of visual comparison (faceted bar plot)
-    'visual_interpretation': True
-}
-# 4. Count achieved interpersonal skill indicators
-num_interpersonal_ops = sum(interpersonal_ops.values())
-# 5. Normalize score to 0–5 scale
-max_interpersonal_ops = 5
-plo3_score = round((num_interpersonal_ops / max_interpersonal_ops) * 5, 1)
-# -------------------------
-# PLO 5 – Communication Skill
-# Based on financial knowledge improvement
-# -------------------------
-knowledge_mapping = {
+# Map complaint behaviour to numeric values
+complaint_mapping = {
     'Never': 1,
     'Sometimes': 3,
     'Always': 5
 }
 
-df['Knowledge_Score'] = df['Increase_Financial_Knowledge'].map(knowledge_mapping)
-plo5_score = round(df['Knowledge_Score'].mean(), 1)
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+
+# Calculate mean complaint score by financial knowledge level
+knowledge_complaint_score = (
+    df.dropna(subset=['Increase_Financial_Knowledge', 'Complaint_Score'])
+      .groupby('Increase_Financial_Knowledge')['Complaint_Score']
+      .mean()
+)
+
+# Final PLO 3 score
+plo3_score = round(knowledge_complaint_score.mean(), 1)
+# -------------------------
+# PLO 4 – Interpersonal Skill
+# Complaint Behaviour by Monthly Income
+# -------------------------
+# Map complaint behaviour to numeric values
+complaint_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
+}
+
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+
+# Calculate mean complaint score by monthly income group
+income_complaint_score = (
+    df.dropna(subset=['Monthly_Income', 'Complaint_Score'])
+      .groupby('Monthly_Income')['Complaint_Score']
+      .mean()
+)
+# Final PLO 4 score
+plo4_score = round(income_complaint_score.mean(), 1)
 # PLO Display
 col1.metric(
     label="Complaint Behaviour",
@@ -142,23 +120,23 @@ col1.metric(
 )
 
 col2.metric(
-    label="Age and Complaint Behaviour",
+    label="Age and Complaint,
     value=plo2_score,
     help="Calculated from digital analysis of Age and Complaint Behaviour",
     border=True
 )
 
 col3.metric(
-    label="PLO 3 – Interpersonal Skill",
+    label="Complain by Knowledge",
     value=plo3_score,
     help="Calculated from analysis of complaint behaviour across financial knowledge levels",
     border=True
 )
 
 col4.metric(
-    label="Financial Knowledge",
-    value=plo5_score,
-    help="Based on increase in financial knowledge",
+    label="Complaint by Income",
+    value=plo4_score,
+    help="Based on complaint behaviour across monthly income groups",
     border=True
 )
 
