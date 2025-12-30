@@ -30,7 +30,7 @@ except UnicodeDecodeError:
     data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 data
 
-st.header("Budgeting and Spending Behaviour")
+st.header("Budgeting & Spending Behaviour")
 #Objective
 st.title("Objective")
 st.write("To analyze budgeting and spending behaviour among students and its impact on financial management.")
