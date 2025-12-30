@@ -1,195 +1,125 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-# DATASET UPLOAD AND SUMMARY BOX
-
-# --- Corrected Imports ---
-import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
-# Set Streamlit page configuration (must be the first Streamlit command)
+# SETTING PREFERENCE
 st.set_page_config(
-    page_title="💷Financial Behaviour among University Students",
-    layout="wide" # Set layout here for consistency
+    page_title="💷 Financial Behaviour among University Students",
+    layout="wide"
 )
+
 # Page header
-st.header("💷Financial Behaviour among University Students", divider="grey")
-# Summary Box
-col1, col2, col3, col4 = st.columns(4)
+st.title("💷 Financial Behaviour among University Students")
+st.markdown("---")
 
-# Load your data
-try:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
-except UnicodeDecodeError:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
-df
+# 1. Load your data FIRST
+@st.cache_data
+def load_data():
+    url = 'https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv'
+    try:
+        return pd.read_csv(url, encoding='utf-8')
+    except:
+        return pd.read_csv(url, encoding='latin-1')
 
-# =========================================================
-# PLO DATA CALCULATIONS: Financial Responsibility & Decision-Making
-# =========================================================
+df = load_data()
 
-total_students = len(df)
-
-# 1. Standardize the Responsibility Score (using Complaint Behavior as a Proxy)
-# High frequency of complaining about unsuitable products indicates higher financial assertiveness/responsibility.
-responsibility_mapping = {
-    'Never': 1,
-    'Sometimes': 3,
-    'Always': 5
-}
+# 2. PLO DATA CALCULATIONS (Financial Responsibility & Decision-Making)
+# Define mapping globally for the metrics
+responsibility_mapping = {'Never': 1, 'Sometimes': 3, 'Always': 5}
 df['Responsibility_Score'] = df['Complaint_for_Unsuitable_Product'].map(responsibility_mapping)
-
-# ---------------------------------------------------------
-# PLO 1 – Cognitive Skill: Financial Responsibility Index
-# Measures the overall level of proactive financial behavior.
-# ---------------------------------------------------------
-plo1_score = round(df['Responsibility_Score'].mean(), 1)
-
-# ---------------------------------------------------------
-# PLO 2 – Digital Skill: Decision Maturity (Age-linked)
-# Analyzes how financial responsibility/decision-making evolves with age.
-# ---------------------------------------------------------
 df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
-age_responsibility = (
-    df.dropna(subset=['Age', 'Responsibility_Score'])
-      .groupby('Age')['Responsibility_Score']
-      .mean()
-)
-plo2_score = round(age_responsibility.mean(), 1)
 
-# ---------------------------------------------------------
-# PLO 3 – Interpersonal Skill: Knowledge-Driven Responsibility
-# Measures how financial knowledge acquisition impacts decision-making quality.
-# ---------------------------------------------------------
-knowledge_responsibility = (
-    df.dropna(subset=['Increase_Financial_Knowledge', 'Responsibility_Score'])
-      .groupby('Increase_Financial_Knowledge')['Responsibility_Score']
-      .mean()
-)
-plo3_score = round(knowledge_responsibility.mean(), 1)
+# Calculations
+plo1_score = round(df['Responsibility_Score'].mean(), 1)
+plo2_score = round(df.dropna(subset=['Age', 'Responsibility_Score']).groupby('Age')['Responsibility_Score'].mean().mean(), 1)
+plo3_score = round(df.dropna(subset=['Increase_Financial_Knowledge', 'Responsibility_Score']).groupby('Increase_Financial_Knowledge')['Responsibility_Score'].mean().mean(), 1)
+plo4_score = round(df.dropna(subset=['Monthly_Income', 'Responsibility_Score']).groupby('Monthly_Income')['Responsibility_Score'].mean().mean(), 1)
 
-# ---------------------------------------------------------
-# PLO 4 – Interpersonal Skill: Economic Decision Capability
-# Analyzes the relationship between income levels and financial responsibility.
-# ---------------------------------------------------------
-income_responsibility = (
-    df.dropna(subset=['Monthly_Income', 'Responsibility_Score'])
-      .groupby('Monthly_Income')['Responsibility_Score']
-      .mean()
-)
-plo4_score = round(income_responsibility.mean(), 1)
+# 3. Create Columns for Summary Box
+m_col1, m_col2, m_col3, m_col4 = st.columns(4)
 
-# =========================
-# DISPLAY METRICS
-# =========================
-
-col1.metric(
+m_col1.metric(
     label="Financial Responsibility Index",
     value=plo1_score,
-    help="Measures proactive behavior and assertiveness regarding unsuitable financial products.",
+    help="Measures proactive behavior regarding unsuitable financial products.",
     border=True
 )
 
-col2.metric(
+m_col2.metric(
     label="Decision Maturity (Age)",
     value=plo2_score,
-    help="Average financial responsibility score normalized across different age groups.",
+    help="Average responsibility score normalized across age groups.",
     border=True
 )
 
-col3.metric(
+m_col3.metric(
     label="Knowledge-Driven Actions",
     value=plo3_score,
-    help="Reflects how financial knowledge levels correlate with responsible financial decisions.",
+    help="Correlation between financial knowledge and responsible decisions.",
     border=True
 )
 
-col4.metric(
+m_col4.metric(
     label="Economic Decision Power",
     value=plo4_score,
-    help="Evaluates financial responsibility scores across various monthly income brackets.",
+    help="Financial responsibility scores across income brackets.",
     border=True
 )
-# --- 2. HEADER & METRICS ---
-st.header("Financial Responsibility & Decision-Making", divider="grey")
 
-# --- 3. GRAPH 1: PRICE COMPARISON (RESIZED) ---
+# =========================
+# OBJECTIVE AND PROBLEM
+# =========================
+st.header("🛒 Consumer Rights & Complaint Behaviour")
+st.markdown("---")
+
 st.subheader("Objective")
-st.write(
-    """
-    To investigate how financial responsibility influences decision-making in university students, evaluating literacy levels, 
-    spending patterns, and risk factors through survey analysis for targeted interventions.
-
-    """
-)
+st.write("Study student awareness of consumer rights and their complaint behaviour after purchasing products.")
 
 st.subheader("Problem Definition")
-st.write(
-    """
-   University students exhibit poor financial responsibility, marked by impulsive decisions like credit misuse and overspending, due to inadequate knowledge of budgeting and investments. 
-   This results in debt burdens (e.g., 40%+ with loans struggle), food insecurity, and long-term unpreparedness, exacerbated by limited education access.
-    """
+st.write("Many students might not be aware of their rights. Dissatisfaction may not lead to formal complaints. Do students understand their rights?")
+
+# =========================
+# VISUALIZATIONS
+# =========================
+st.subheader("Demographic of Students")
+chart_option = st.selectbox(
+    "List of Graph:",
+    ("Age Distribution", "Gender Distribution", "Faculty Distribution", 
+     "Housing Arrangement Distribution", "Main Income Source Distribution", "Monthly Income Distribution")
 )
 
-# We create columns to "squeeze" the graph so it isn't full-width
-col_left, col_mid, col_right = st.columns([1, 2, 1]) 
+if chart_option == "Age Distribution":
+    fig, ax = plt.subplots(figsize=(8, 4))
+    sns.histplot(df['Age'], kde=True, ax=ax, color='skyblue')
+    st.pyplot(fig)
 
-with col_mid:
-    # Reduced figsize from (10,6) to (6,4)
-    fig0, ax0 = plt.subplots(figsize=(6, 4)) 
-    sns.countplot(
-        data=df, 
-        x='Compare_Prices_Before_Buying', 
-        order=df['Compare_Prices_Before_Buying'].value_counts().index, 
-        palette='viridis',
-        ax=ax0
-    )
-    ax0.set_title('Compare Prices Before Buying', fontsize=10)
-    plt.xticks(rotation=45, fontsize=8)
-    plt.yticks(fontsize=8)
-    st.pyplot(fig0)
+elif chart_option == "Gender Distribution":
+    fig, ax = plt.subplots(figsize=(6, 6))
+    gender_counts = df['Gender'].value_counts()
+    ax.pie(gender_counts, labels=gender_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('pastel'))
+    st.pyplot(fig)
 
-st.divider()
+# ... (Include other chart options here following the same pattern)
 
-# --- 4. TABS FOR REMAINING 4 GRAPHS ---
-tab1, tab2, tab3, tab4 = st.tabs(["Score Distribution", "Age Analysis", "Gender Comparison", "Correlations"])
+st.markdown("---")
 
-# Use a standard small size for all remaining plots
-SMALL_FIG = (5, 3.5)
+# HEATMAP
+st.subheader("Correlation of Financial Management and Planning Behaviours")
 
-with tab1:
-    st.write("#### Distribution of Financial Confidence")
-    # Using columns inside the tab to keep it small and centered
-    c1, c2, c3 = st.columns([1, 2, 1])
-    with c2:
-        fig1, ax1 = plt.subplots(figsize=SMALL_FIG)
-        sns.histplot(data=df, x='Organised_Money_Management', bins=5, discrete=True, ax=ax1, color="#6A0DAD")
-        st.pyplot(fig1)
+selected_numerical_cols = [
+    'Organised_Money_Management', 'Saver_or_Spender', 'Buy_on_Credit',
+    'Avoid_Credit_Debt', 'Savings_for_Rainy_Day', 'Pension_Funds_for_Retirement',
+    'Live_for_Today', 'Savings_for_Life_Changes', 'Plan_for_Old_Age_Care'
+]
+correlation_matrix = df[selected_numerical_cols].corr()
+fig, ax = plt.subplots(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", ax=ax)
+st.pyplot(fig)
 
-with tab2:
-    st.write("#### Financial Confidence Score by Age")
-    c1, c2, c3 = st.columns([1, 2, 1])
-    with c2:
-        fig2, ax2 = plt.subplots(figsize=SMALL_FIG)
-        sns.boxplot(data=df, x='Age', y='Organised_Money_Management', palette='cubehelix', ax=ax2)
-        st.pyplot(fig2)
+# VIOLIN PLOT
+st.subheader("Age Distribution and Complaint Behaviour")
 
-with tab3:
-    st.write("#### Average Score by Gender")
-    c1, c2, c3 = st.columns([1, 2, 1])
-    with c2:
-        fig3, ax3 = plt.subplots(figsize=SMALL_FIG)
-        sns.barplot(data=df, x='Gender', y='Organised_Money_Management', palette='rocket', ax=ax3)
-        st.pyplot(fig3)
-
-with tab4:
-    st.write("#### Correlation Heatmap")
-    c1, c2, c3 = st.columns([0.5, 3, 0.5]) # Heatmap needs a bit more width for labels
-    with c2:
-        numerical_cols = df.select_dtypes(include=['number']).columns
-        if not numerical_cols.empty:
-            fig4, ax4 = plt.subplots(figsize=(7, 5))
-            sns.heatmap(df[numerical_cols].corr(), annot=True, cmap='coolwarm', fmt=".2f", ax=ax4, annot_kws={"size": 8})
-            plt.xticks(fontsize=7)
-            plt.yticks(fontsize=7)
-            st.pyplot(fig4)
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.violinplot(x='Complaint_for_Unsuitable_Product', y='Age', data=df, palette='viridis', ax=ax)
+st.pyplot(fig)
