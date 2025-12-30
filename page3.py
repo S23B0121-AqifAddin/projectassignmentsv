@@ -99,7 +99,7 @@ st.pyplot(fig)
 
 #Pie Chart
 st.subheader("Complaint Behavior for Unsuitable Products")
-st.write("This pie chart shows the proportion of consumers who lodged complaints regarding unsuitable products.")
+st.write("This pie chart shows the proportion of consumers who submit complaints regarding unsuitable products.")
 # Calculate the value counts for 'Complaint_for_Unsuitable_Product'
 complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
 # Create the figure
