@@ -170,3 +170,27 @@ plt.tight_layout()
 
 # Papar dalam Streamlit
 st.pyplot(fig)
+
+# Tajuk aplikasi
+st.title("Organised Money Management vs Saver/Spender by Gender")
+
+# Plot scatter
+fig, ax = plt.subplots(figsize=(10, 6))
+
+sns.scatterplot(
+    x='Organised_Money_Management',
+    y='Saver_or_Spender',
+    hue='Gender',
+    data=data,
+    palette='viridis',
+    ax=ax
+)
+
+ax.set_title('Organised Money Management vs. Saver/Spender by Gender')
+ax.set_xlabel('Organised Money Management')
+ax.set_ylabel('Saver or Spender')
+
+plt.tight_layout()
+
+# Papar graf dalam Streamlit
+st.pyplot(fig)
