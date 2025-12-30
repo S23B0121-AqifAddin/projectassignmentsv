@@ -17,11 +17,6 @@ st.set_page_config(
 st.header("Financial Behaviour among University Students", divider="grey")
 
 col1, col2, col3, col4 = st.columns(4)
-    
-col1.metric(label="PLO 2", value=f"3.3", help="PLO 2: Cognitive Skill", border=True)
-col2.metric(label="PLO 3", value=f"3.5", help="PLO 3: Digital Skill", border=True)
-col3.metric(label="PLO 4", value=f"4.0", help="PLO 4: Interpersonal Skill", border=True)
-col4.metric(label="PLO 5", value=f"4.3", help="PLO 5: Communication Skill", border=True)
 
 # Load your data
 try:
@@ -35,28 +30,28 @@ data
 # Define PLO → column mapping
 plo_mapping = {
     "PLO 2": {
-        "label": "Cognitive Skill",
+        "label": "Money Management",
         "columns": [
             "Organised_Money_Management",
             "Plan_for_Old_Age_Care"
         ]
     },
     "PLO 3": {
-        "label": "Digital Skill",
+        "label": "Buy on Credit",
         "columns": [
             "Buy_on_Credit",
             "Avoid_Credit_Debt"
         ]
     },
     "PLO 4": {
-        "label": "Interpersonal Skill",
+        "label": "Saving Life Changes",
         "columns": [
             "Savings_for_Life_Changes",
             "Live_for_Today"
         ]
     },
     "PLO 5": {
-        "label": "Communication Skill",
+        "label": "Saver or Spender",
         "columns": [
             "Saver_or_Spender",
             "Follow_Budget"
@@ -93,12 +88,10 @@ for plo, info in plo_mapping.items():
 
 # ================== DISPLAY ==================
 
-col1, col2, col3, col4 = st.columns(4)
-
-col1.metric("PLO 2", plo_scores["PLO 2"], help="Cognitive Skill", border=True)
-col2.metric("PLO 3", plo_scores["PLO 3"], help="Digital Skill", border=True)
-col3.metric("PLO 4", plo_scores["PLO 4"], help="Interpersonal Skill", border=True)
-col4.metric("PLO 5", plo_scores["PLO 5"], help="Communication Skill", border=True)
+col1.metric("PLO 2", plo_scores["PLO 2"], help="Money Management", border=True)
+col2.metric("PLO 3", plo_scores["PLO 3"], help="Buy on Credit", border=True)
+col3.metric("PLO 4", plo_scores["PLO 4"], help="Saving Life Changes", border=True)
+col4.metric("PLO 5", plo_scores["PLO 5"], help="Saver or Spender", border=True)
 
 
 st.header("Budgeting and spending behavior")
