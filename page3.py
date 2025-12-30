@@ -92,7 +92,6 @@ plo3_score = round(knowledge_complaint_score.mean(), 1)
 # Complaint Behaviour by Monthly Income
 # -------------------------
 # Ensure Monthly Income is treated as string
-df['Monthly_Income'] = df['Monthly_Income'].astype(str).str.strip()
 # Map complaint behaviour to numeric values
 complaint_mapping = {
     'Never': 1,
@@ -118,7 +117,7 @@ col1.metric(
 )
 
 col2.metric(
-    label="Age and Complaint,
+    label="Age and Complaint",
     value=plo2_score,
     help="Calculated from digital analysis of Age and Complaint Behaviour",
     border=True
