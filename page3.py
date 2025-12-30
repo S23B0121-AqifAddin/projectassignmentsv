@@ -293,8 +293,25 @@ with st.container():
         ax.set_xlabel("Count")
         ax.set_ylabel("Monthly Income")
         st.pyplot(fig)
-
+st.markdown(
+    """
+    <div style="
+        background-color:#BDB5D5;
+        color:#000000;
+        padding:15px 20px;
+        border-radius:10px;
+        border:1px solid #d1d5db;
+        margin-bottom:15px;
+    ">
+        <strong>Description:</strong><br>
+        The average sleep quality for different occupations is displayed in this line graph.
+        The y-axis (4.0–8.0) represents average sleep quality, while the x-axis shows different occupations.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 st.markdown("---")  # this creates a horizontal line
+
 #Heatmap
 st.subheader("Correlation of Financial Management and Planning Behaviours")
 st.write(
@@ -333,6 +350,23 @@ ax.set_title('Correlation Heatmap of Financial Management and Planning Behaviors
 plt.tight_layout()
 # Display in Streamlit
 st.pyplot(fig)
+st.markdown(
+    """
+    <div style="
+        background-color:#BDB5D5;
+        color:#000000;
+        padding:15px 20px;
+        border-radius:10px;
+        border:1px solid #d1d5db;
+        margin-bottom:15px;
+    ">
+        <strong>Description:</strong><br>
+        The average sleep quality for different occupations is displayed in this line graph.
+        The y-axis (4.0–8.0) represents average sleep quality, while the x-axis shows different occupations.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 #Pie Chart
 st.subheader("Complaint Behavior for Unsuitable Products")
@@ -382,6 +416,23 @@ ax.set_ylabel('Age')
 plt.tight_layout()
 # Display in Streamlit
 st.pyplot(fig)
+st.markdown(
+    """
+    <div style="
+        background-color:#BDB5D5;
+        color:#000000;
+        padding:15px 20px;
+        border-radius:10px;
+        border:1px solid #d1d5db;
+        margin-bottom:15px;
+    ">
+        <strong>Description:</strong><br>
+        The average sleep quality for different occupations is displayed in this line graph.
+        The y-axis (4.0–8.0) represents average sleep quality, while the x-axis shows different occupations.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 #Grouped Bar Plot
 st.subheader("Complaint Behaviour by Gender")
@@ -407,6 +458,23 @@ ax.set_ylabel('Count')
 plt.tight_layout()
 # Display in Streamlit
 st.pyplot(fig)
+st.markdown(
+    """
+    <div style="
+        background-color:#BDB5D5;
+        color:#000000;
+        padding:15px 20px;
+        border-radius:10px;
+        border:1px solid #d1d5db;
+        margin-bottom:15px;
+    ">
+        <strong>Description:</strong><br>
+        The average sleep quality for different occupations is displayed in this line graph.
+        The y-axis (4.0–8.0) represents average sleep quality, while the x-axis shows different occupations.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 #Stacked Bar Plot
 # Streamlit section
@@ -429,6 +497,23 @@ ax.legend(title='Complaint for Unsuitable Product', bbox_to_anchor=(1.05, 1), lo
 plt.tight_layout()
 # Display the plot in Streamlit
 st.pyplot(fig)
+st.markdown(
+    """
+    <div style="
+        background-color:#BDB5D5;
+        color:#000000;
+        padding:15px 20px;
+        border-radius:10px;
+        border:1px solid #d1d5db;
+        margin-bottom:15px;
+    ">
+        <strong>Description:</strong><br>
+        The average sleep quality for different occupations is displayed in this line graph.
+        The y-axis (4.0–8.0) represents average sleep quality, while the x-axis shows different occupations.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 #Faceted Bar Plot
 st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
@@ -457,3 +542,20 @@ plt.suptitle('Complaint Behavior by Financial Knowledge Increase', y=1.05)  # Ad
 plt.tight_layout()
 # Streamlit: display the plot
 st.pyplot(g.fig)
+st.markdown(
+    """
+    <div style="
+        background-color:#BDB5D5;
+        color:#000000;
+        padding:15px 20px;
+        border-radius:10px;
+        border:1px solid #d1d5db;
+        margin-bottom:15px;
+    ">
+        <strong>Description:</strong><br>
+        The average sleep quality for different occupations is displayed in this line graph.
+        The y-axis (4.0–8.0) represents average sleep quality, while the x-axis shows different occupations.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
