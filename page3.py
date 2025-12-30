@@ -6,28 +6,6 @@ import matplotlib as mpl
 import seaborn as sns
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
-# SETTING PREFERENCE
-st.markdown("""
-<style>
-/* === FORCE SAME SIZE FOR ALL FIGURES === */
-[data-testid="stPyplot"] {
-    width: 100% !important;
-}
-
-/* control the actual canvas size */
-[data-testid="stPyplot"] canvas {
-    width: 700px !important;   /* CHANGE THIS NUMBER ONLY */
-    height: auto !important;
-}
-
-/* remove weird vertical gaps */
-[data-testid="stPyplot"] > div {
-    padding: 0 !important;
-    margin: 0 auto !important;
-}
-</style>
-""", unsafe_allow_html=True)
-        
 
 # DATASET UPLOAD AND SUMMARY BOX
 
