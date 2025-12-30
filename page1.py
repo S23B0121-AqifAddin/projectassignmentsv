@@ -103,6 +103,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Money Management Difficulty by Age Group")
+st.write("Generate a grouped bar chart to analyze how 'Money_Management_Difficulty' varies across different 'Age' groups")
 
 # Plot
 fig, ax = plt.subplots(figsize=(12, 7))
