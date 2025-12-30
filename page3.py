@@ -169,12 +169,18 @@ st.write(
 
 #Distribution Demographic Graph
 
-st.subheader("Demographic of Students")
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Sidebar selector
-with st.sidebar:
+st.title("📊 Demographic Profile of Students")
+
+# Main page container
+with st.container():
+
+    # Selector INSIDE the page
     chart_option = st.selectbox(
-        "Select a chart to display:",
+        "Choose a chart to display:",
         (
             "Age Distribution",
             "Gender Distribution",
@@ -184,9 +190,6 @@ with st.sidebar:
             "Monthly Income Distribution"
         )
     )
-
-# Main display area
-with st.container():
 
     # 1. Age Distribution
     if chart_option == "Age Distribution":
