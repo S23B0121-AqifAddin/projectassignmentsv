@@ -20,11 +20,26 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* Main reading area */
     .block-container {
-        padding-left: 5rem;
-        padding-right: 5rem;
-        max-width: 1400px;
-        margin: auto;
+        max-width: 900px;          /* Book-like text width */
+        padding-top: 3rem;
+        padding-bottom: 4rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;          /* Comfortable reading */
+    }
+
+    /* Improve text readability */
+    p, li {
+        font-size: 1.05rem;
+    }
+
+    h1, h2, h3 {
+        margin-top: 2.5rem;
+        margin-bottom: 1.2rem;
     }
     </style>
     """,
