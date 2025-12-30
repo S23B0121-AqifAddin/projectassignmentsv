@@ -15,7 +15,7 @@ st.set_page_config(
     layout="wide" # Set layout here for consistency
 )
 # Page header
-st.title("💷Financial Behaviour among University Students", divider="grey")
+st.title("💷Financial Behaviour among University Students")
 
 col1, col2, col3, col4 = st.columns(4)
     
