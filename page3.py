@@ -166,21 +166,14 @@ st.write(
 
 
 # DISPLAY VISUALIZATION
-
 #Distribution Demographic Graph
 
-import streamlit as st
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-st.title("📊 Demographic Profile of Students")
-
+st.subheader("Demographic of Students")
 # Main page container
 with st.container():
-
     # Selector INSIDE the page
     chart_option = st.selectbox(
-        "Choose a chart to display:",
+        "List of Graph:",
         (
             "Age Distribution",
             "Gender Distribution",
@@ -190,7 +183,6 @@ with st.container():
             "Monthly Income Distribution"
         )
     )
-
     # 1. Age Distribution
     if chart_option == "Age Distribution":
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -199,7 +191,6 @@ with st.container():
         ax.set_xlabel("Age")
         ax.set_ylabel("Frequency")
         st.pyplot(fig)
-
     # 2. Gender Distribution
     elif chart_option == "Gender Distribution":
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -214,7 +205,6 @@ with st.container():
         ax.set_title("Distribution of Gender")
         ax.axis("equal")
         st.pyplot(fig)
-
     # 3. Faculty Distribution
     elif chart_option == "Faculty Distribution":
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -230,7 +220,6 @@ with st.container():
         ax.set_xlabel("Count")
         ax.set_ylabel("Faculty")
         st.pyplot(fig)
-
     # 4. Housing Arrangement Distribution
     elif chart_option == "Housing Arrangement Distribution":
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -246,7 +235,6 @@ with st.container():
         ax.set_xlabel("Count")
         ax.set_ylabel("Housing Arrangement")
         st.pyplot(fig)
-
     # 5. Main Income Source Distribution
     elif chart_option == "Main Income Source Distribution":
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -262,7 +250,6 @@ with st.container():
         ax.set_xlabel("Count")
         ax.set_ylabel("Main Income Source")
         st.pyplot(fig)
-
     # 6. Monthly Income Distribution
     elif chart_option == "Monthly Income Distribution":
         monthly_income_order = [
@@ -285,6 +272,7 @@ with st.container():
         ax.set_ylabel("Monthly Income")
         st.pyplot(fig)
 
+st.markdown("---")  # this creates a horizontal line
 #Heatmap
 st.subheader("Correlation of Financial Management and Planning Behaviours")
 st.write(
