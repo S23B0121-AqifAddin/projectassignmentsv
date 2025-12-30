@@ -63,9 +63,9 @@ plo4_score = round(((gender_diversity + income_diversity) / 2), 1)
 # Based on financial knowledge improvement
 # -------------------------
 knowledge_mapping = {
-    'No Increase': 1,
-    'Slight Increase': 3,
-    'Significant Increase': 5
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
 }
 
 df['Knowledge_Score'] = df['Increase_Financial_Knowledge'].map(knowledge_mapping)
