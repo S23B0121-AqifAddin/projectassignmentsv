@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # --- Corrected Imports ---
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
