@@ -15,6 +15,22 @@ st.set_page_config(
     page_title="💷Financial Behaviour among University Students",
     layout="wide" # Set layout here for consistency
 )
+
+# Forced SETUP Page Streamlit
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Page header
 st.title("💷Financial Behaviour among University Students")
 st.markdown("---")  # this creates a horizontal line
