@@ -15,7 +15,7 @@ st.set_page_config(
     layout="wide" # Set layout here for consistency
 )
 # Page header
-st.header("💷Financial Behaviour among University Students", divider="grey")
+st.title("💷Financial Behaviour among University Students", divider="grey")
 
 col1, col2, col3, col4 = st.columns(4)
     
@@ -31,7 +31,7 @@ except UnicodeDecodeError:
 df
 
 #OBJECTIVE, PROBLEM AND VARIABLE USED
-st.header("🛒Consumer Rights & Complaint Behaviour")
+st.header("🛒Consumer Rights & Complaint Behaviour", divider="purple")
 
 # =========================
 # 1. Individual Goal
