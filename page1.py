@@ -147,3 +147,26 @@ plt.tight_layout()
 
 # Papar graf dalam Streamlit
 st.pyplot(fig)
+
+# Tajuk aplikasi
+st.title("Distribution of Gender")
+
+# Kiraan jantina
+gender_counts = data['Gender'].value_counts()
+
+# Plot pie chart
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.pie(
+    gender_counts,
+    labels=gender_counts.index,
+    autopct='%1.1f%%',
+    startangle=90,
+    colors=sns.color_palette('pastel')
+)
+
+ax.set_title('Distribution of Gender')
+ax.axis('equal')  # Pastikan bulatan sempurna
+plt.tight_layout()
+
+# Papar dalam Streamlit
+st.pyplot(fig)
