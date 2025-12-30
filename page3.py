@@ -218,7 +218,7 @@ g = sns.catplot(
 
 g.set_axis_labels('Complaint Behavior', 'Count')
 g.set_titles('Financial Knowledge: {col_name}')
-plt.suptitle('Complaint Behavior by Financial Knowledge Increase', y=1.02)  # Adjust suptitle position
+plt.suptitle('Complaint Behavior by Financial Knowledge Increase', y=1.05)  # Adjust suptitle position
 plt.tight_layout()
 # Streamlit: display the plot
 st.pyplot(g.fig)
