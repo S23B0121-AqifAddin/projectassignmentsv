@@ -77,6 +77,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Distribution of Monthly Income")
+st.write("This bar chart to visualize the distribution of Monthly_Income to understand students' income levels")
 
 # Plot
 fig, ax = plt.subplots(figsize=(10, 6))
