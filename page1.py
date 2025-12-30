@@ -176,7 +176,7 @@ st.title("Relationship between Budget Following and Monthly Savings")
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Plot stacked bar chart
-budget_savings_crosstab.plot.bar(
+budget_savings_crosstab(
     stacked=True,
     colormap='viridis',
     ax=ax
