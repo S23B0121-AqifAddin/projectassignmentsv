@@ -30,7 +30,7 @@ except UnicodeDecodeError:
     data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 data
 
-# ================== PLO MATRIX (FULL CORRECTION) ==================
+# ================== SAFE PLO MATRIX (FINAL) ==================
 
 # Define PLO → column mapping
 plo_mapping = {
@@ -64,7 +64,7 @@ plo_mapping = {
     }
 }
 
-# (Optional but SAFE) Likert scale mapping
+# Likert scale mapping (safe even if not used)
 likert_map = {
     "Strongly Disagree": 1,
     "Disagree": 2,
@@ -73,56 +73,33 @@ likert_map = {
     "Strongly Agree": 5
 }
 
-# Replace Likert text with numbers (only where applicable)
+# Replace Likert text → numbers
 data = data.replace(likert_map)
 
-# Calculate PLO scores
+# Calculate PLO scores safely
 plo_scores = {}
 
 for plo, info in plo_mapping.items():
-
-    # Select columns & force numeric conversion
-    numeric_data = data[info["columns"]].apply(
-        pd.to_numeric, errors="coerce"
+    numeric_data = (
+        data[info["columns"]]
+        .apply(pd.to_numeric, errors="coerce")
+        .astype(float)
     )
 
-    # Mean of columns → mean of respondents
     plo_scores[plo] = round(
-        numeric_data.mean(axis=1).mean(),
+        numeric_data.stack().mean(),  # ✅ safest mean method
         2
     )
 
-# ================== DISPLAY PLO METRICS ==================
+# ================== DISPLAY ==================
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric(
-    label="PLO 2",
-    value=plo_scores["PLO 2"],
-    help="PLO 2: Cognitive Skill",
-    border=True
-)
+col1.metric("PLO 2", plo_scores["PLO 2"], help="Cognitive Skill", border=True)
+col2.metric("PLO 3", plo_scores["PLO 3"], help="Digital Skill", border=True)
+col3.metric("PLO 4", plo_scores["PLO 4"], help="Interpersonal Skill", border=True)
+col4.metric("PLO 5", plo_scores["PLO 5"], help="Communication Skill", border=True)
 
-col2.metric(
-    label="PLO 3",
-    value=plo_scores["PLO 3"],
-    help="PLO 3: Digital Skill",
-    border=True
-)
-
-col3.metric(
-    label="PLO 4",
-    value=plo_scores["PLO 4"],
-    help="PLO 4: Interpersonal Skill",
-    border=True
-)
-
-col4.metric(
-    label="PLO 5",
-    value=plo_scores["PLO 5"],
-    help="PLO 5: Communication Skill",
-    border=True
-)
 
 st.header("Budgeting and spending behavior")
 #Objective
