@@ -11,11 +11,11 @@ import seaborn as sns
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 # Set Streamlit page configuration (must be the first Streamlit command)
 st.set_page_config(
-    page_title="Financial Behaviour among University Students",
+    page_title="💷Financial Behaviour among University Students",
     layout="wide" # Set layout here for consistency
 )
 # Page header
-st.header("Financial Behaviour among University Students", divider="grey")
+st.header("💷Financial Behaviour among University Students", divider="grey")
 
 col1, col2, col3, col4 = st.columns(4)
     
@@ -31,12 +31,12 @@ except UnicodeDecodeError:
 df
 
 #OBJECTIVE, PROBLEM AND VARIABLE USED
-st.header("Consumer Rights & Complaint Behaviour")
+st.header("🛒Consumer Rights & Complaint Behaviour")
 
 # =========================
 # 1. Individual Goal
 # =========================
-st.subheader("1. Objective")
+st.subheader("Objective")
 st.write(
     """
     To investigate student's awareness of consumer rights and their complaint
@@ -47,7 +47,7 @@ st.write(
 # =========================
 # 2. Problem Definition
 # =========================
-st.subheader("2. Problem Definition")
+st.subheader("Problem Definition")
 st.write(
     """
    Although being involved as buyers, many students might not be completely aware of their rights as consumers.
