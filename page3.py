@@ -91,6 +91,8 @@ plo3_score = round(knowledge_complaint_score.mean(), 1)
 # PLO 4 – Interpersonal Skill
 # Complaint Behaviour by Monthly Income
 # -------------------------
+# Ensure Monthly Income is treated as string
+df['Monthly_Income'] = df['Monthly_Income'].astype(str).str.strip()
 # Map complaint behaviour to numeric values
 complaint_mapping = {
     'Never': 1,
