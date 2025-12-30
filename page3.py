@@ -21,10 +21,10 @@ st.markdown(
     """
     <style>
     .block-container {
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-        padding-left: 4rem;
-        padding-right: 4rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+        max-width: 1400px;
+        margin: auto;
     }
     </style>
     """,
