@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # Page header
-st.title("💷 Financial Behaviour Analysis: University Students")
+st.title("Financial Behaviour Analysis: University Students")
 st.markdown("---")
 
 # 2. DATASET LOADING
@@ -18,6 +18,7 @@ st.markdown("---")
 def load_data():
     url = 'https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv'
     try:
+        # Standardize loading with common encodings
         data = pd.read_csv(url, encoding='utf-8')
     except:
         data = pd.read_csv(url, encoding='latin-1')
@@ -25,19 +26,19 @@ def load_data():
 
 df = load_data()
 
-# 3. CALCULATIONS
-# Mapping complaint behavior to a numeric responsibility score
+# 3. DATA CALCULATIONS
+# Mapping behavior to a numeric scale for metrics
 mapping = {'Never': 1, 'Sometimes': 3, 'Always': 5}
 df['Responsibility_Score'] = df['Complaint_for_Unsuitable_Product'].map(mapping)
 df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
 
-# Calculating PLO scores (Means)
+# Metric Values
 plo1 = round(df['Responsibility_Score'].mean(), 1)
 plo2 = round(df.dropna(subset=['Age', 'Responsibility_Score']).groupby('Age')['Responsibility_Score'].mean().mean(), 1)
 plo3 = round(df.dropna(subset=['Increase_Financial_Knowledge', 'Responsibility_Score']).groupby('Increase_Financial_Knowledge')['Responsibility_Score'].mean().mean(), 1)
 plo4 = round(df.dropna(subset=['Monthly_Income', 'Responsibility_Score']).groupby('Monthly_Income')['Responsibility_Score'].mean().mean(), 1)
 
-# 4. METRICS DISPLAY
+# 4. TOP METRICS ROW
 m_col1, m_col2, m_col3, m_col4 = st.columns(4)
 m_col1.metric("Financial Responsibility Index", plo1, border=True)
 m_col2.metric("Decision Maturity (Age)", plo2, border=True)
@@ -46,35 +47,37 @@ m_col4.metric("Economic Decision Power", plo4, border=True)
 
 st.markdown("---")
 
-# 5. ALL VISUALIZATIONS (Grid Layout)
+# 5. VISUALIZATIONS GRID
 
 # ROW 1: Demographics
 st.subheader("1. Student Demographics")
-c1, c2 = st.columns(2)
-with c1:
+row1_c1, row1_c2 = st.columns(2)
+with row1_c1:
     st.write("**Age Distribution**")
     fig1, ax1 = plt.subplots(figsize=(8, 4))
     sns.histplot(df['Age'], kde=True, color='teal', ax=ax1)
     st.pyplot(fig1)
-with c2:
+
+with row1_c2:
     st.write("**Gender Distribution**")
     fig2, ax2 = plt.subplots(figsize=(6, 6))
-    gen_counts = df['Gender'].value_counts()
-    ax2.pie(gen_counts, labels=gen_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('pastel'))
+    g_counts = df['Gender'].value_counts()
+    ax2.pie(g_counts, labels=g_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('pastel'))
     st.pyplot(fig2)
 
 st.markdown("---")
 
 # ROW 2: Responsibility & Maturity
 st.subheader("2. Behavioral & Responsibility Analysis")
-c3, c4 = st.columns(2)
-with c3:
+row2_c1, row2_c2 = st.columns(2)
+with row2_c1:
     st.write("**Responsibility Distribution (Complaints)**")
-    comp_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
+    c_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
     fig3, ax3 = plt.subplots(figsize=(6, 6))
-    ax3.pie(comp_counts, labels=comp_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('viridis'))
+    ax3.pie(c_counts, labels=c_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('viridis'))
     st.pyplot(fig3)
-with c4:
+
+with row2_c2:
     st.write("**Maturity Analysis (Age vs Responsibility)**")
     
     fig4, ax4 = plt.subplots(figsize=(8, 5))
@@ -85,31 +88,27 @@ st.markdown("---")
 
 # ROW 3: Correlation & Income
 st.subheader("3. Correlation & Economic Factors")
-c5, c6 = st.columns([2, 1])
-with c5:
+row3_c1, row3_c2 = st.columns([2, 1])
+with row3_c1:
     st.write("**Correlation of Financial Behaviours**")
     
 
 [Image of a correlation matrix heatmap]
 
-    num_cols = [
+    nums = [
         'Organised_Money_Management', 'Saver_or_Spender', 'Buy_on_Credit',
         'Avoid_Credit_Debt', 'Savings_for_Rainy_Day', 'Pension_Funds_for_Retirement'
     ]
-    corr = df[num_cols].corr()
+    corr = df[nums].corr()
     fig5, ax5 = plt.subplots(figsize=(10, 6))
     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f", ax=ax5)
     st.pyplot(fig5)
-with c6:
+
+with row3_c2:
     st.write("**Income vs Responsibility**")
-    inc_order = ['Below RM 99', 'RM 100 - RM 500', 'Above RM 600']
-    ct = pd.crosstab(df['Monthly_Income'], df['Complaint_for_Unsuitable_Product']).reindex(inc_order)
+    order = ['Below RM 99', 'RM 100 - RM 500', 'Above RM 600']
+    ct = pd.crosstab(df['Monthly_Income'], df['Complaint_for_Unsuitable_Product']).reindex(order)
     ct_norm = ct.div(ct.sum(1), axis=0)
     fig6, ax6 = plt.subplots(figsize=(6, 9))
     ct_norm.plot(kind='bar', stacked=True, ax=ax6, colormap='viridis')
     st.pyplot(fig6)
-
-# 6. FOOTER CONTEXT
-st.markdown("---")
-with st.expander("Project Details"):
-    st.write("This dashboard analyzes student financial responsibility using complaint behavior as a primary indicator.")
