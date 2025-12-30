@@ -166,23 +166,16 @@ plt.tight_layout()
 # Papar graf dalam Streamlit
 st.pyplot(fig)
 
-import streamlit as st
-import matplotlib.pyplot as plt
-
-# Title
-st.title("Relationship between Budget Following and Monthly Savings")
-
-# Create figure
+st.subheader("Relationship between Budget Following and Monthly Savings")
 fig, ax = plt.subplots(figsize=(10, 6))
 
-# Plot stacked bar chart
-budget_savings_crosstab(
+budget_savings_crosstab.plot(
+    kind='bar',
     stacked=True,
     colormap='viridis',
     ax=ax
 )
 
-# Labels & title
 ax.set_title('Relationship between Budget Following and Monthly Savings')
 ax.set_xlabel('Follow Budget')
 ax.set_ylabel('Proportion of Monthly Savings')
@@ -190,6 +183,4 @@ ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 ax.legend(title='Monthly Savings')
 
 plt.tight_layout()
-
-# Display plot in Streamlit
 st.pyplot(fig)
