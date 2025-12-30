@@ -167,6 +167,121 @@ st.write(
 
 # DISPLAY VISUALIZATION
 
+#Distribution Demographic Graph
+
+st.subheader("Demographic of Students")
+
+# Sidebar selector
+with st.sidebar:
+    chart_option = st.selectbox(
+        "Select a chart to display:",
+        (
+            "Age Distribution",
+            "Gender Distribution",
+            "Faculty Distribution",
+            "Housing Arrangement Distribution",
+            "Main Income Source Distribution",
+            "Monthly Income Distribution"
+        )
+    )
+
+# Main display area
+with st.container():
+
+    # 1. Age Distribution
+    if chart_option == "Age Distribution":
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.histplot(df['Age'], kde=True, ax=ax)
+        ax.set_title("Distribution of Age")
+        ax.set_xlabel("Age")
+        ax.set_ylabel("Frequency")
+        st.pyplot(fig)
+
+    # 2. Gender Distribution
+    elif chart_option == "Gender Distribution":
+        fig, ax = plt.subplots(figsize=(8, 6))
+        gender_counts = df['Gender'].value_counts()
+        ax.pie(
+            gender_counts,
+            labels=gender_counts.index,
+            autopct='%1.1f%%',
+            startangle=90,
+            colors=sns.color_palette('pastel')
+        )
+        ax.set_title("Distribution of Gender")
+        ax.axis("equal")
+        st.pyplot(fig)
+
+    # 3. Faculty Distribution
+    elif chart_option == "Faculty Distribution":
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.countplot(
+            y=df['Faculty'],
+            order=df['Faculty'].value_counts().index,
+            hue=df['Faculty'],
+            palette='viridis',
+            legend=False,
+            ax=ax
+        )
+        ax.set_title("Distribution of Faculty")
+        ax.set_xlabel("Count")
+        ax.set_ylabel("Faculty")
+        st.pyplot(fig)
+
+    # 4. Housing Arrangement Distribution
+    elif chart_option == "Housing Arrangement Distribution":
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.countplot(
+            y=df['Housing_Arrangement'],
+            order=df['Housing_Arrangement'].value_counts().index,
+            hue=df['Housing_Arrangement'],
+            palette='coolwarm',
+            legend=False,
+            ax=ax
+        )
+        ax.set_title("Distribution of Housing Arrangement")
+        ax.set_xlabel("Count")
+        ax.set_ylabel("Housing Arrangement")
+        st.pyplot(fig)
+
+    # 5. Main Income Source Distribution
+    elif chart_option == "Main Income Source Distribution":
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.countplot(
+            y=df['Main_Income_Source'],
+            order=df['Main_Income_Source'].value_counts().index,
+            hue=df['Main_Income_Source'],
+            palette='plasma',
+            legend=False,
+            ax=ax
+        )
+        ax.set_title("Distribution of Main Income Source")
+        ax.set_xlabel("Count")
+        ax.set_ylabel("Main Income Source")
+        st.pyplot(fig)
+
+    # 6. Monthly Income Distribution
+    elif chart_option == "Monthly Income Distribution":
+        monthly_income_order = [
+            'Below RM 99',
+            'RM 100 - RM 500',
+            'Above RM 600'
+        ]
+
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.countplot(
+            y=df['Monthly_Income'],
+            order=monthly_income_order,
+            hue=df['Monthly_Income'],
+            palette='magma',
+            legend=False,
+            ax=ax
+        )
+        ax.set_title("Distribution of Monthly Income")
+        ax.set_xlabel("Count")
+        ax.set_ylabel("Monthly Income")
+        st.pyplot(fig)
+
 #Heatmap
 st.subheader("Correlation of Financial Management and Planning Behaviours")
 st.write(
