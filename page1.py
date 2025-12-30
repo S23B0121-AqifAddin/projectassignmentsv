@@ -30,12 +30,21 @@ except UnicodeDecodeError:
     data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 data
 
+st.header("Budgeting & Spending Behaviour")
 #Objective
 st.title("Objective")
-st.write("To analyze budgeting and spending behaviour among students and its impact on financial management")
+st.write("To analyze budgeting and spending behaviour among students and its impact on financial management.")
+
+#Problem statement
+st.title("Problem Statement")
+st.write("Budgeting and spending behaviour play a critical role in financial capability, yet many students struggle with 
+effective expense management and financial planning. Poor budgeting habits and uncontrolled spending can lead to financial stress 
+and instability. Therefore, it is important to examine budgeting and spending behaviour to understand its impact on 
+financial decision-making and financial capability.")
 
 # Tajuk aplikasi
 st.title("Correlation Heatmap of Financial Attitudes")
+st.write("This heatmap shows the correlation between different financial attitudes of respondents.")
 
 # Load dataset dari GitHub
 url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv"
@@ -78,7 +87,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Distribution of Monthly Income")
-st.write("This bar chart to visualize the distribution of Monthly_Income to understand students' income levels")
+st.write("This bar chart to visualize the distribution of Monthly_Income to understand students' income levels.")
 
 # Plot
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -103,7 +112,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Money Management Difficulty by Age Group")
-st.write("This grouped bar chart to analyze how 'Money_Management_Difficulty' varies across different 'Age' groups")
+st.write("This grouped bar chart to analyze how 'Money_Management_Difficulty' varies across different 'Age' groups.")
 
 # Plot
 fig, ax = plt.subplots(figsize=(12, 7))
@@ -127,7 +136,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Distribution of Gender")
-st.write("To visualize the overall distribution of 'Gender' using a pie chart")
+st.write("To visualize the overall distribution of 'Gender' using a pie chart.")
 
 # Kiraan jantina
 gender_counts = data['Gender'].value_counts()
@@ -151,7 +160,7 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Organised Money Management vs Saver/Spender by Gender")
-st.write("Create a scatter plot to visualize the relationship between 'Organised_Money_Management' and 'Saver_or_Spender', colored by 'Gender'")
+st.write("This scatter plot to visualize the relationship between 'Organised_Money_Management' and 'Saver_or_Spender', colored by 'Gender'.")
 
 # Plot scatter
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -175,6 +184,7 @@ plt.tight_layout()
 st.pyplot(fig)
 
 st.subheader("Relationship between Budget Following and Monthly Savings")
+st.write("This stacked bar chart to explore the relationship between 'Follow_Budget' and 'Monthly_Savings' to understand budgeting and saving habits.")
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Cross-tabulation
