@@ -30,64 +30,45 @@ except UnicodeDecodeError:
     data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
 data
 
-# Title Bar Chart
-st.title("Distribution of Monthly Income Range")
+# Tajuk aplikasi
+st.title("Correlation Heatmap of Financial Attitudes")
 
-# Load data 
+# Load dataset dari GitHub
 url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv"
 data = pd.read_csv(url)
 
-# Check column name
-st.write("Dataset Preview:")
-st.dataframe(data.head())
-st.write("Visualize the distribution of 'Monthly_Income_Range' using a bar chart to understand students' income levels")
+# Senarai kolum sikap kewangan
+attitude_columns = [
+    'Organised_Money_Management',
+    'Saver_or_Spender',
+    'Buy_on_Credit',
+    'Avoid_Credit_Debt',
+    'Savings_for_Rainy_Day',
+    'Pension_Funds_for_Retirement',
+    'Live_for_Today',
+    'Savings_for_Life_Changes',
+    'Plan_for_Old_Age_Care'
+]
 
-# Plot
-fig, ax = plt.subplots(figsize=(10, 6))
+# Kira correlation matrix
+correlation_matrix = data[attitude_columns].corr()
 
-sns.countplot(
-    y='Monthly_Income',
-    data=data,
-    order=data['Monthly_Income'].value_counts().index,
-    palette='viridis',
+# Plot heatmap
+fig, ax = plt.subplots(figsize=(12, 10))
+sns.heatmap(
+    correlation_matrix,
+    annot=True,
+    cmap='coolwarm',
+    fmt=".2f",
+    linewidths=.5,
     ax=ax
 )
 
-ax.set_title('Distribution of Monthly Income Range')
-ax.set_xlabel('Count')
-ax.set_ylabel('Monthly Income Range')
-
-st.pyplot(fig)
-
-# Title
-st.title("Relationship between Having a Budget and Regular Savings")
-
-# Preview data
-st.write("Create a stacked bar chart to explore the relationship between 'Has_Budget' and 'Regular_Savings")
-
-# Crosstab (normalized by index)
-budget_savings_crosstab = pd.crosstab(
-    data['Has_Budget'],
-    data['Regular_Savings'],
-    normalize='index'
-)
-
-# Plot
-fig, ax = plt.subplots(figsize=(12, 7))
-budget_savings_crosstab.plot(
-    kind='bar',
-    stacked=True,
-    colormap='viridis',
-    ax=ax
-)
-
-ax.set_title('Relationship between Having a Budget and Regular Savings')
-ax.set_xlabel('Has Budget')
-ax.set_ylabel('Proportion')
-ax.set_xticklabels(ax.get_xticklabels(), rotation=0)
-ax.legend(title='Regular Savings')
-
+ax.set_title('Correlation Heatmap of Financial Attitudes')
+plt.xticks(rotation=45, ha='right')
+plt.yticks(rotation=0)
 plt.tight_layout()
 
-# Display in Streamlit
+# Papar dalam Streamlit
 st.pyplot(fig)
+
