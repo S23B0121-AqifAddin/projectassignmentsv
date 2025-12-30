@@ -174,76 +174,51 @@ plt.tight_layout()
 st.pyplot(fig)
 
 #Stacked Bar Plot
-st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
-st.write(
-    "This stacked percentage bar chart shows how complaint behaviour for unsuitable products "
-    "varies across different levels of financial knowledge improvement. The proportions allow "
-    "for direct comparison between categories."
-)
-# Create a cross-tabulation (contingency table)
-contingency_table = pd.crosstab(
-    df['Increase_Financial_Knowledge'],
-    df['Complaint_for_Unsuitable_Product']
-)
-# Normalize to proportions (stacked percentage bar chart)
-contingency_table_normalized = contingency_table.div(
-    contingency_table.sum(axis=1), axis=0
-)
-# Create figure
+# Streamlit section
+st.subheader("Complaint Behavior by Monthly Income")
+# Create a cross-tabulation (contingency table) of the two categorical variables
+contingency_table = pd.crosstab(df['Monthly_Income'], df['Complaint_for_Unsuitable_Product'])
+# Define the order for Monthly_Income categories
+monthly_income_order = ['Below RM 99', 'RM 100 - RM 500', 'Above RM 600']
+contingency_table = contingency_table.reindex(monthly_income_order)
+# Normalize the table to show proportions within each 'Monthly_Income' category
+contingency_table_normalized = contingency_table.div(contingency_table.sum(1).astype(float), axis=0)
+# Plot the stacked bar chart using matplotlib
 fig, ax = plt.subplots(figsize=(12, 8))
+contingency_table_normalized.plot(kind='bar', stacked=True, colormap='viridis', ax=ax)
 
-contingency_table_normalized.plot(
-    kind='bar',
-    stacked=True,
-    colormap='viridis',
-    ax=ax
-)
-
-ax.set_title('Complaint Behavior by Financial Knowledge Increase')
-ax.set_xlabel('Increase_Financial_Knowledge')
+ax.set_xlabel('Monthly Income')
 ax.set_ylabel('Proportion')
 ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-
-ax.legend(
-    title='Complaint_for_Unsuitable_Product',
-    bbox_to_anchor=(1.05, 1),
-    loc='upper left'
-)
-
+ax.legend(title='Complaint for Unsuitable Product', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
-# Display in Streamlit
+# Display the plot in Streamlit
 st.pyplot(fig)
 
 #Faceted Bar Plot
-st.subheader("Complaint Behaviour by Monthly Income")
-st.write(
-    "These faceted bar charts compare complaint behaviour for unsuitable products "
-    "across different monthly income groups. Sharing the y-axis allows for clearer "
-    "comparison of complaint frequency between income categories."
-)
-# Define category orders
-monthly_income_order = ['Below RM 99', 'RM 100 - RM 500', 'Above RM 600']
+st.subheader("Complaint Behavior by Financial Knowledge Increase")
+# Define the order for Increase_Financial_Knowledge categories
+financial_knowledge_order = df['Increase_Financial_Knowledge'].value_counts().index.tolist()
+# Define the order for Complaint_for_Unsuitable_Product categories
 complaint_order = ['Never', 'Sometimes', 'Always']
-# Create faceted count plot
+# Create a faceted bar plot (kind='count')
 g = sns.catplot(
     data=df,
     x='Complaint_for_Unsuitable_Product',
-    col='Monthly_Income',
+    col='Increase_Financial_Knowledge',
     kind='count',
-    col_order=monthly_income_order,
+    col_order=financial_knowledge_order,
     order=complaint_order,
-    height=5,
-    aspect=1,
+    height=5, aspect=1,
     palette='viridis',
-    sharey=True
+    sharey=True,
+    hue='Complaint_for_Unsuitable_Product',
+    legend=False  # Share the y-axis limit across facets for better comparison
 )
 
 g.set_axis_labels('Complaint Behavior', 'Count')
-g.set_titles('Monthly Income: {col_name}')
-# Overall title
-g.fig.suptitle(
-    'Complaint Behavior by Monthly Income (Faceted Bar Plots)',
-    y=1.05
-)
-# Display in Streamlit
+g.set_titles('Financial Knowledge: {col_name}')
+plt.suptitle('Complaint Behavior by Financial Knowledge Increase', y=1.02)  # Adjust suptitle position
+plt.tight_layout()
+# Streamlit: display the plot
 st.pyplot(g.fig)
