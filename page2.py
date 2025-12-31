@@ -85,11 +85,6 @@ m_col2.metric("Decision Maturity (Age)", p2, border=True)
 m_col3.metric("Knowledge-Driven Actions", p3, border=True)
 m_col4.metric("Economic Decision Power", p4, border=True)
 
-st.markdown("---")
-#OBJECTIVE AND PROBLEM
-st.header("Financial Responsibility & Decision-Making")
-st.markdown("---")  # this creates a horizontal line
-
 # =========================
 # 1. Individual Goal
 # =========================
