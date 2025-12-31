@@ -44,58 +44,79 @@ m_col4.metric("Economic Decision Power", p4, border=True)
 
 st.markdown("---")
 
-# 5. ALL VISUALIZATIONS
+# 5. SEPARATED VISUALIZATIONS
+# We use st.container() and clear headers to separate the logic
 
-# ROW 1: Demographics
-st.subheader("1. Student Demographics")
-c1, c2 = st.columns(2)
-with c1:
-    st.write("**Age Distribution**")
-    fig1, ax1 = plt.subplots(figsize=(8, 4))
-    sns.histplot(df['Age'], kde=True, color='teal', ax=ax1)
-    st.pyplot(fig1)
-with c2:
-    st.write("**Gender Distribution**")
-    fig2, ax2 = plt.subplots(figsize=(6, 6))
-    g_counts = df['Gender'].value_counts()
-    ax2.pie(g_counts, labels=g_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('pastel'))
-    st.pyplot(fig2)
+# SECTION 1: DEMOGRAPHICS
+with st.container():
+    st.header("Step 1: Understanding the Demographic")
+    st.info("This section explores the age and gender distribution of the students surveyed.")
+    c1, c2 = st.columns(2)
+    
+    with c1:
+        st.write("**Age Distribution**")
+        fig1, ax1 = plt.subplots(figsize=(8, 4))
+        sns.histplot(df['Age'], kde=True, color='teal', ax=ax1)
+        st.pyplot(fig1)
+        plt.close(fig1)
 
-st.markdown("---")
-
-# ROW 2: Responsibility & Maturity
-st.subheader("2. Behavioral & Responsibility Analysis")
-c3, c4 = st.columns(2)
-with c3:
-    st.write("**Responsibility Distribution (Complaints)**")
-    comp_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
-    fig3, ax3 = plt.subplots(figsize=(6, 6))
-    ax3.pie(comp_counts, labels=comp_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('viridis'))
-    st.pyplot(fig3)
-with c4:
-    st.write("**Maturity Analysis (Age vs Responsibility)**")
-    fig4, ax4 = plt.subplots(figsize=(8, 5))
-    sns.violinplot(x='Complaint_for_Unsuitable_Product', y='Age', data=df, palette='muted', ax=ax4)
-    st.pyplot(fig4)
+    with c2:
+        st.write("**Gender Distribution**")
+        fig2, ax2 = plt.subplots(figsize=(6, 6))
+        g_counts = df['Gender'].value_counts()
+        ax2.pie(g_counts, labels=g_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('pastel'))
+        st.pyplot(fig2)
+        plt.close(fig2)
 
 st.markdown("---")
 
-# ROW 3: Correlation & Income
-st.subheader("3. Correlation & Economic Factors")
-c5, c6 = st.columns([2, 1])
-with c5:
+# SECTION 2: BEHAVIORAL ANALYSIS
+with st.container():
+    st.header("Step 2: Responsibility & Maturity")
+    st.info("How do students react to unsuitable products across different age groups?")
+    c3, c4 = st.columns(2)
+    
+    with c3:
+        st.write("**Complaint Behavior Frequency**")
+        comp_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
+        fig3, ax3 = plt.subplots(figsize=(6, 6))
+        ax3.pie(comp_counts, labels=comp_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette('viridis'))
+        st.pyplot(fig3)
+        plt.close(fig3)
+
+    with c4:
+        st.write("**Maturity Analysis (Age vs. Responsibility)**")
+        
+        fig4, ax4 = plt.subplots(figsize=(8, 5))
+        sns.violinplot(x='Complaint_for_Unsuitable_Product', y='Age', data=df, palette='muted', ax=ax4)
+        st.pyplot(fig4)
+        plt.close(fig4)
+
+st.markdown("---")
+
+# SECTION 3: ECONOMIC INFLUENCES
+with st.container():
+    st.header("Step 3: Economic Factors & Correlation")
+    st.info("Evaluating how income and specific financial habits correlate with responsibility.")
+    
+    # Correlation Heatmap (Full width for better readability)
     st.write("**Correlation of Financial Behaviours**")
+    
     nums = ['Organised_Money_Management', 'Saver_or_Spender', 'Buy_on_Credit',
             'Avoid_Credit_Debt', 'Savings_for_Rainy_Day', 'Pension_Funds_for_Retirement']
     corr = df[nums].corr()
-    fig5, ax5 = plt.subplots(figsize=(10, 6))
+    fig5, ax5 = plt.subplots(figsize=(12, 6))
     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f", ax=ax5)
     st.pyplot(fig5)
-with c6:
-    st.write("**Income vs Responsibility**")
+    plt.close(fig5)
+
+    # Income Bar Chart
+    st.write("**Monthly Income vs. Responsibility Level**")
     order = ['Below RM 99', 'RM 100 - RM 500', 'Above RM 600']
     ct = pd.crosstab(df['Monthly_Income'], df['Complaint_for_Unsuitable_Product']).reindex(order)
     ct_norm = ct.div(ct.sum(1), axis=0)
-    fig6, ax6 = plt.subplots(figsize=(6, 9))
-    ct_norm.plot(kind='bar', stacked=True, ax=ax6, colormap='viridis')
+    fig6, ax6 = plt.subplots(figsize=(10, 5))
+    ct_norm.plot(kind='barh', stacked=True, ax=ax6, colormap='viridis')
+    ax6.set_xlabel("Proportion of Students")
     st.pyplot(fig6)
+    plt.close(fig6)
