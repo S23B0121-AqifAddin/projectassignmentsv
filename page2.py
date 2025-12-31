@@ -171,7 +171,7 @@ col4.metric(
 
 
 #OBJECTIVE AND PROBLEM
-st.header("🛒Consumer Rights & Complaint Behaviour")
+st.header("Financial Responsibility & Decision-Making")
 st.markdown("---")  # this creates a horizontal line
 
 # =========================
@@ -180,7 +180,9 @@ st.markdown("---")  # this creates a horizontal line
 st.subheader("Objective")
 st.write(
     """
-    Study about student's awareness of consumer rights and their complaint behaviour after purchasing products.
+    To investigate how financial responsibility influences decision-making in university students, evaluating literacy levels, spending patterns, 
+    and risk factors through survey analysis for targeted interventions.
+
     """
 )
 
@@ -190,9 +192,9 @@ st.write(
 st.subheader("Problem Definition")
 st.write(
     """
-   Even though being involved as buyers, many students might not be completely aware of their rights as consumers.
-   As a result, dissatisfaction with products or services may not lead to formal complaints or refund requests.
-   The Problem is, did students understand their consumer rights?
+   University students exhibit poor financial responsibility, marked by impulsive decisions like credit misuse and overspending, due to inadequate knowledge of budgeting and investments. 
+   This results in debt burdens (e.g., 40%+ with loans struggle), food insecurity, and long-term unpreparedness, exacerbated by limited education access.
+
     """
 )
 
