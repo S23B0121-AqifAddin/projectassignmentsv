@@ -75,32 +75,6 @@ m_col4.metric("Economic Decision Power", p4, border=True)
 
 st.markdown("---")
 
-# =========================
-# 1. Individual Goal
-# =========================
-st.subheader("Objective")
-st.write(
-    """
-    To investigate how financial responsibility influences decision-making in university students, evaluating literacy levels, spending patterns, 
-    and risk factors through survey analysis for targeted interventions.
-
-    """
-)
-
-# =========================
-# 2. Problem Definition
-# =========================
-st.subheader("Problem Definition")
-st.write(
-    """
-   University students exhibit poor financial responsibility, marked by impulsive decisions like credit misuse and overspending, due to inadequate knowledge of budgeting and investments. 
-   This results in debt burdens (e.g., 40%+ with loans struggle), food insecurity, and long-term unpreparedness, exacerbated by limited education access.
-
-    """
-)
-
-st.divider()
-
 # Load your data
 try:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
