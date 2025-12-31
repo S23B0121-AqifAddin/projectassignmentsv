@@ -20,16 +20,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# 2. DATASET LOADING
-@st.cache_data
-def load_data():
-    url = 'https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv'
-    try:
-        return pd.read_csv(url, encoding='utf-8')
-    except:
-        return pd.read_csv(url, encoding='latin-1')
-
-df = load_data()
+# Load your data
+try:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
+df
 
 # 3. CALCULATIONS (Prepare data for metrics)
 mapping = {'Never': 1, 'Sometimes': 3, 'Always': 5}
