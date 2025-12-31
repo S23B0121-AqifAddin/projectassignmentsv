@@ -196,4 +196,57 @@ st.write(
     """
 )
 
+st.divider()
+
+# --- 5. TOP ROW: BEHAVIORAL OVERVIEW (RESIZED SIDE-BY-SIDE) ---
+st.subheader("📊 Key Behavioural Insights")
+row1_col1, row1_col2 = st.columns(2)
+
+with row1_col1:
+    st.write("###### Price Comparison Frequency")
+    fig0, ax0 = plt.subplots(figsize=(6, 4))
+    sns.countplot(data=df, x='Compare_Prices_Before_Buying', 
+                  order=df['Compare_Prices_Before_Buying'].value_counts().index, 
+                  palette='viridis', ax=ax0)
+    plt.xticks(rotation=45, fontsize=8)
+    st.pyplot(fig0)
+
+with row1_col2:
+    st.write("###### Score Distribution")
+    fig1, ax1 = plt.subplots(figsize=(6, 4))
+    sns.histplot(data=df, x='Organised_Money_Management', bins=5, discrete=True, color="#6A0DAD", ax=ax1)
+    ax1.set_xticks(range(1, 6))
+    st.pyplot(fig1)
+
+# --- 6. BOTTOM ROW: TABS FOR DETAILED ANALYSIS ---
+st.subheader("🔍 Deep Dive Analysis")
+tab1, tab2, tab3 = st.tabs(["Demographics (Age & Gender)", "Correlation Matrix", "Raw Dataset"])
+
+with tab1:
+    sub_col1, sub_col2 = st.columns(2)
+    with sub_col1:
+        st.write("###### Financial Confidence by Age")
+        fig2, ax2 = plt.subplots(figsize=(6, 4))
+        sns.boxplot(data=df, x='Age', y='Organised_Money_Management', palette='cubehelix', ax=ax2)
+        st.pyplot(fig2)
+    
+    with sub_col2:
+        st.write("###### Average Score by Gender")
+        fig3, ax3 = plt.subplots(figsize=(6, 4))
+        sns.barplot(data=df, x='Gender', y='Organised_Money_Management', palette='rocket', ax=ax3)
+        st.pyplot(fig3)
+
+with tab2:
+    st.write("###### Feature Correlation Heatmap")
+    # Centering the heatmap to keep it from stretching
+    _, mid_col, _ = st.columns([1, 4, 1])
+    with mid_col:
+        numerical_cols = df.select_dtypes(include=['number']).columns
+        if not numerical_cols.empty:
+            fig4, ax4 = plt.subplots(figsize=(8, 6))
+            sns.heatmap(df[numerical_cols].corr(), annot=True, cmap='coolwarm', fmt=".2f", ax=ax4, annot_kws={"size": 8})
+            st.pyplot(fig4)
+
+with tab3:
+    st.dataframe(df, use_container_width=True)
 
