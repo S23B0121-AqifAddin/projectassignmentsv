@@ -78,10 +78,6 @@ p2 = round(df.dropna(subset=['Age', 'Responsibility_Score']).groupby('Age')['Res
 p3 = round(df.dropna(subset=['Increase_Financial_Knowledge', 'Responsibility_Score']).groupby('Increase_Financial_Knowledge')['Responsibility_Score'].mean().mean(), 1)
 p4 = round(df.dropna(subset=['Monthly_Income', 'Responsibility_Score']).groupby('Monthly_Income')['Responsibility_Score'].mean().mean(), 1)
 
-# 4. HEADER & SUMMARY BOX (Displayed First)
-st.title("💷 Financial Behaviour among University Students")
-st.markdown("---")
-
 # Metrics appear right at the top
 m_col1, m_col2, m_col3, m_col4 = st.columns(4)
 m_col1.metric("Financial Responsibility Index", p1, border=True)
