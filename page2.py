@@ -63,116 +63,24 @@ df
 # PLO DATA CALCULATIONS
 # =========================
 
-total_students = len(df)
-# -------------------------
-# PLO 1 – Cognitive Skill
-# Complaint awareness level
-# -------------------------
-complaint_mapping = {
-    'Never': 1,
-    'Sometimes': 3,
-    'Always': 5
-}
-
-df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
-plo1_score = round(df['Complaint_Score'].mean(), 1)
-# -------------------------
-# -------------------------
-# PLO 2 – Digital Skill
-# Age × Complaint Behaviour
-# -------------------------
-# Convert Age to numeric (safety)
+# 3. CALCULATIONS
+mapping = {'Never': 1, 'Sometimes': 3, 'Always': 5}
+df['Responsibility_Score'] = df['Complaint_for_Unsuitable_Product'].map(mapping)
 df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
-# Map complaint behaviour to numeric values
-complaint_mapping = {
-    'Never': 1,
-    'Sometimes': 3,
-    'Always': 5
-}
 
-df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
-# Calculate mean complaint score by age group
-age_complaint_score = (
-    df.dropna(subset=['Age', 'Complaint_Score'])
-      .groupby('Age')['Complaint_Score']
-      .mean()
-)
-# Final PLO 2 score
-plo2_score = round(age_complaint_score.mean(), 1)
-# -------------------------
-# PLO 3 – Interpersonal Skill
-# Financial Knowledge × Complaint Behaviour
-# -------------------------
-# Map complaint behaviour to numeric values
-complaint_mapping = {
-    'Never': 1,
-    'Sometimes': 3,
-    'Always': 5
-}
+p1 = round(df['Responsibility_Score'].mean(), 1)
+p2 = round(df.dropna(subset=['Age', 'Responsibility_Score']).groupby('Age')['Responsibility_Score'].mean().mean(), 1)
+p3 = round(df.dropna(subset=['Increase_Financial_Knowledge', 'Responsibility_Score']).groupby('Increase_Financial_Knowledge')['Responsibility_Score'].mean().mean(), 1)
+p4 = round(df.dropna(subset=['Monthly_Income', 'Responsibility_Score']).groupby('Monthly_Income')['Responsibility_Score'].mean().mean(), 1)
 
-df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
-# Calculate mean complaint score by financial knowledge level
-knowledge_complaint_score = (
-    df.dropna(subset=['Increase_Financial_Knowledge', 'Complaint_Score'])
-      .groupby('Increase_Financial_Knowledge')['Complaint_Score']
-      .mean()
-)
-# Final PLO 3 score
-plo3_score = round(knowledge_complaint_score.mean(), 1)
-# -------------------------
-# PLO 4 – Interpersonal Skill
-# Complaint Behaviour by Monthly Income
-# -------------------------
-# Ensure Monthly Income is treated as string
-# Map complaint behaviour to numeric values
-complaint_mapping = {
-    'Never': 1,
-    'Sometimes': 3,
-    'Always': 5
-}
+# 4. TOP METRICS ROW
+m_col1, m_col2, m_col3, m_col4 = st.columns(4)
+m_col1.metric("Financial Responsibility Index", p1, border=True)
+m_col2.metric("Decision Maturity (Age)", p2, border=True)
+m_col3.metric("Knowledge-Driven Actions", p3, border=True)
+m_col4.metric("Economic Decision Power", p4, border=True)
 
-df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
-# Calculate mean complaint score by monthly income group
-income_complaint_score = (
-    df.dropna(subset=['Monthly_Income', 'Complaint_Score'])
-      .groupby('Monthly_Income')['Complaint_Score']
-      .mean()
-)
-# Final PLO 4 score
-plo4_score = round(income_complaint_score.mean(), 1)
-# PLO Display
-col1.metric(
-    label="Complaint Behaviour",
-    value=plo1_score,
-    help="Calculated from complaint behaviour analysis",
-    border=True
-)
-
-col2.metric(
-    label="Age and Complaint",
-    value=plo2_score,
-    help="Calculated from digital analysis of Age and Complaint Behaviour",
-    border=True
-)
-
-col3.metric(
-    label="Complaint by Knowledge",
-    value=plo3_score,
-    help="Calculated from analysis of complaint behaviour across financial knowledge levels",
-    border=True
-)
-
-col4.metric(
-    label="Complaint by Income",
-    value=plo4_score,
-    help="Based on complaint behaviour across monthly income groups",
-    border=True
-)
-
-
-#OBJECTIVE AND PROBLEM
-st.header("Financial Responsibility & Decision-Making")
-st.markdown("---")  # this creates a horizontal line
+st.markdown("---")
 
 # =========================
 # 1. Individual Goal
