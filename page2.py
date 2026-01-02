@@ -202,6 +202,7 @@ row1_col1, row1_col2 = st.columns(2)
 
 with row1_col1:
     st.write("###### Price Comparison Frequency")
+    st.write("###### This bar chart illustrates the frequency of price-checking behavior, highlighting that a majority of students exercise market vigilance by comparing prices before making a purchase.")
     fig0, ax0 = plt.subplots(figsize=(6, 4))
     sns.countplot(data=df, x='Compare_Prices_Before_Buying', 
                   order=df['Compare_Prices_Before_Buying'].value_counts().index, 
@@ -211,6 +212,7 @@ with row1_col1:
 
 with row1_col2:
     st.write("###### Score Distribution")
+    st.write("###### This histogram shows the distribution of self-rated financial organization, revealing a normal distribution where most students possess a 'neutral' or average level of money management discipline.")
     fig1, ax1 = plt.subplots(figsize=(6, 4))
     sns.histplot(data=df, x='Organised_Money_Management', bins=5, discrete=True, color="#6A0DAD", ax=ax1)
     ax1.set_xticks(range(1, 6))
@@ -224,6 +226,7 @@ with tab1:
     sub_col1, sub_col2 = st.columns(2)
     with sub_col1:
         st.write("###### Financial Confidence by Age")
+        st.write("###### This histogram shows the distribution of self-rated financial organization, revealing a normal distribution where most students possess a 'neutral' or average level of money management discipline.")
         fig2, ax2 = plt.subplots(figsize=(6, 4))
         sns.boxplot(data=df, x='Age', y='Organised_Money_Management', palette='cubehelix', ax=ax2)
         st.pyplot(fig2)
