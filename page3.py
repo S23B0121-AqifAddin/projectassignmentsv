@@ -40,17 +40,13 @@ st.markdown(
     }
 
     .stApp {
-        background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
-        background-color: rgba(0, 0, 0, 0.92);
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
-
-    .block-container {
-        background-color: rgba(0, 0, 0, 0.92);
-        border-radius: 0; /* matches page edges */
-        padding: 2.5rem;
+        /* Overlay a semi-transparent black on the image */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     }
     </style>
     """,
