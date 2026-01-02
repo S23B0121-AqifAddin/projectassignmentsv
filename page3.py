@@ -41,6 +41,19 @@ st.markdown(
         margin-top: 2.5rem;
         margin-bottom: 1.2rem;
     }
+
+    .stApp {
+        background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .block-container {
+        background-color: rgba(255, 255, 255, 0.92);
+        border-radius: 12px;
+        padding: 2.5rem;
+    }
     </style>
     """,
     unsafe_allow_html=True
