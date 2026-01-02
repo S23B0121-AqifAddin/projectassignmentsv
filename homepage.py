@@ -12,20 +12,6 @@ st.markdown(
         background-position: center;
         background-attachment: fixed;
     }
-
-    /* Titles, headers, subheaders */
-    .stTitle h1, .stHeader h2, .stSubheader h3 {
-        font-weight: 900;       /* extra bold */
-        color: white;           /* text color */
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* makes text pop over background */
-    }
-
-    /* Remove boxes for st.write / st.markdown normal text */
-    .stMarkdown p {
-        background-color: transparent;
-        color: white;           /* optional, to make readable */
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
     </style>
     """,
     unsafe_allow_html=True
