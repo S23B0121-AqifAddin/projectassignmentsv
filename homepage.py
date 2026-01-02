@@ -21,6 +21,7 @@ st.markdown(
         font-size: 1.05rem;
     }
 
+    /* Headers spacing */
     h1, h2, h3 {
         margin-top: 2.5rem;
         margin-bottom: 1.2rem;
@@ -36,18 +37,23 @@ st.markdown(
         background-attachment: fixed;
     }
 
-    /* Transparent black boxes around st.write and other content */
-    .stBlock {
-        background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
-        border-radius: 12px; /* rounded corners */
-        padding: 1.5rem;     /* internal spacing */
+    /* Transparent black boxes around all text content */
+    .stMarkdown, .stHeader, .stSubheader, .stText, .stCodeBlock {
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 12px;
+        padding: 1.5rem;
         margin-bottom: 1.5rem;
-        color: white;        /* make text readable */
+        color: white;
     }
 
-    /* Optional: style headers inside the box */
-    .stBlock h1, .stBlock h2, .stBlock h3 {
+    /* Make headers inside boxes white */
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
         color: white;
+    }
+
+    /* Optional: Button spacing */
+    .stButton > button {
+        margin-bottom: 1rem;
     }
     </style>
     """,
