@@ -2,6 +2,39 @@ import streamlit as st
 import pandas as pd
 
 st.title("💵💷Financial Behaviour among University Students💴💶")
+st.markdown("---")
+
+st.header("📈📉Original Dataset(Without Cleaning)")
+#Load Original Dataset
+try:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='latin-1')
+df
+st.markdown("---")
+
+#OBJECTIVE AND PROBLEM
+# =========================
+# 1. Objective
+# =========================
+st.subheader("Objective")
+st.write(
+    """
+    Study about student's awareness of consumer rights and their complaint behaviour after purchasing products.
+    """
+)
+
+# =========================
+# 2. Problem Definition
+# =========================
+st.subheader("Problem Definition")
+st.write(
+    """
+   Even though being involved as buyers, many students might not be completely aware of their rights as consumers.
+   As a result, dissatisfaction with products or services may not lead to formal complaints or refund requests.
+   The Problem is, did students understand their consumer rights?
+    """
+)
 
 st.markdown("""
 ### Group Overview
@@ -9,13 +42,6 @@ This dashboard presents an analysis of **financial behaviour among university st
 
 Click a section below to view each member’s contribution.
 """)
-
-#Load Original Dataset
-try:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='utf-8')
-except UnicodeDecodeError:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='latin-1')
-df
 
 st.divider()
 
