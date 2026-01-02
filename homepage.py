@@ -20,7 +20,9 @@ st.markdown("---")
 st.subheader("Objective")
 st.write(
     """
-    Study about student's awareness of consumer rights and their complaint behaviour after purchasing products.
+    The objective of this study is to use scientific visualisation techniques to examine university student's
+    financial literacy and consumer behaviour in order to find important trends and connections that can help
+    with successful financial education and industry activities.
     """
 )
 
@@ -30,9 +32,10 @@ st.write(
 st.subheader("Problem Definition")
 st.write(
     """
-   Even though being involved as buyers, many students might not be completely aware of their rights as consumers.
-   As a result, dissatisfaction with products or services may not lead to formal complaints or refund requests.
-   The Problem is, did students understand their consumer rights?
+   Low financial knowledge among university students often results in bad consumer behaviour, including overspending,
+   building up debt and inappropriate usage of financial services. Scientific visualisation is required to
+   help uncover trends and threats within student financial data since traditional data analysis methods have
+   limitations in their ability to show complicated behavioural patterns.
     """
 )
 
