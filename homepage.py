@@ -47,8 +47,6 @@ This dashboard presents an analysis of **financial behaviour among university st
 Click a section below to view each member’s contribution.
 """)
 
-st.divider()
-
 col1, col2 = st.columns(2)
 
 with col1:
