@@ -12,6 +12,25 @@ st.markdown(
         background-position: center;
         background-attachment: fixed;
     }
+
+    /* Main container overlay for all page content */
+    .main-container {
+        background-color: rgba(0, 0, 0, 0.4); /* semi-transparent dark */
+        padding: 2rem;                        /* spacing around content */
+        color: white;                          /* make text readable */
+    }
+
+    /* Buttons styling (optional, for readability) */
+    .stButton button {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid white;
+    }
+
+    .stButton button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
     </style>
     """,
     unsafe_allow_html=True
