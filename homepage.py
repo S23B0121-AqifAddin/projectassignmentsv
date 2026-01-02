@@ -35,7 +35,7 @@ st.markdown(
     h3 {
         background-color: #000000;
         padding: 10px 18px;
-        border-radius: 8px;
+        border-radius: 0px;
         display: inline-block;
         color: white;
     }
@@ -44,7 +44,7 @@ st.markdown(
     .stMarkdown p {
         background-color: #000000;
         padding: 10px 16px;
-        border-radius: 8px;
+        border-radius: 0px;
         display: inline-block;
         color: white;
     }
@@ -55,7 +55,7 @@ st.markdown(
         height: 4px;
         background-color: #000000;
         margin: 1.5rem 0;
-        border-radius: 4px;
+        border-radius: 0px;
     }
     </style>
     """,
