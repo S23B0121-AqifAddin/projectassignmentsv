@@ -5,35 +5,31 @@ import pandas as pd
 st.markdown(
     """
     <style>
-   /* Full background image for the page */
-    .stApp {
+   /* Container with background image */
+    .title-container {
         background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
+        display: flex;
+        justify-content: center;
+        padding: 50px;   /* space around the black box */
+        border-radius: 12px;
     }
 
     /* Transparent black box behind the title */
     .title-box {
-        background-color: rgba(0, 0, 0, 0.5);  /* Transparent black */
+        background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
         padding: 20px 40px;
         border-radius: 12px;
-        display: inline-block;
-        margin-top: 50px;
-    }
-
-    .title-box h1 {
-        color: white;   /* Title text color */
-        margin: 0;
-        font-size: 2.5rem;
-        font-weight: bold;
         text-align: center;
     }
 
-    /* Center the title box */
-    .title-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    /* Title text */
+    .title-box h1 {
+        color: white;
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: bold;
     }
     </style>
     """,
