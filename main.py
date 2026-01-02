@@ -5,7 +5,7 @@ st.set_page_config(
 )
 
 # Define each page
-Home_page = st.Page("main.py", title="🏠 Group Overview")
+Home_page = st.Page("homepage.py", title="🏠 Group Overview")
 
 page_1 = st.Page("page1.py", title="(Aisyah) Budgeting & Spending Behavior")
 page_2 = st.Page("page2.py", title="(Aqif) Financial Decision-Making")
