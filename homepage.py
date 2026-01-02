@@ -12,30 +12,6 @@ st.markdown(
         background-position: center;
         background-attachment: fixed;
         }
-
-     /* Title */
-    h1 {
-        -webkit-text-stroke: 1.8px black;
-        color: white;   /* inner fill */
-    }
-
-    /* Header */
-    h2 {
-        -webkit-text-stroke: 1.4px black;
-        color: white;
-    }
-
-    /* Subheader */
-    h3 {
-        -webkit-text-stroke: 1.1px black;
-        color: white;
-    }
-
-    /* st.write text */
-    div[data-testid="stMarkdownContainer"] p {
-        -webkit-text-stroke: 0.8px black;
-        color: white;
-    }
     </style>
     """,
     unsafe_allow_html=True
