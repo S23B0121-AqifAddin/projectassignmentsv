@@ -1,30 +1,28 @@
-# -------- HOMEPAGE CONTENT --------
-if pg.current_page is None:
-    st.title("💷 Financial Behaviour among University Students")
+import streamlit as st
 
-    st.markdown("""
-    ### Group Overview
-    This dashboard presents an analysis of **financial behaviour among university students**.
+st.title("💵💷Financial Behaviour among University Students💴💶")
 
-    Click a section below to view each member’s contribution.
-    """)
+st.markdown("""
+### Group Overview
+This dashboard presents an analysis of **financial behaviour among university students**.
 
-    st.divider()
+Click a section below to view each member’s contribution.
+""")
 
-    # Button layout (2x2 grid)
-    col1, col2 = st.columns(2)
+st.divider()
 
-    with col1:
-        if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
-            pg.switch_page(page_1)
+col1, col2 = st.columns(2)
 
-        if st.button("🧠 Aqif – Financial Decision-Making", use_container_width=True):
-            pg.switch_page(page_2)
+with col1:
+    if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
+        st.switch_page("page1.py")
 
-    with col2:
-        if st.button("🧾 Khadijah – Consumer Rights", use_container_width=True):
-            pg.switch_page(page_3)
+    if st.button("🧠 Aqif – Financial Decision-Making", use_container_width=True):
+        st.switch_page("page2.py")
 
-        if st.button("🔍 Kisantini – Consumer Awareness", use_container_width=True):
-            pg.switch_page(page_4)
-pg.run()
+with col2:
+    if st.button("🧾 Khadijah – Consumer Rights", use_container_width=True):
+        st.switch_page("page3.py")
+
+    if st.button("🔍 Kisantini – Consumer Awareness", use_container_width=True):
+        st.switch_page("page4.py")
