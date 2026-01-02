@@ -8,7 +8,8 @@ st.markdown(
         background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
-        color: black;
+        color: white;  /* Text fill color */
+        -webkit-text-stroke: 2px black; /* Black outline thickness */
         padding: 30px;
         border-radius: 12px;
         font-size: 2.5rem;
