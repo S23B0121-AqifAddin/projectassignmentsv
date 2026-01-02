@@ -69,22 +69,36 @@ total_students = len(df)
 # Complaint awareness level
 # -------------------------
 # 3. CALCULATIONS (Prepare data for metrics)
+# 2. Define the mapping
 mapping = {'Never': 1, 'Sometimes': 3, 'Always': 5}
-df['Responsibility_Score'] = df['Complaint_for_Unsuitable_Product'].map(mapping)
-df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
 
-p1 = round(df['Responsibility_Score'].mean(), 1)
-p2 = round(df.dropna(subset=['Age', 'Responsibility_Score']).groupby('Age')['Responsibility_Score'].mean().mean(), 1)
-p3 = round(df.dropna(subset=['Increase_Financial_Knowledge', 'Responsibility_Score']).groupby('Increase_Financial_Knowledge')['Responsibility_Score'].mean().mean(), 1)
-p4 = round(df.dropna(subset=['Monthly_Income', 'Responsibility_Score']).groupby('Monthly_Income')['Responsibility_Score'].mean().mean(), 1)
+# 3. Safety Check: Verify the column exists
+target_col = 'Complaint_for_Unsuitable_Product'
 
-# Metrics appear right at the top
-m_col1, m_col2, m_col3, m_col4 = st.columns(4)
-m_col1.metric("Financial Responsibility ndex", p1, border=True)
-m_col2.metric("Decision Maturity (Age)", p2, border=True)
-m_col3.metric("Knowledge-Driven Actions", p3, border=True)
-m_col4.metric("Economic Decision Power", p4, border=True)
+if target_col in df.columns:
+    # Column found, proceed with mapping
+    df['Responsibility_Score'] = df[target_col].map(mapping)
+    
+    # Fill NaN values with 0 or mean if some rows are empty to prevent metric errors
+    df['Responsibility_Score'] = df['Responsibility_Score'].fillna(0)
+    
+    df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
 
+    # Calculate Metrics
+    p1 = round(df['Responsibility_Score'].mean(), 1)
+    
+    # Groupby calculations with safety dropna
+    p2 = round(df.dropna(subset=['Age']).groupby('Age')['Responsibility_Score'].mean().mean(), 1) if 'Age' in df.columns else 0
+    p3 = round(df.dropna(subset=['Increase_Financial_Knowledge']).groupby('Increase_Financial_Knowledge')['Responsibility_Score'].mean().mean(), 1) if 'Increase_Financial_Knowledge' in df.columns else 0
+    p4 = round(df.dropna(subset=['Monthly_Income']).groupby('Monthly_Income')['Responsibility_Score'].mean().mean(), 1) if 'Monthly_Income' in df.columns else 0
+
+    # Display Metrics
+    m_col1, m_col2, m_col3, m_col4 = st.columns(4)
+    m_col1.metric("Financial Responsibility Index", p1, border=True)
+    m_col2.metric("Decision Maturity (Age)", p2, border=True)
+    m_col3.metric("Knowledge-Driven Actions", p3, border=True)
+    m_col4.metric("Economic Decision Power", p4, border=True)
+    
 # =========================
 # 1. Individual Goal
 # =========================
