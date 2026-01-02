@@ -38,30 +38,6 @@ st.markdown(
         margin-top: 2.5rem;
         margin-bottom: 1.2rem;
     }
-
-
-    /* Page background adapts to Streamlit theme */
-    html, body, [class*="css"] {
-        background-color: var(--background-color);
-    }
-
-    /* Main reading container with soft contrast */
-    .block-container {
-        background-color: var(--secondary-background-color);
-        border-radius: 16px;
-        padding: 3rem 2.5rem 4rem 2.5rem;
-    }
-
-    /* Ensure text follows theme */
-    p, li, h1, h2, h3, h4 {
-        color: var(--text-color);
-    }
-
-    /* Charts & widgets match background */
-    .stPyplot, .stPlotlyChart, canvas,
-    .stMetric, .stDataFrame, .stTable {
-        background-color: transparent;
-    }
     </style>
     """,
     unsafe_allow_html=True
