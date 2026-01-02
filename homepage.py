@@ -19,6 +19,16 @@ st.markdown(
         padding: 2.5rem;
     }
 
+     /* Force text color inside the app */
+    .block-container, .stMarkdown, .stText, h1, h2, h3, p, li {
+        color: #111111;  /* dark text for readability */
+    }
+
+    /* Optional: links inside text */
+    a {
+        color: #1a73e8;
+    }
+
     </style>
     """,
     unsafe_allow_html=True
