@@ -11,6 +11,38 @@ st.markdown(
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        }
+
+    /* Title */
+    h1 {
+        background: rgba(0, 0, 0, 0.55);
+        padding: 12px 20px;
+        border-radius: 12px;
+        display: inline-block;
+    }
+
+    /* Header */
+    h2 {
+        background: rgba(0, 0, 0, 0.45);
+        padding: 10px 18px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    /* Subheader */
+    h3 {
+        background: rgba(0, 0, 0, 0.40);
+        padding: 8px 16px;
+        border-radius: 8px;
+        display: inline-block;
+    }
+
+    /* st.write / paragraph text */
+    .stMarkdown p {
+        background: rgba(0, 0, 0, 0.35);
+        padding: 10px 16px;
+        border-radius: 8px;
+        display: inline-block;
     }
     </style>
     """,
