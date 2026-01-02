@@ -13,20 +13,18 @@ st.markdown(
         background-attachment: fixed;
     }
 
-    /* Make titles and headers readable with semi-transparent background */
-    .stTitle, .stHeader, .stSubheader, .stMarkdown {
-        background-color: rgba(0, 0, 0, 0.6);  /* dark transparent background */
-        padding: 0.2rem 0.5rem;                /* small padding around text */
-        border-radius: 5px;                    /* rounded edges */
-        color: white;                          /* text color */
+    /* Titles, headers, subheaders */
+    .stTitle h1, .stHeader h2, .stSubheader h3 {
+        font-weight: 900;       /* extra bold */
+        color: white;           /* text color */
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* makes text pop over background */
     }
 
-    /* For st.write text (markdown) */
+    /* Remove boxes for st.write / st.markdown normal text */
     .stMarkdown p {
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 0.2rem 0.5rem;
-        border-radius: 5px;
-        color: white;
+        background-color: transparent;
+        color: white;           /* optional, to make readable */
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
     </style>
     """,
