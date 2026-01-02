@@ -13,24 +13,16 @@ st.markdown(
         background-attachment: fixed;
     }
 
-    /* Main container overlay for all page content */
-    .main-container {
-        background-color: rgba(0, 0, 0, 0.4); /* semi-transparent dark */
-        padding: 2rem;                        /* spacing around content */
-        color: white;                          /* make text readable */
-    }
+.block-container {
+    background-color: rgba(255, 255, 255, 0.92); /* slightly transparent white */
+    border-radius: 0; /* remove rounded corners to fit edges */
+    padding: 2rem; /* optional: keep some inner spacing */
+    margin: 0; /* remove default margins */
+    width: 100vw; /* full viewport width */
+    height: 100vh; /* full viewport height */
+    box-sizing: border-box; /* include padding in width/height */
+}
 
-    /* Buttons styling (optional, for readability) */
-    .stButton button {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: white;
-        border: 1px solid white;
-    }
-
-    .stButton button:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-        color: white;
-    }
     </style>
     """,
     unsafe_allow_html=True
