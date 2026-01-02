@@ -50,7 +50,7 @@ st.markdown(
     }
 
     .block-container {
-        background-color: rgba(255, 255, 255, 0.92);
+        background-color: rgba(0, 0, 0, 0.92);
         border-radius: 12px;
         padding: 2.5rem;
     }
