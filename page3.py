@@ -12,8 +12,6 @@ import plotly.graph_objects as go # Keep this if you need go, though px handles 
 # --- Corrected Imports ---
 # Set Streamlit page configuration (must be the first Streamlit command)
 st.set_page_config(
-    page_title="💷Financial Behaviour among University Students(Khadijah)",
-    layout="wide" # Set layout here for consistency
 )
 
 # Forced SETUP Page Streamlit
@@ -44,10 +42,11 @@ st.markdown(
     </style>
     """,
     unsafe_allow_html=True
+    layout="wide" # Set layout here for consistency
 )
 
 # Page header
-st.title("💷Financial Behaviour among University Students")
+st.title("💷Financial Behaviour among University Students(Khadijah)")
 st.markdown("---")  # this creates a horizontal line
 # Summary Box
 col1, col2, col3, col4 = st.columns(4)
