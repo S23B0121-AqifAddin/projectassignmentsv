@@ -70,9 +70,7 @@ st.set_page_config(
     layout="wide" # Set layout here for consistency
 )
 
-st.markdown('<div class="custom-title">💵💷Financial Behaviour among University Students💴💶</div>', unsafe_allow_html=True)
 st.markdown("---")
-
 st.header("📈📉Original Dataset(Without Cleaning)")
 #Load Original Dataset
 try:
