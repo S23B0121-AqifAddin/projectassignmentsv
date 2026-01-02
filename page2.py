@@ -202,7 +202,8 @@ row1_col1, row1_col2 = st.columns(2)
 
 with row1_col1:
     st.write("###### Price Comparison Frequency")
-    st.write("###### This bar chart illustrates the frequency of price-checking behavior, highlighting that a majority of students exercise market vigilance by comparing prices before making a purchase.")
+    summary_text = "This bar chart illustrates the frequency of price-checking behavior, highlighting that a majority of students exercise market vigilance by comparing prices before making a purchase."
+    st.info(summary_text)
     fig0, ax0 = plt.subplots(figsize=(6, 4))
     sns.countplot(data=df, x='Compare_Prices_Before_Buying', 
                   order=df['Compare_Prices_Before_Buying'].value_counts().index, 
