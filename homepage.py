@@ -13,16 +13,11 @@ st.markdown(
         background-attachment: fixed;
     }
 
-/* Make main content fill the page with semi-transparent box */
     .block-container {
-        background-color: rgba(0, 0, 0, 0.5); /* dark transparent overlay */
-        padding: 2rem;
-        margin: 0;
-        width: 100vw;
-        min-height: 100vh;  /* fill full page height */
-        box-sizing: border-box;
-        border-radius: 0;    /* optional: remove rounded corners */
-}
+        background-color: rgba(255, 255, 255, 0.92);
+        border-radius: 12px;
+        padding: 2.5rem;
+    }
 
     </style>
     """,
