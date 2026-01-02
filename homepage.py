@@ -4,69 +4,54 @@ import pandas as pd
 st.markdown(
     """
     <style>
-/* Main reading area */
-    .block-container {
-        max-width: 900px;
-        padding-top: 3rem;
-        padding-bottom: 4rem;
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.8;
+ .glass-box {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 1.6rem;
+        border-radius: 14px;
+        margin-bottom: 1.8rem;
+        color: white;
     }
 
-    /* Background image */
+    .glass-title {
+        background-color: rgba(0, 0, 0, 0.75);
+        padding: 2rem;
+        border-radius: 18px;
+        margin-bottom: 2.5rem;
+        color: white;
+        text-align: center;
+    }
+
     .stApp {
         background-image:
-            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
             url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
     }
-
-    /* ===== BOX STYLE ===== */
-    /* st.write */
-    div[data-testid="stText"] {
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-        color: white;
-    }
-
-    /* st.header */
-    div[data-testid="stHeader"] {
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 1.2rem 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-        color: white;
-    }
-
-    /* st.subheader */
-    div[data-testid="stSubheader"] {
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 1.2rem 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-        color: white;
-    }
-
-    /* st.title */
-    div[data-testid="stTitle"] {
-        background-color: rgba(0, 0, 0, 0.75);
-        padding: 1.8rem;
-        border-radius: 14px;
-        margin-bottom: 2rem;
-        color: white;
-        text-align: center;
-    }
     </style>
     """,
     unsafe_allow_html=True
 )
+
+def boxed_title(text):
+    st.markdown(f"""
+    <div class="glass-title">
+        <h1>{text}</h1>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def boxed_section(title=None, content=None):
+    st.markdown('<div class="glass-box">', unsafe_allow_html=True)
+
+    if title:
+        st.subheader(title)
+
+    if content:
+        st.write(content)
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 st.title("💵💷Financial Behaviour among University Students💴💶")
 st.markdown("---")
