@@ -52,6 +52,7 @@ st.markdown(
     .block-container {
         background-color: rgba(0, 0, 0, 0.92);
         border-radius: 0; /* matches page edges */
+        padding: 2.5rem;
     }
     </style>
     """,
