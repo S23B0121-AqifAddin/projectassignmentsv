@@ -59,7 +59,6 @@ except UnicodeDecodeError:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/processed_financial_capability_data.csv', encoding='latin-1')
 df
 
-
 # =========================
 # PLO DATA CALCULATIONS
 # =========================
@@ -69,37 +68,108 @@ total_students = len(df)
 # PLO 1 – Cognitive Skill
 # Complaint awareness level
 # -------------------------
-# 3. CALCULATIONS (Prepare data for metrics)
-# 2. Define the mapping
-mapping = {'Never': 1, 'Sometimes': 3, 'Always': 5}
+complaint_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
+}
 
-# 3. Safety Check: Verify the column exists
-target_col = 'Complaint_for_Unsuitable_Product'
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+plo1_score = round(df['Complaint_Score'].mean(), 1)
+# -------------------------
+# -------------------------
+# PLO 2 – Digital Skill
+# Age × Complaint Behaviour
+# -------------------------
+# Convert Age to numeric (safety)
+df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
+# Map complaint behaviour to numeric values
+complaint_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
+}
 
-if target_col in df.columns:
-    # Column found, proceed with mapping
-    df['Responsibility_Score'] = df[target_col].map(mapping)
-    
-    # Fill NaN values with 0 or mean if some rows are empty to prevent metric errors
-    df['Responsibility_Score'] = df['Responsibility_Score'].fillna(0)
-    
-    df['Age'] = pd.to_numeric(df['Age'], errors='coerce')
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+# Calculate mean complaint score by age group
+age_complaint_score = (
+    df.dropna(subset=['Age', 'Complaint_Score'])
+      .groupby('Age')['Complaint_Score']
+      .mean()
+)
+# Final PLO 2 score
+plo2_score = round(age_complaint_score.mean(), 1)
+# -------------------------
+# PLO 3 – Interpersonal Skill
+# Financial Knowledge × Complaint Behaviour
+# -------------------------
+# Map complaint behaviour to numeric values
+complaint_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
+}
 
-    # Calculate Metrics
-    p1 = round(df['Responsibility_Score'].mean(), 1)
-    
-    # Groupby calculations with safety dropna
-    p2 = round(df.dropna(subset=['Age']).groupby('Age')['Responsibility_Score'].mean().mean(), 1) if 'Age' in df.columns else 0
-    p3 = round(df.dropna(subset=['Increase_Financial_Knowledge']).groupby('Increase_Financial_Knowledge')['Responsibility_Score'].mean().mean(), 1) if 'Increase_Financial_Knowledge' in df.columns else 0
-    p4 = round(df.dropna(subset=['Monthly_Income']).groupby('Monthly_Income')['Responsibility_Score'].mean().mean(), 1) if 'Monthly_Income' in df.columns else 0
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+# Calculate mean complaint score by financial knowledge level
+knowledge_complaint_score = (
+    df.dropna(subset=['Increase_Financial_Knowledge', 'Complaint_Score'])
+      .groupby('Increase_Financial_Knowledge')['Complaint_Score']
+      .mean()
+)
+# Final PLO 3 score
+plo3_score = round(knowledge_complaint_score.mean(), 1)
+# -------------------------
+# PLO 4 – Interpersonal Skill
+# Complaint Behaviour by Monthly Income
+# -------------------------
+# Ensure Monthly Income is treated as string
+# Map complaint behaviour to numeric values
+complaint_mapping = {
+    'Never': 1,
+    'Sometimes': 3,
+    'Always': 5
+}
 
-    # Display Metrics
-    m_col1, m_col2, m_col3, m_col4 = st.columns(4)
-    m_col1.metric("Financial Responsibility Index", p1, border=True)
-    m_col2.metric("Decision Maturity (Age)", p2, border=True)
-    m_col3.metric("Knowledge-Driven Actions", p3, border=True)
-    m_col4.metric("Economic Decision Power", p4, border=True)
-    
+df['Complaint_Score'] = df['Complaint_for_Unsuitable_Product'].map(complaint_mapping)
+# Calculate mean complaint score by monthly income group
+income_complaint_score = (
+    df.dropna(subset=['Monthly_Income', 'Complaint_Score'])
+      .groupby('Monthly_Income')['Complaint_Score']
+      .mean()
+)
+# Final PLO 4 score
+plo4_score = round(income_complaint_score.mean(), 1)
+# PLO Display
+col1.metric(
+    label="Financial Responsibility Index",
+    value=plo1_score,
+    border=True
+)
+
+col2.metric(
+    label="Decision Maturity (Age)",
+    value=plo2_score,
+    border=True
+)
+
+col3.metric(
+    label="Decision Maturity (Age)",
+    value=plo3_score,
+    border=True
+)
+
+col4.metric(
+    label="Economic Decision Power",
+    value=plo4_score,
+    border=True
+)
+
+
+#OBJECTIVE AND PROBLEM
+st.header("Financial Responsibility & Decision-Making")
+st.markdown("---")  # this creates a horizontal line
+
 # =========================
 # 1. Individual Goal
 # =========================
