@@ -4,29 +4,17 @@ import pandas as pd
 st.markdown(
     """
     <style>
-   .stApp {
-        background-image:
-            linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-            url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
+   .custom-title {
+        background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
-        background-attachment: fixed;
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        font-size: 2.5rem;
+        text-align: center;
+        font-weight: bold;
     }
-
-    /* Custom wrapper for content */
-.theme-wrapper {
-    border-radius: 12px;
-    padding: 2.5rem;
-    margin: 1rem;
-
-    /* Light theme background */
-    background-color: rgba(255, 255, 255, 0.85);
-
-    /* Dark theme background automatically using CSS variable */
-    background-color: var(--background-color-alpha);
-    
-    color: var(--text-color);
-}
     </style>
     """,
     unsafe_allow_html=True
@@ -38,7 +26,7 @@ st.set_page_config(
     layout="wide" # Set layout here for consistency
 )
 
-st.title("💵💷Financial Behaviour among University Students💴💶")
+st.markdown('<div class="custom-title">💵💷Financial Behaviour among University Students💴💶</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 st.header("📈📉Original Dataset(Without Cleaning)")
