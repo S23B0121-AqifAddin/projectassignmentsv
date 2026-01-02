@@ -48,6 +48,15 @@ st.markdown(
         display: inline-block;
         color: white;
     }
+
+    <style>
+    hr {
+        border: none;
+        height: 4px;
+        background-color: #000000;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+    }
     </style>
     """,
     unsafe_allow_html=True
