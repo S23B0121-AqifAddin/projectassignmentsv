@@ -5,31 +5,44 @@ import pandas as pd
 st.markdown(
     """
     <style>
-   /* Container with background image */
+  /* Background image container */
     .title-container {
+        position: relative;
+        width: fit-content; /* width adjusts to content */
+        margin: 0 auto; /* center horizontally */
+        border-radius: 12px;
+        overflow: hidden; /* ensures rounded corners apply to children */
+    }
+
+    /* Background image */
+    .title-bg {
         background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
         display: flex;
         justify-content: center;
-        padding: 50px;   /* space around the black box */
-        border-radius: 12px;
+        align-items: center;
+        width: 100%;
+        height: 200px; /* height of the image box */
     }
 
-    /* Transparent black box behind the title */
-    .title-box {
+    /* Transparent black overlay */
+    .title-overlay {
         background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
-        padding: 20px 40px;
-        border-radius: 12px;
-        text-align: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     /* Title text */
-    .title-box h1 {
+    .title-overlay h1 {
         color: white;
-        margin: 0;
         font-size: 2.5rem;
         font-weight: bold;
+        margin: 0;
+        text-align: center;
     }
     </style>
     """,
@@ -39,9 +52,11 @@ st.markdown(
 # Display title inside transparent black box
 st.markdown(
     """
-    <div class="title-container">
-        <div class="title-box">
-            <h1>Financial Behaviour among University Students</h1>
+   <div class="title-container">
+        <div class="title-bg">
+            <div class="title-overlay">
+                <h1>💵💷Financial Behaviour among University Students💴💶</h1>
+            </div>
         </div>
     </div>
     """,
