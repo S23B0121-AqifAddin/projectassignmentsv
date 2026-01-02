@@ -39,7 +39,8 @@ st.write(
     """
 )
 
-st.markdown("""
+st.markdown("---")
+st.write("""
 ### Group Overview
 This dashboard presents an analysis of **financial behaviour among university students**.
 
