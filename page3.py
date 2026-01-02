@@ -40,20 +40,27 @@ st.markdown(
     }
 
 
+    /* Page background adapts to Streamlit theme */
     html, body, [class*="css"] {
-        background-color: transparent !important;
+        background-color: var(--background-color);
     }
 
+    /* Main reading container with soft contrast */
     .block-container {
-        background-color: transparent !important;
+        background-color: var(--secondary-background-color);
+        border-radius: 16px;
+        padding: 3rem 2.5rem 4rem 2.5rem;
     }
 
-    .stPyplot, .stPlotlyChart, canvas {
-        background-color: transparent !important;
+    /* Ensure text follows theme */
+    p, li, h1, h2, h3, h4 {
+        color: var(--text-color);
     }
 
+    /* Charts & widgets match background */
+    .stPyplot, .stPlotlyChart, canvas,
     .stMetric, .stDataFrame, .stTable {
-        background-color: transparent !important;
+        background-color: transparent;
     }
     </style>
     """,
