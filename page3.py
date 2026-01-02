@@ -11,9 +11,6 @@ import plotly.graph_objects as go # Keep this if you need go, though px handles 
 
 # --- Corrected Imports ---
 # Set Streamlit page configuration (must be the first Streamlit command)
-st.set_page_config(
-)
-
 # Forced SETUP Page Streamlit
 st.markdown(
     """
