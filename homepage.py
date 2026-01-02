@@ -13,10 +13,10 @@ st.markdown(
         background-attachment: fixed;
     }
 
-    .block-container {
-        background-color: rgba(255, 255, 255, 0.92);
-        border-radius: 12px;
-        padding: 2.5rem;
+   .block-container {
+    background-color: rgba(0, 0, 0, 0.92); /* semi-transparent black */
+    border-radius: 12px;
+    padding: 2.5rem;
     }
     </style>
     """,
