@@ -4,14 +4,30 @@ import pandas as pd
 st.markdown(
     """
     <style>
-    .stApp {
+   .stApp {
         background-image:
             linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
             url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-        }
+    }
+
+    /* Make titles and headers readable with semi-transparent background */
+    .stTitle, .stHeader, .stSubheader, .stMarkdown {
+        background-color: rgba(0, 0, 0, 0.6);  /* dark transparent background */
+        padding: 0.2rem 0.5rem;                /* small padding around text */
+        border-radius: 5px;                    /* rounded edges */
+        color: white;                          /* text color */
+    }
+
+    /* For st.write text (markdown) */
+    .stMarkdown p {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 0.2rem 0.5rem;
+        border-radius: 5px;
+        color: white;
+    }
     </style>
     """,
     unsafe_allow_html=True
