@@ -13,29 +13,28 @@ st.markdown(
         background-attachment: fixed;
         }
 
-     /* Title underline */
+     /* Title */
     h1 {
-        border-bottom: 6px solid black;
-        padding-bottom: 8px;
+        -webkit-text-stroke: 1.8px black;
+        color: white;   /* inner fill */
     }
 
-    /* Header underline */
+    /* Header */
     h2 {
-        border-bottom: 4px solid black;
-        padding-bottom: 6px;
+        -webkit-text-stroke: 1.4px black;
+        color: white;
     }
 
-    /* Subheader underline */
+    /* Subheader */
     h3 {
-        border-bottom: 3px solid black;
-        padding-bottom: 5px;
+        -webkit-text-stroke: 1.1px black;
+        color: white;
     }
 
-    /* st.write underline */
+    /* st.write text */
     div[data-testid="stMarkdownContainer"] p {
-        display: inline-block;
-        border-bottom: 2px solid black;
-        padding-bottom: 3px;
+        -webkit-text-stroke: 0.8px black;
+        color: white;
     }
     </style>
     """,
