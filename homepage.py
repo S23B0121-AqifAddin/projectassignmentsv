@@ -15,47 +15,22 @@ st.markdown(
 
      /* Title */
     h1 {
-        background-color: #000000;
-        padding: 14px 22px;
-        border-radius: 12px;
-        display: inline-block;
-        color: white;
+        font-weight: 900 !important;   /* extra thick */
     }
 
     /* Header */
     h2 {
-        background-color: #000000;
-        padding: 12px 20px;
-        border-radius: 10px;
-        display: inline-block;
-        color: white;
+        font-weight: 800 !important;
     }
 
     /* Subheader */
     h3 {
-        background-color: #000000;
-        padding: 10px 18px;
-        border-radius: 0px;
-        display: inline-block;
-        color: white;
+        font-weight: 700 !important;
     }
 
-    /* st.write text */
-    .stMarkdown p {
-        background-color: #000000;
-        padding: 10px 16px;
-        border-radius: 0px;
-        display: inline-block;
-        color: white;
-    }
-
-    <style>
-    hr {
-        border: none;
-        height: 4px;
-        background-color: #000000;
-        margin: 1.5rem 0;
-        border-radius: 0px;
+    /* st.write() text */
+    div[data-testid="stMarkdownContainer"] p {
+        font-weight: 600 !important;
     }
     </style>
     """,
