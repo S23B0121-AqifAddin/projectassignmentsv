@@ -5,16 +5,35 @@ st.markdown(
     """
     <style>
    .custom-title {
+        position: relative;
         background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
-        color: white;  /* Text fill color */
-        -webkit-text-stroke: 2px black; /* Black outline thickness */
-        padding: 30px;
+        padding: 40px;
         border-radius: 12px;
-        font-size: 2.5rem;
         text-align: center;
+        font-size: 2.5rem;
         font-weight: bold;
+        color: white;
+    }
+
+    /* Overlay behind the text */
+    .custom-title::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5); /* Transparent black */
+        border-radius: 12px;
+        z-index: 0;
+    }
+
+    /* Text above overlay */
+    .custom-title span {
+        position: relative;
+        z-index: 1;
     }
     </style>
     """,
