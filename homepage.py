@@ -13,24 +13,29 @@ st.markdown(
         background-attachment: fixed;
         }
 
-     /* Title */
+     /* Title underline */
     h1 {
-        font-weight: 900 !important;   /* extra thick */
+        border-bottom: 6px solid black;
+        padding-bottom: 8px;
     }
 
-    /* Header */
+    /* Header underline */
     h2 {
-        font-weight: 800 !important;
+        border-bottom: 4px solid black;
+        padding-bottom: 6px;
     }
 
-    /* Subheader */
+    /* Subheader underline */
     h3 {
-        font-weight: 700 !important;
+        border-bottom: 3px solid black;
+        padding-bottom: 5px;
     }
 
-    /* st.write() text */
+    /* st.write underline */
     div[data-testid="stMarkdownContainer"] p {
-        font-weight: 600 !important;
+        display: inline-block;
+        border-bottom: 2px solid black;
+        padding-bottom: 3px;
     }
     </style>
     """,
