@@ -13,36 +13,40 @@ st.markdown(
         background-attachment: fixed;
         }
 
-    /* Title */
+     /* Title */
     h1 {
-        background: rgba(0, 0, 0, 0.55);
-        padding: 12px 20px;
+        background-color: #000000;
+        padding: 14px 22px;
         border-radius: 12px;
         display: inline-block;
+        color: white;
     }
 
     /* Header */
     h2 {
-        background: rgba(0, 0, 0, 0.45);
-        padding: 10px 18px;
+        background-color: #000000;
+        padding: 12px 20px;
         border-radius: 10px;
         display: inline-block;
+        color: white;
     }
 
     /* Subheader */
     h3 {
-        background: rgba(0, 0, 0, 0.40);
-        padding: 8px 16px;
+        background-color: #000000;
+        padding: 10px 18px;
         border-radius: 8px;
         display: inline-block;
+        color: white;
     }
 
-    /* st.write / paragraph text */
+    /* st.write text */
     .stMarkdown p {
-        background: rgba(0, 0, 0, 0.35);
+        background-color: #000000;
         padding: 10px 16px;
         border-radius: 8px;
         display: inline-block;
+        color: white;
     }
     </style>
     """,
