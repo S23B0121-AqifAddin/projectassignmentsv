@@ -23,6 +23,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Set Streamlit page configuration (must be the first Streamlit command)
+st.set_page_config(
+    page_title="💵💷Financial Behaviour among University Students💴💶",
+    layout="wide" # Set layout here for consistency
+)
+
 st.title("💵💷Financial Behaviour among University Students💴💶")
 st.markdown("---")
 
