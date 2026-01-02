@@ -1,45 +1,58 @@
 import streamlit as st
 import pandas as pd
 
+#SETUP SETTING
 st.markdown(
     """
     <style>
-   .custom-title {
-        position: relative;
+   /* Full background image for the page */
+    .stApp {
         background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
         background-position: center;
-        padding: 40px;
+    }
+
+    /* Transparent black box behind the title */
+    .title-box {
+        background-color: rgba(0, 0, 0, 0.5);  /* Transparent black */
+        padding: 20px 40px;
         border-radius: 12px;
-        text-align: center;
+        display: inline-block;
+        margin-top: 50px;
+    }
+
+    .title-box h1 {
+        color: white;   /* Title text color */
+        margin: 0;
         font-size: 2.5rem;
         font-weight: bold;
-        color: white;
+        text-align: center;
     }
 
-    /* Overlay behind the text */
-    .custom-title::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5); /* Transparent black */
-        border-radius: 12px;
-        z-index: 0;
-    }
-
-    /* Text above overlay */
-    .custom-title span {
-        position: relative;
-        z-index: 1;
+    /* Center the title box */
+    .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
+# Display title inside transparent black box
+st.markdown(
+    """
+    <div class="title-container">
+        <div class="title-box">
+            <h1>Financial Behaviour among University Students</h1>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+#PAGE
 # Set Streamlit page configuration (must be the first Streamlit command)
 st.set_page_config(
     page_title="💵💷Financial Behaviour among University Students💴💶",
