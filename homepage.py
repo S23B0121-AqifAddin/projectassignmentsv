@@ -4,23 +4,6 @@ import pandas as pd
 st.markdown(
     """
     <style>
- .glass-box {
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 1.6rem;
-        border-radius: 14px;
-        margin-bottom: 1.8rem;
-        color: white;
-    }
-
-    .glass-title {
-        background-color: rgba(0, 0, 0, 0.75);
-        padding: 2rem;
-        border-radius: 18px;
-        margin-bottom: 2.5rem;
-        color: white;
-        text-align: center;
-    }
-
     .stApp {
         background-image:
             linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
@@ -33,25 +16,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-def boxed_title(text):
-    st.markdown(f"""
-    <div class="glass-title">
-        <h1>{text}</h1>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-def boxed_section(title=None, content=None):
-    st.markdown('<div class="glass-box">', unsafe_allow_html=True)
-
-    if title:
-        st.subheader(title)
-
-    if content:
-        st.write(content)
-
-    st.markdown('</div>', unsafe_allow_html=True)
 
 st.title("💵💷Financial Behaviour among University Students💴💶")
 st.markdown("---")
