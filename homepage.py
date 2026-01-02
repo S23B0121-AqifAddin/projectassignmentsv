@@ -13,14 +13,15 @@ st.markdown(
         background-attachment: fixed;
     }
 
-.block-container {
-    background-color: rgba(255, 255, 255, 0.92); /* slightly transparent white */
-    border-radius: 0; /* remove rounded corners to fit edges */
-    padding: 2rem; /* optional: keep some inner spacing */
-    margin: 0; /* remove default margins */
-    width: 100vw; /* full viewport width */
-    height: 100vh; /* full viewport height */
-    box-sizing: border-box; /* include padding in width/height */
+/* Make main content fill the page with semi-transparent box */
+    .block-container {
+        background-color: rgba(0, 0, 0, 0.5); /* dark transparent overlay */
+        padding: 2rem;
+        margin: 0;
+        width: 100vw;
+        min-height: 100vh;  /* fill full page height */
+        box-sizing: border-box;
+        border-radius: 0;    /* optional: remove rounded corners */
 }
 
     </style>
