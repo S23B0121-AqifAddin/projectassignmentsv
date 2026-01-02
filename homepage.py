@@ -13,26 +13,20 @@ st.markdown(
         background-attachment: fixed;
     }
 
-    /* Adaptive block container: dark on dark theme, light on light theme */
-.block-container {
+    /* Light theme container */
+body[data-theme="light"] .block-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--text-color);
     border-radius: 12px;
     padding: 2.5rem;
+}
 
-    /* Theme-adaptive background */
-    background-color: rgba(255, 255, 255, 0.8); /* fallback light */
-    background-color: var(--background-color-alpha);
-
-    /* Theme-adaptive text color */
+/* Dark theme container */
+body[data-theme="dark"] .block-container {
+    background-color: rgba(0, 0, 0, 0.85);
     color: var(--text-color);
-
-    /* Optional: subtle shadow for readability */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-
-/* Force text inside block container to adapt */
-.block-container * {
-    color: var(--text-color) !important;
-}
+    border-radius: 12px;
+    padding: 2.5rem;
     </style>
     """,
     unsafe_allow_html=True
