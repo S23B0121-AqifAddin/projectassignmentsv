@@ -9,6 +9,13 @@ This dashboard presents an analysis of **financial behaviour among university st
 Click a section below to view each member’s contribution.
 """)
 
+#Load Original Dataset
+try:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='latin-1')
+df
+
 st.divider()
 
 col1, col2 = st.columns(2)
