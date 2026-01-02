@@ -6,30 +6,19 @@ st.markdown(
     <style>
 /* Main reading area */
     .block-container {
-        max-width: 900px;          /* Book-like text width */
+        max-width: 900px;
         padding-top: 3rem;
         padding-bottom: 4rem;
         padding-left: 2.5rem;
         padding-right: 2.5rem;
         margin-left: auto;
         margin-right: auto;
-        line-height: 1.8;          /* Comfortable reading */
+        line-height: 1.8;
     }
 
-    /* Improve text readability */
-    p, li {
-        font-size: 1.05rem;
-    }
-
-    /* Headers spacing */
-    h1, h2, h3 {
-        margin-top: 2.5rem;
-        margin-bottom: 1.2rem;
-    }
-
-    /* Background image with transparent black overlay */
+    /* Background image */
     .stApp {
-        background-image: 
+        background-image:
             linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
             url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
         background-size: cover;
@@ -37,18 +26,42 @@ st.markdown(
         background-attachment: fixed;
     }
 
-    /* Transparent black boxes around all text content */
-    .stwrite, .stHeader, .stSubheader, .stText {
+    /* ===== BOX STYLE ===== */
+    /* st.write */
+    div[data-testid="stText"] {
         background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 12px;
         padding: 1.5rem;
+        border-radius: 12px;
         margin-bottom: 1.5rem;
         color: white;
     }
 
-    /* Optional: Button spacing */
-    .stButton > button {
-        margin-bottom: 1rem;
+    /* st.header */
+    div[data-testid="stHeader"] {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 1.2rem 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        color: white;
+    }
+
+    /* st.subheader */
+    div[data-testid="stSubheader"] {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 1.2rem 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        color: white;
+    }
+
+    /* st.title */
+    div[data-testid="stTitle"] {
+        background-color: rgba(0, 0, 0, 0.75);
+        padding: 1.8rem;
+        border-radius: 14px;
+        margin-bottom: 2rem;
+        color: white;
+        text-align: center;
     }
     </style>
     """,
