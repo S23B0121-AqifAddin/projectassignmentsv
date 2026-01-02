@@ -18,12 +18,6 @@ st.markdown(
         border-radius: 12px;
         padding: 2.5rem;
     }
-
-     /* Force text color inside the app */
-    .block-container, .stMarkdown, .stText, h1, h2, h3, p, li {
-        color: #111111;  /* dark text for readability */
-    }
-
     </style>
     """,
     unsafe_allow_html=True
