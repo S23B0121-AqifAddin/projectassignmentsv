@@ -20,9 +20,9 @@ col1, col2, col3, col4 = st.columns(4)
 
 # Load your data
 try:
-    data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
+    data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Aisyah)%20financial_capability_data.csv', encoding='utf-8')
 except UnicodeDecodeError:
-    data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
+    data = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Aisyah)%20financial_capability_data.csv', encoding='latin-1')
 data
 
 # ================== SAFE PLO MATRIX (FINAL) ==================
@@ -116,7 +116,7 @@ st.title("Correlation Heatmap of Financial Attitudes")
 st.write("This heatmap shows the correlation between different financial attitudes of respondents.")
 
 # Load dataset dari GitHub
-url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/main/processed_financial_capability_data.csv"
+url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Aisyah)%20financial_capability_data.csv"
 data = pd.read_csv(url)
 
 # Senarai kolum sikap kewangan
