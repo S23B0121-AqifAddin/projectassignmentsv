@@ -38,16 +38,11 @@ st.markdown(
     }
 
     /* Transparent black boxes around all text content */
-    .stMarkdown, .stHeader, .stSubheader, .stText, .stCodeBlock {
+    .stwiter, .stHeader, .stSubheader, .stText {
         background-color: rgba(0, 0, 0, 0.7);
         border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        color: white;
-    }
-
-    /* Make headers inside boxes white */
-    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
         color: white;
     }
 
