@@ -54,10 +54,11 @@ col1, col2, col3, col4 = st.columns(4)
 
 # Load your data
 try:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='utf-8')
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/processed_financial_capability_data.csv', encoding='utf-8')
 except UnicodeDecodeError:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv', encoding='latin-1')
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/processed_financial_capability_data.csv', encoding='latin-1')
 df
+
 
 # =========================
 # PLO DATA CALCULATIONS
