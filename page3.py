@@ -38,32 +38,6 @@ st.markdown(
         margin-top: 2.5rem;
         margin-bottom: 1.2rem;
     }
-
-    /* Light theme */
-    @media (prefers-color-scheme: light) {
-        html, body, .stApp {
-            background-color: #f4f6f9;
-        }
-
-        .block-container {
-            background-color: #ffffff;
-            border-radius: 16px;
-            padding: 3rem 2.5rem 4rem 2.5rem;
-        }
-    }
-
-    /* Dark theme */
-    @media (prefers-color-scheme: dark) {
-        html, body, .stApp {
-            background-color: #0e1117;
-        }
-
-        .block-container {
-            background-color: #161b22;
-            border-radius: 16px;
-            padding: 3rem 2.5rem 4rem 2.5rem;
-        }
-    }
     </style>
     """,
     unsafe_allow_html=True
