@@ -38,7 +38,7 @@ st.markdown(
     }
 
     /* Transparent black boxes around all text content */
-    .stwiter, .stHeader, .stSubheader, .stText {
+    .stwrite, .stHeader, .stSubheader, .stText {
         background-color: rgba(0, 0, 0, 0.7);
         border-radius: 12px;
         padding: 1.5rem;
