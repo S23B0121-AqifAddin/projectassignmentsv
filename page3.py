@@ -38,19 +38,6 @@ st.markdown(
         margin-top: 2.5rem;
         margin-bottom: 1.2rem;
     }
-
-
-    /* App background */
-    .stApp {
-        background-color: #f5f7fa;  /* light grey-blue */
-    }
-
-    /* Main reading area stays white */
-    .block-container {
-        background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-    }
     </style>
     """,
     unsafe_allow_html=True
