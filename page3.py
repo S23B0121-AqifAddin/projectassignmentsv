@@ -54,9 +54,9 @@ col1, col2, col3, col4 = st.columns(4)
 
 # Load your data
 try:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='utf-8')
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Khadijah)%20processed_financial_capability_data.csv', encoding='utf-8')
 except UnicodeDecodeError:
-    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/processed_financial_capability_data.csv', encoding='latin-1')
+    df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Khadijah)%20processed_financial_capability_data.csv', encoding='latin-1')
 df
 
 # =========================
@@ -316,23 +316,19 @@ st.write(
     "management and planning behaviours. Strong positive correlations suggest behaviours "
     "that tend to occur together, while negative correlations indicate contrasting habits."
 )
-# Select numerical columns related to financial management and planning behaviors
+# Select the numerical columns related to financial management and planning behaviors
 selected_numerical_cols = [
+    'Age',
     'Organised_Money_Management',
-    'Saver_or_Spender',
-    'Buy_on_Credit',
-    'Avoid_Credit_Debt',
+    'More_of_a_Saver_Than_a_Spender',
+    'Prefer_to_Buy_on_Credit',
     'Savings_for_Rainy_Day',
-    'Pension_Funds_for_Retirement',
-    'Live_for_Today',
-    'Savings_for_Life_Changes',
-    'Plan_for_Old_Age_Care'
+    'Prefer_to_Live_for_Today',
 ]
-# Calculate correlation matrix
+# Calculate the correlation matrix
 correlation_matrix = df[selected_numerical_cols].corr()
-# Create figure
+# Create the matplotlib figure
 fig, ax = plt.subplots(figsize=(12, 10))
-
 sns.heatmap(
     correlation_matrix,
     annot=True,
@@ -342,10 +338,8 @@ sns.heatmap(
     ax=ax
 )
 
-ax.set_title('Correlation Heatmap of Financial Management and Planning Behaviors')
-
-plt.tight_layout()
-# Display in Streamlit
+ax.set_title("Correlation Heatmap of Financial Management and Planning Behaviors")
+# Display the plot inside Streamlit
 st.pyplot(fig)
 
 #Pie Chart
