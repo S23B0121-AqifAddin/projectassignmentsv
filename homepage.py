@@ -13,9 +13,11 @@ st.markdown(
         background-attachment: fixed;
     }
 
-   /* Adaptive container background */
+    /* Adaptive block container */
     .block-container {
-        background-color: var(--background-color-alpha); /* uses theme-aware alpha color */
+        background-color: rgba(255, 255, 255, 0.8); /* fallback for light theme */
+        background-color: var(--background-color-alpha); /* adapts to light/dark */
+        color: var(--text-color); /* adapts text color */
         border-radius: 12px;
         padding: 2.5rem;
     }
