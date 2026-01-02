@@ -38,6 +38,23 @@ st.markdown(
         margin-top: 2.5rem;
         margin-bottom: 1.2rem;
     }
+
+
+    html, body, [class*="css"] {
+        background-color: transparent !important;
+    }
+
+    .block-container {
+        background-color: transparent !important;
+    }
+
+    .stPyplot, .stPlotlyChart, canvas {
+        background-color: transparent !important;
+    }
+
+    .stMetric, .stDataFrame, .stTable {
+        background-color: transparent !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
