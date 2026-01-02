@@ -51,8 +51,8 @@ st.markdown(
 
     .block-container {
         background-color: rgba(0, 0, 0, 0.92);
-        border-radius: 12px;
-        padding: 2.5rem;
+        border-radius: 2%; /* subtle rounding */
+        border-radius: 10%; /* more rounded */
     }
     </style>
     """,
