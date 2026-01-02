@@ -80,7 +80,7 @@ p4 = round(df.dropna(subset=['Monthly_Income', 'Responsibility_Score']).groupby(
 
 # Metrics appear right at the top
 m_col1, m_col2, m_col3, m_col4 = st.columns(4)
-m_col1.metric("Financial Responsibility Index", p1, border=True)
+m_col1.metric("Financial Responsibility ndex", p1, border=True)
 m_col2.metric("Decision Maturity (Age)", p2, border=True)
 m_col3.metric("Knowledge-Driven Actions", p3, border=True)
 m_col4.metric("Economic Decision Power", p4, border=True)
