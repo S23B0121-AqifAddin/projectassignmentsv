@@ -1,0 +1,103 @@
+Age,Gender,Faculty,Housing_Arrangement,Main_Income_Source,Monthly_Income,Organised_Money_Management,Saver_or_Spender,Buy_on_Credit,Avoid_Credit_Debt,Savings_for_Rainy_Day,Pension_Funds_for_Retirement,Live_for_Today,Savings_for_Life_Changes,Plan_for_Old_Age_Care,Compare_Prices_Before_Buying,Search_Info_Before_Buying,Read_Agreement_Carefully,Impulse_Buying,Save_for_Big_Events,Avoid_Overspending,Money_Management_Difficulty,Follow_Budget,Monthly_Savings,Increase_Financial_Knowledge,Compare_Products_Services,Complaint_for_Unsuitable_Product
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,3,4,3,2,3,3,2,3,3,Yes,Yes,Yes,Sometimes,Never,Sometimes,Always,Sometimes,Sometimes,Never,Sometimes,Sometimes
+21,Male,FSDK,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,1,1,5,1,1,1,2,2,2,Yes,Yes,Yes,Sometimes,Always,Always,Always,Always,Always,Sometimes,Always,Always
+18,Female,FSDK,On-campus (student accommodation),Other family members,Below RM 99,4,3,3,3,4,4,3,5,5,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,5,1,5,1,5,1,1,1,1,Yes,Yes,Yes,Never,Sometimes,Always,Sometimes,Never,Sometimes,Never,Always,Never
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,1,1,1,1,1,1,5,1,1,Yes,Yes,Yes,Never,Sometimes,Always,Never,Always,Always,Always,Sometimes,Sometimes
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,1,3,5,2,1,1,3,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Above RM 600,4,5,2,3,1,1,3,1,1,Yes,Yes,Yes,Never,Always,Always,Sometimes,Always,Always,Never,Always,Sometimes
+21,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,4,3,4,4,3,4,4,3,4,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Never,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,4,5,3,3,2,3,2,1,2,Yes,Yes,Yes,Sometimes,Sometimes,Never,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always
+21,Male,FSDK,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,2,2,5,1,2,3,2,1,1,Yes,Yes,Yes,Never,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),A part time job,Above RM 600,1,2,5,1,1,1,5,1,1,Yes,Yes,Yes,Never,Always,Always,Never,Always,Always,Always,Always,Sometimes
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,3,4,3,2,2,2,4,2,2,Yes,Yes,Yes,Never,Always,Always,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,2,2,1,1,1,1,3,1,1,Yes,Yes,Yes,Sometimes,Always,Sometimes,Always,Sometimes,Always,Sometimes,Sometimes,Never
+21,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Above RM 600,1,1,1,1,1,1,1,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FHPK,Live with parents/relatives,Pocket money from parents,RM 100 - RM 500,3,4,3,4,2,3,3,3,2,Yes,Yes,Yes,Sometimes,Always,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes,Never
+21,Female,FSDK,Off-campus (own),Pocket money from parents,RM 100 - RM 500,2,3,3,3,2,3,2,2,2,Yes,Yes,Yes,Sometimes,Always,Sometimes,Sometimes,Always,Sometimes,Sometimes,Always,Always
+21,Female,FKP,Off-campus rent (sharing house/flat),Scholarship,Below RM 99,3,5,3,3,2,1,4,1,1,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Never,Sometimes,Sometimes,Always,Never
+21,Female,FSDK,Live with parents/relatives,Other,Below RM 99,3,3,3,3,2,2,4,1,2,Yes,Yes,Yes,Always,Sometimes,Sometimes,Never,Never,Never,Sometimes,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,4,4,3,2,1,1,3,1,1,Yes,Yes,Yes,Never,Always,Always,Sometimes,Never,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,Live with parents/relatives,Pocket money from parents,Above RM 600,3,3,3,3,3,2,4,2,3,Yes,Yes,Yes,Sometimes,Never,Sometimes,Sometimes,Never,Always,Never,Sometimes,Never
+21,Female,FHPK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,4,4,4,4,4,4,4,4,4,Yes,Yes,Yes,Sometimes,Never,Always,Sometimes,Always,Always,Always,Always,Always
+21,Male,FSDK,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,4,5,1,5,5,5,2,4,5,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Never,Never,Always,Always,Sometimes
+21,Female,FKP,Live with parents/relatives,Pocket money from parents,RM 100 - RM 500,1,1,5,1,1,5,1,1,1,Yes,Yes,Yes,Never,Always,Always,Never,Always,Always,Always,Always,Always
+21,Female,FKP,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,1,2,2,3,2,1,2,1,1,Yes,Yes,Yes,Never,Sometimes,Sometimes,Sometimes,Always,Always,Sometimes,Sometimes,Never
+21,Female,FSDK,Live with parents/relatives,Pocket money from parents,RM 100 - RM 500,1,1,1,1,1,1,5,1,1,Yes,Yes,Yes,Never,Always,Never,Always,Never,Sometimes,Always,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,5,5,2,3,1,2,5,1,2,Yes,Yes,Yes,Sometimes,Never,Always,Sometimes,Never,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,On-campus (student accommodation),Scholarship,RM 100 - RM 500,3,4,1,1,3,3,2,4,3,Yes,Yes,Yes,Never,Sometimes,Sometimes,Sometimes,Never,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FSDK,Live with parents/relatives,Other,RM 100 - RM 500,3,4,5,1,1,1,4,1,1,Yes,Yes,Yes,Sometimes,Always,Always,Always,Sometimes,Always,Sometimes,Sometimes,Sometimes
+21,Male,Other,Off-campus (own),A part time job,RM 100 - RM 500,1,2,1,2,3,1,1,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Always,Always,Always,Always,Never,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,4,5,5,1,5,3,5,1,2,Yes,Yes,Yes,Never,Sometimes,Sometimes,Sometimes,Always,Always,Sometimes,Always,Always
+21,Female,FKP,Live with parents/relatives,A part time job,RM 100 - RM 500,5,3,3,1,5,3,3,5,5,Yes,Yes,Yes,Sometimes,Always,Never,Sometimes,Sometimes,Always,Sometimes,Always,Always
+21,Female,FSDK,Live with parents/relatives,Scholarship,Below RM 99,3,3,5,1,3,2,1,1,3,Yes,Yes,Yes,Never,Sometimes,Sometimes,Sometimes,Never,Never,Never,Always,Always
+21,Female,FSDK,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,1,3,5,1,1,2,1,1,1,Yes,Yes,Yes,Never,Always,Always,Sometimes,Always,Always,Always,Always,Sometimes
+21,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,1,3,2,2,3,3,3,3,3,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FSDK,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,3,4,3,1,3,3,5,1,1,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Always,Always,Never
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Above RM 600,3,3,3,3,3,3,3,3,3,Yes,Yes,Yes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Male,Other,Live with parents/relatives,Pocket money from parents,RM 100 - RM 500,1,1,4,1,1,1,1,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FSDK,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,2,3,4,1,3,2,4,1,3,Yes,Yes,Yes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Always,Sometimes
+18,Female,FSDK,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,3,3,3,3,3,3,3,4,4,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,2,3,5,1,1,1,3,2,1,Yes,Yes,Yes,Never,Sometimes,Always,Sometimes,Never,Sometimes,Sometimes,Always,Sometimes
+21,Male,FSDK,Live with parents/relatives,Other,RM 100 - RM 500,3,3,5,5,3,2,3,1,2,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Never,Always,Always
+18,Male,FSDK,On-campus (student accommodation),Pocket money from parents,Above RM 600,2,1,3,1,1,2,3,1,1,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Always,Sometimes,Always,Sometimes
+21,Female,FSDK,Live with parents/relatives,Pocket money from parents,Above RM 600,1,1,5,1,1,1,3,1,1,Yes,Yes,Yes,Never,Sometimes,Sometimes,Always,Sometimes,Always,Always,Always,Never
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,4,4,4,4,4,4,3,4,4,Yes,Yes,Yes,Never,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,1,1,1,1,3,4,3,5,4,Yes,Yes,Yes,Never,Never,Sometimes,Always,Never,Never,Sometimes,Always,Always
+21,Female,FBKT,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,2,3,5,1,1,2,4,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Never,Always,Sometimes,Always,Sometimes
+21,Male,FBI,Off-campus rent (sharing house/flat),Other,Above RM 600,1,1,4,1,1,4,5,5,5,Yes,Yes,Yes,Never,Always,Always,Always,Always,Always,Always,Always,Sometimes
+21,Female,FIAT,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,5,4,3,3,3,4,2,5,5,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Always,Sometimes
+21,Male,FSB,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,4,4,1,3,2,1,4,2,1,Yes,Yes,Yes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Always,Always,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,3,1,1,1,1,1,3,1,1,Yes,Yes,Yes,Always,Always,Always,Sometimes,Sometimes,Sometimes,Never,Always,Always
+21,Male,Other,Off-campus (own),Other,Above RM 600,1,1,1,1,1,1,1,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always,Always
+21,Male,Other,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,4,4,3,3,3,2,4,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Never,Never,Never,Always,Sometimes,Always
+21,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,3,2,4,5,5,5,3,5,5,Yes,Yes,Yes,Sometimes,Never,Sometimes,Sometimes,Never,Never,Never,Always,Sometimes
+21,Male,FHPK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,5,5,5,5,5,4,5,4,4,Yes,Yes,Yes,Sometimes,Never,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,Other,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,5,4,1,4,4,4,4,5,5,Yes,Yes,Yes,Never,Sometimes,Always,Always,Always,Always,Always,Always,Always
+21,Female,FSDK,Live with parents/relatives,Pocket money from parents,Above RM 600,1,3,2,3,1,1,5,1,1,Yes,Yes,Yes,Sometimes,Always,Sometimes,Never,Sometimes,Sometimes,Sometimes,Always,Sometimes
+21,Female,FSDK,On-campus (student accommodation),Pocket money from parents,Below RM 99,3,4,4,2,3,3,2,2,3,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Never,Never,Sometimes,Always,Sometimes
+21,Female,FKP,On-campus (student accommodation),Pocket money from parents,Below RM 99,1,2,5,3,1,1,1,1,2,No,No,Yes,Never,Always,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Never
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,3,4,5,1,1,2,2,1,2,Yes,Yes,Yes,Sometimes,Always,Always,Always,Sometimes,Always,Sometimes,Always,Never
+21,Female,Other,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,1,2,5,5,2,2,5,1,3,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Never,Never,Sometimes,Sometimes,Sometimes,Never
+21,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,4,3,4,4,3,4,4,4,4,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Always,Sometimes,Sometimes,Always,Sometimes
+21,Male,FSDK,Off-campus rent (sharing house/flat),Other,Below RM 99,5,5,5,5,5,5,5,5,5,Yes,Yes,Yes,Sometimes,Always,Always,Never,Never,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,Live with parents/relatives,Scholarship,Below RM 99,4,3,2,3,5,5,5,5,5,Yes,Yes,Yes,Never,Sometimes,Always,Sometimes,Always,Always,Always,Always,Sometimes
+18,Female,FSB,On-campus (student accommodation),Pocket money from parents,Below RM 99,2,2,3,3,1,1,3,1,1,Yes,Yes,Yes,Never,Always,Always,Always,Sometimes,Always,Always,Always,Always
+18,Female,Other,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,3,3,4,1,2,2,3,1,2,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,5,5,5,3,4,2,3,2,3,Yes,Yes,Yes,Always,Sometimes,Sometimes,Always,Sometimes,Sometimes,Always,Always,Sometimes
+18,Male,FSDK,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,3,3,3,3,3,3,3,3,3,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FSDK,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,4,3,3,4,4,4,3,4,5,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Sometimes,Always,Sometimes,Sometimes,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,3,3,4,2,4,1,3,1,1,Yes,Yes,Yes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Always,Sometimes,Always,Never
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,1,2,5,2,2,2,3,1,2,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Always,Never,Always,Never
+21,Female,Other,Live with parents/relatives,Other,RM 100 - RM 500,4,3,3,3,5,4,3,5,5,Yes,Yes,Yes,Sometimes,Always,Sometimes,Sometimes,Always,Always,Always,Always,Sometimes
+21,Female,FSDK,Live with parents/relatives,Pocket money from parents,Above RM 600,3,3,2,3,2,2,3,2,3,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Always,Always,Always,Always,Always
+21,Female,FKP,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,1,1,5,1,2,2,5,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Always,Never,Always,Always,Always,Always,Always
+21,Female,Other,Live with parents/relatives,Pocket money from parents,Above RM 600,3,4,5,1,2,2,4,2,2,Yes,Yes,Yes,Never,Always,Always,Sometimes,Sometimes,Always,Sometimes,Always,Sometimes
+26,Male,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Below RM 99,4,4,3,4,3,3,3,4,4,Yes,Yes,Yes,Never,Sometimes,Always,Sometimes,Always,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FKP,Live with parents/relatives,Pocket money from parents,Below RM 99,3,3,5,5,2,2,5,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always,Always
+21,Female,Other,On-campus (student accommodation),A part time job,RM 100 - RM 500,3,4,5,2,2,2,3,1,2,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Always,Never,Sometimes,Sometimes,Sometimes,Never
+21,Female,Other,Off-campus rent (sharing house/flat),Pocket money from parents,Above RM 600,3,3,4,2,2,3,2,2,2,Yes,Yes,Yes,Never,Always,Always,Sometimes,Sometimes,Sometimes,Always,Always,Always
+21,Female,Other,Off-campus rent (sharing house/flat),Other,RM 100 - RM 500,2,1,4,5,1,1,3,1,1,Yes,Yes,Yes,Sometimes,Always,Sometimes,Sometimes,Sometimes,Always,Always,Always,Sometimes
+21,Female,Other,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,1,1,5,5,1,5,5,1,1,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Always,Always,Always,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,3,3,3,3,3,3,3,3,3,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FKP,On-campus (student accommodation),Scholarship,RM 100 - RM 500,1,1,1,1,1,1,1,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Always,Always,Always,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,Other,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,2,2,3,3,3,3,3,2,2,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Sometimes,Always,Sometimes
+21,Female,FKP,On-campus (student accommodation),Scholarship,RM 100 - RM 500,1,4,5,1,1,1,4,1,1,Yes,Yes,Yes,Sometimes,Sometimes,Always,Sometimes,Sometimes,Never,Never,Always,Never
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Above RM 600,4,4,5,3,4,3,4,1,3,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Always,Always,Sometimes,Never,Always,Never
+21,Male,FBI,Off-campus (own),Pocket money from parents,RM 100 - RM 500,5,5,5,4,5,5,5,5,5,Yes,Yes,Yes,Sometimes,Always,Always,Always,Always,Always,Always,Always,Always
+21,Male,FSDK,Live with parents/relatives,Other,Above RM 600,4,3,3,4,4,4,3,4,4,Yes,Yes,Yes,Sometimes,Always,Sometimes,Always,Always,Always,Sometimes,Always,Always
+21,Female,Other,On-campus (student accommodation),Pocket money from parents,Above RM 600,3,3,5,1,2,1,4,1,2,Yes,Yes,Yes,Never,Always,Always,Sometimes,Sometimes,Sometimes,Always,Always,Always
+21,Female,Other,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,3,3,2,1,3,4,5,1,1,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Never,Always,Never
+21,Male,FBKT,Off-campus rent (sharing house/flat),Scholarship,RM 100 - RM 500,2,2,2,3,1,1,2,1,1,Yes,Yes,Yes,Never,Sometimes,Always,Sometimes,Sometimes,Always,Always,Always,Sometimes
+18,Male,FHPK,Live with parents/relatives,A part time job,RM 100 - RM 500,2,3,2,3,4,1,5,1,3,Yes,Yes,Yes,Sometimes,Never,Always,Always,Always,Sometimes,Sometimes,Always,Always
+21,Female,FKP,On-campus (student accommodation),Other family members,Above RM 600,5,5,5,5,5,5,1,1,1,Yes,Yes,Yes,Always,Never,Always,Always,Sometimes,Never,Sometimes,Sometimes,Always
+21,Female,FSDK,Live with parents/relatives,Pocket money from parents,Above RM 600,1,1,5,1,1,1,3,1,1,Yes,Yes,Yes,Never,Always,Always,Always,Always,Always,Always,Always,Always
+21,Female,Other,Off-campus rent (sharing house/flat),Pocket money from parents,Above RM 600,3,3,4,4,2,3,3,1,2,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Never,Sometimes,Sometimes,Never,Always,Never
+21,Female,FBI,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,2,3,5,1,1,1,3,1,1,Yes,Yes,Yes,Never,Always,Always,Never,Sometimes,Sometimes,Never,Always,Sometimes
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,3,1,5,1,1,3,4,1,3,Yes,Yes,Yes,Never,Always,Always,Sometimes,Never,Sometimes,Always,Always,Never
+21,Male,Other,Off-campus (own),A part time job,Above RM 600,4,4,5,2,3,2,4,1,1,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Always,Sometimes,Always,Always,Always
+21,Female,Other,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,3,3,3,3,3,3,3,3,3,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Never,Sometimes,Sometimes,Sometimes,Sometimes
+21,Female,FSDK,On-campus (student accommodation),Pocket money from parents,RM 100 - RM 500,4,3,5,1,2,2,3,1,2,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Sometimes,Sometimes,Always,Never
+21,Female,FSDK,Live with parents/relatives,Pocket money from parents,Above RM 600,1,1,5,1,1,1,5,5,1,Yes,Yes,Yes,Sometimes,Always,Always,Always,Sometimes,Always,Sometimes,Always,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,RM 100 - RM 500,3,4,2,2,1,2,3,1,2,Yes,Yes,Yes,Sometimes,Always,Always,Sometimes,Sometimes,Always,Sometimes,Sometimes,Always
+21,Female,FSDK,Off-campus rent (sharing house/flat),Pocket money from parents,Above RM 600,1,3,3,3,1,3,3,1,2,Yes,Yes,Yes,Sometimes,Sometimes,Sometimes,Sometimes,Always,Always,Sometimes,Always,Sometimes
