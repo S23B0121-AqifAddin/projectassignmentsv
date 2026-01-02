@@ -1,6 +1,59 @@
 import streamlit as st
 import pandas as pd
 
+st.markdown(
+    """
+    <style>
+/* Main reading area */
+    .block-container {
+        max-width: 900px;          /* Book-like text width */
+        padding-top: 3rem;
+        padding-bottom: 4rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;          /* Comfortable reading */
+    }
+
+    /* Improve text readability */
+    p, li {
+        font-size: 1.05rem;
+    }
+
+    h1, h2, h3 {
+        margin-top: 2.5rem;
+        margin-bottom: 1.2rem;
+    }
+
+    /* Background image with transparent black overlay */
+    .stApp {
+        background-image: 
+            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* Transparent black boxes around st.write and other content */
+    .stBlock {
+        background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
+        border-radius: 12px; /* rounded corners */
+        padding: 1.5rem;     /* internal spacing */
+        margin-bottom: 1.5rem;
+        color: white;        /* make text readable */
+    }
+
+    /* Optional: style headers inside the box */
+    .stBlock h1, .stBlock h2, .stBlock h3 {
+        color: white;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("💵💷Financial Behaviour among University Students💴💶")
 st.markdown("---")
 
