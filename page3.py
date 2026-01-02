@@ -7,9 +7,6 @@ import seaborn as sns
 import plotly.graph_objects as go # Keep this if you need go, though px handles everything here
 
 
-# DATASET UPLOAD AND SUMMARY BOX
-
-# --- Corrected Imports ---
 # Set Streamlit page configuration (must be the first Streamlit command)
 st.set_page_config(
     page_title="Financial Behaviour among University Students",
@@ -59,6 +56,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# DATASET UPLOAD AND SUMMARY BOX
 # Page header
 st.title("💷Financial Behaviour among University Students(KHADIJAH)")
 st.markdown("---")  # this creates a horizontal line
