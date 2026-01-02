@@ -24,11 +24,6 @@ st.markdown(
         color: #111111;  /* dark text for readability */
     }
 
-    /* Optional: links inside text */
-    a {
-        color: #1a73e8;
-    }
-
     </style>
     """,
     unsafe_allow_html=True
