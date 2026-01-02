@@ -41,6 +41,7 @@ st.markdown(
 
     .stApp {
         background-image: url("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e");
+        background-color: rgba(0, 0, 0, 0.92);
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
