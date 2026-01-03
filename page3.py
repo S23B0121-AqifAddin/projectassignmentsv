@@ -43,14 +43,12 @@ st.markdown(
         text-align: justify;
     }
 
-        /* Paragraph text = st.write body text */
-    p {
+       .stMarkdown p {
         background-color: rgba(0, 0, 0, 0.35);
         padding: 0.9rem 1.1rem;
         border-radius: 10px;
         text-align: justify;
         margin-bottom: 1rem;
-    }
     </style>
     """,
     unsafe_allow_html=True
