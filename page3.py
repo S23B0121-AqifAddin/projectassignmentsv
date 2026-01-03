@@ -44,9 +44,9 @@ st.markdown(
     }
     
     .stMarkdown p {
-    background-color: #EEE6FF; /* soft light purple */
-    border: 3.0px solid #888888;                 /* black border */
-    color: #000000;                              /* black text */
+    background-color: #EEE6FF;   /* color box */
+    border: 1.5.0px solid #888888; /* color border */
+    color: #000000;              /* color text */
     padding: 0.9rem 1.1rem;
     border-radius: 10px;
     text-align: justify;
