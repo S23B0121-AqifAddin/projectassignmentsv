@@ -43,15 +43,15 @@ st.markdown(
         text-align: justify;
     }
     
-       .stMarkdown p {
-       background-color: rgba(245, 240, 255, 0.18); /* soft light purple */
-        border: 3.0px solid #000000;                 /* black border */
-        color: #000000;                              /* black text */
-        padding: 0.9rem 1.1rem;
-        border-radius: 10px;
-        text-align: justify;
-        margin-bottom: 1rem;
-        }
+    .stMarkdown p {
+    background-color: #EEE6FF; /* soft light purple */
+    border: 3.0px solid #000000;                 /* black border */
+    color: #000000;                              /* black text */
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    text-align: justify;
+    margin-bottom: 1rem;
+    }
     </style>
     """,
     unsafe_allow_html=True
