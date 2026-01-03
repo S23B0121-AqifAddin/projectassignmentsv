@@ -42,10 +42,21 @@ st.markdown(
     p {
         text-align: justify;
     }
+    
+    [data-theme="dark"] .stMarkdown p {
+        background-color: rgba(255, 255, 255, 0.12); /* soft light purple */
+        color: #000; 
+        border: 3.0px solid #000000;                 /* black border */
+        color: #000000;                              /* black text */
+        padding: 0.9rem 1.1rem;
+        border-radius: 10px;
+        text-align: justify;
+        margin-bottom: 1rem;
 
-       .stMarkdown p {
-        background-color: rgba(245, 240, 255, 0.4);  /* soft glassy light purple */
-        border: 4.0px solid #000000;                 /* black border */
+    [data-theme="light"] .stMarkdown p {
+        background-color: rgba(235, 228, 250, 0.45); /* soft light purple */
+        color: #000; 
+        border: 3.0px solid #000000;                 /* black border */
         color: #000000;                              /* black text */
         padding: 0.9rem 1.1rem;
         border-radius: 10px;
