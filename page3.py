@@ -38,6 +38,10 @@ st.markdown(
         margin-top: 2.5rem;
         margin-bottom: 1.2rem;
     }
+
+    p {
+        text-align: justify;
+    }
     </style>
     """,
     unsafe_allow_html=True
