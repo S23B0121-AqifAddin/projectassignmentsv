@@ -219,6 +219,16 @@ with st.container():
     )
     # 1. Age Distribution
     if chart_option == "Age Distribution":
+        st.write(
+            """
+            The "Distribution of Age" graph shows a histogram with an overlay of a kernel density estimate (KDE) curve. 
+            The largest bar and the strong peak in the KDE curve at age 21 show that most students in the study are 21. At ages 18 and 26, 
+            there are quite fewer students, and the frequency of students declines on each side of age 21. The KDE curve highlights 
+            the overall layout of the data and underlines the peak around age 21 by offering a smooth simulation of the age distribution. 
+            The dataset appears to have a significant overall pattern, with age 21 being the most typical population, 
+            according to this visualisation.
+            """
+        )
         fig, ax = plt.subplots(figsize=(8, 6))
         sns.histplot(df['Age'], kde=True, ax=ax)
         ax.set_title("Distribution of Age")
@@ -227,6 +237,13 @@ with st.container():
         st.pyplot(fig)
     # 2. Gender Distribution
     elif chart_option == "Gender Distribution":
+        st.write(
+            """
+            The "Distribution of Gender" pie chart shows the percentage of men and women in a dataset. It shows that 26.5% are men (shown in orange), 
+            while 73.5% are women (shown in light blue). Having over three times as many women's students as men in this university student, this suggests a severe gender imbalance. 
+            For an overview of demographic characteristics, the chart offers a clear visual summary of gender ratio.
+            """
+        )
         fig, ax = plt.subplots(figsize=(8, 6))
         gender_counts = df['Gender'].value_counts()
         ax.pie(
@@ -241,6 +258,14 @@ with st.container():
         st.pyplot(fig)
     # 3. Faculty Distribution
     elif chart_option == "Faculty Distribution":
+        st.write(
+            """
+           The number of people in each faculty is displayed as a horizontal bar graph in the "Distribution of Faculty" chart. 
+           With more than 60 students, FSDK is the faculty with the largest presence. The "Other" group, which includes about thirty people, 
+           comes next. With counts of less than 20, the other faculties is FKP, FHPK, FBI, FBKT, FSB, and FIAT, have a fewer students. 
+           This distribution shows a lowest appearance in the other faculties and an impressive majority in FSDK.
+            """
+        )
         fig, ax = plt.subplots(figsize=(8, 6))
         sns.countplot(
             y=df['Faculty'],
@@ -256,6 +281,14 @@ with st.container():
         st.pyplot(fig)
     # 4. Housing Arrangement Distribution
     elif chart_option == "Housing Arrangement Distribution":
+        st.write(
+            """
+           The "Distribution of Housing Arrangement" graphic shows how student are categorised according to their living situations. 
+           Off-campus rent (sharing a house or flat) with more than fifty students is the most in this typical option. The numbers for living on 
+           campus and with parents or other family members are equivalent, ranging from 21 to 22. Off-campus (own) living is the least usual arrangement, 
+           with just around five students. This means living independently off campus is more uncommon, whereas shared off-campus accommodation is the favoured option.
+            """
+        )
         fig, ax = plt.subplots(figsize=(8, 6))
         sns.countplot(
             y=df['Housing_Arrangement'],
@@ -271,6 +304,15 @@ with st.container():
         st.pyplot(fig)
     # 5. Main Income Source Distribution
     elif chart_option == "Main Income Source Distribution":
+        st.write(
+            """
+            The "Distribution of Main Income Source" visualisation shows how student have support financially. 
+            The majority, almost 70 students depend on their parent's pocket money as their main source of income. 
+            Another 15 students are supported by scholarships, while another 10 are supported by other means. 
+            Only around two of the smaller group and roughly seven students is depend on other family members for their income and part-time work. 
+            This distribution shows a considerable dependency on parental support, while very few students earning money on their own or earning scholarships.
+            """
+        )
         fig, ax = plt.subplots(figsize=(8, 6))
         sns.countplot(
             y=df['Main_Income_Source'],
@@ -286,6 +328,14 @@ with st.container():
         st.pyplot(fig)
     # 6. Monthly Income Distribution
     elif chart_option == "Monthly Income Distribution":
+        st.write(
+            """
+            The "Distribution of Monthly Income" figure shows how students are divided into three income groups. 
+            The majority fall between RM 100 and RM 500, suggesting that this is the most typical monthly income range. 
+            A lower percentage of students make less than RM 99, while an even smaller percentage make more than RM 600. 
+            This means that the majority of students in this study have moderate monthly incomes, with just a few at the higher and lower ends of the income range.
+            """
+        )
         monthly_income_order = [
             'Below RM 99',
             'RM 100 - RM 500',
@@ -310,9 +360,12 @@ st.markdown("---")  # this creates a horizontal line
 #Heatmap
 st.subheader("Correlation of Financial Management and Planning Behaviours")
 st.write(
-    "This heatmap illustrates the strength and direction of relationships among financial "
-    "management and planning behaviours. Strong positive correlations suggest behaviours "
-    "that tend to occur together, while negative correlations indicate contrasting habits."
+    """
+    The "Correlation Heatmap of Financial Management and Planning Behaviours" illustrates the relationships between financial behaviours. 
+    Organised money management, saving for a rainy day (0.67), and being more of a saver than a spender (0.71) all show strong positive relationships. 
+    Additionally, there is a moderate correlation (0.45) between saving for a rainy day and being a saver. On the other hand, behaviours such as living in the now or 
+    preferring credit purchases indicate weaker or unfavourable connections. Overall, the heatmap shows how saving habits and organised money management typically support one another.
+    """
 )
 # Select the numerical columns related to financial management and planning behaviors
 selected_numerical_cols = [
@@ -342,7 +395,13 @@ st.pyplot(fig)
 
 #Pie Chart
 st.subheader("Complaint Behavior for Unsuitable Products")
-st.write("This pie chart shows the proportion of consumers who submit complaints regarding unsuitable products.")
+st.write(
+    """
+    The "Distribution of Complaint Behaviour for Unsuitable Products" pie chart has shows how students react when they come with unacceptable products. 
+    Those who frequently complain make up the biggest population (41.2%), followed closely by those who complain occasionally (39.2%). 
+    Just 19.6% of people never complain. This implies that the majority of people actively express their dissatisfaction, with only a small percentage choosing to do nothing.
+    """
+)
 # Calculate the value counts for 'Complaint_for_Unsuitable_Product'
 complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
 # Create the figure
@@ -365,8 +424,14 @@ st.pyplot(fig)
 #Violin Plot
 st.subheader("Age Distribution and Complaint Behaviour")
 st.write(
-    "The violin plot illustrates how age is distributed among consumers who did and did not "
-    "file complaints regarding unsuitable products, highlighting differences in complaint patterns."
+    """
+    The "Age Distribution by Complaint Behaviour for Unsuitable Products" has been illustrated by violin plot, 
+    the differences in age between the three types of complaint behaviour which is Never, Sometimes, and Always. 
+    Wider violin shapes in the "Always" and "Sometimes" groups suggest a wider age range and greater range in the complaints. 
+    However, the "Never" group shows up as a thin line, indicating that those who never complain are either focused at a single age or have very little age variation. 
+    In order to look into core patterns among behaviours, each white small line inside the violins represents the median age for that category. 
+    This graphic shows that age may have an impact on complaint behaviour, with complaints coming from a wider range of age groups while non-complainers are often more specific to age.
+    """
 )
 # Create the figure
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -392,8 +457,13 @@ st.pyplot(fig)
 #Grouped Bar Plot
 st.subheader("Complaint Behaviour by Gender")
 st.write(
-    "This bar chart compares complaint behaviour for unsuitable products across genders, "
-    "highlighting potential differences in reporting patterns."
+    """
+    The "Complaint Behaviour by Gender" visualisation shows how men's student and women's student react to inappropriate items in three different complaint categories 
+    which is Always, Sometimes, and Never. Complaints are more common among student by women, with "Always" accounting for the largest percentage, followed by "Sometimes". 
+    Although they are less common than females, men's students also fall into the "Always" and "Sometimes" categories. unexpectedly, the "Never" group only includes females, 
+    suggesting that every guy in the dataset expresses a sense of dissatisfaction. This implies that while men's students usually express a sense of unhappiness, women's students 
+    have a greater variety of complaint behaviours.
+    """
 )
 # Create figure
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -418,10 +488,13 @@ st.pyplot(fig)
 # Streamlit section
 st.subheader("Complaint Behavior by Monthly Income")
 st.write(
-    "This stacked bar chart shows the proportion of students who file complaints about unsuitable products, "
-    "segmented by their monthly income. Each bar represents a different income group, "
-    "and the colors indicate the frequency of complaint behaviour (Never, Sometimes, Always). "
-    "It helps to identify if income level influences students' likelihood to submit complaints."
+    """
+    The "Complaint Behaviour by Monthly Income" illustration has shows how student in different income categories react to inappropriate products. 
+    Most students in all three income groups is below RM 99, between RM 100 and RM 500, and above RM 600, either often or sometimes complain. The "Never" 
+    category is always the smallest, suggesting that relatively few students decide not to express their dissatisfaction. "Always" and "Sometimes" 
+    are distributed fairly evenly in the RM 100–RM 500 category, although "Always" is more common in the other two categories. Given that most people voice 
+    complaints no matter their financial status, this shows that income level does not considerably prevent complaint behaviour.
+    """
 )
 # Create a cross-tabulation (contingency table) of the two categorical variables
 contingency_table = pd.crosstab(df['Monthly_Income'], df['Complaint_for_Unsuitable_Product'])
@@ -445,9 +518,14 @@ st.pyplot(fig)
 #Faceted Bar Plot
 st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
 st.write(
-    "This faceted bar compares complaint behaviour across different levels of financial knowledge increase. "
-    "Each faceted bar represents a level of financial knowledge, showing how student's complaint patterns. "
-    "It helps to evaluate whether higher financial knowledge influences students to submit complaints more frequently."
+    """
+    The "Complaint Behaviour by Financial Knowledge Increase" visualisation has illustrates how student's complaint behaviour changes 
+    according to their level of financial understanding. "Sometimes" is the most frequent complaint behaviour among people who say their financial 
+    understanding sometimes improves, followed by "Always" and "Never". Most people who are always learning more about finance always complain, while a 
+    smaller percentage choose to complain is sometimes or never. On the other hand, those whose financial literacy never improves are more likely to never 
+    complain, and very few of them actually do. This trend shows a relationship between consumer confidence and financial awareness, those who are more 
+    knowledgeable about finances are more likely to express their disapproval.
+    """
 )
 # Define the order for Increase_Financial_Knowledge categories
 financial_knowledge_order = df['Increase_Financial_Knowledge'].value_counts().index.tolist()
