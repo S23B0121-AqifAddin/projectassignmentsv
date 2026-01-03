@@ -42,6 +42,14 @@ st.markdown(
     p {
         text-align: justify;
     }
+
+    p {
+        background-color: color-mix(in srgb, var(--background-color) 80%, black);
+        padding: 1rem 1.2rem;
+        border-radius: 12px;
+        text-align: justify;
+        margin-bottom: 1rem;
+    }
     </style>
     """,
     unsafe_allow_html=True
