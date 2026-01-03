@@ -41,9 +41,13 @@ st.markdown(
 
     p {
         text-align: justify;
-        background-color: color-mix(in srgb, var(--background-color) 80%, black);
-        padding: 1rem 1.2rem;
-        border-radius: 12px;
+    }
+
+        /* Paragraph text = st.write body text */
+    p {
+        background-color: rgba(0, 0, 0, 0.35);
+        padding: 0.9rem 1.1rem;
+        border-radius: 10px;
         text-align: justify;
         margin-bottom: 1rem;
     }
