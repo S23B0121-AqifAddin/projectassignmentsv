@@ -44,6 +44,10 @@ st.markdown(
         margin: 0;
         text-align: center;
     }
+
+    p {
+        text-align: justify;
+    }
     </style>
     """,
     unsafe_allow_html=True
