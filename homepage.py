@@ -89,7 +89,7 @@ SHEET_NAME = "Form Responses 1"
 # ----------------------------
 # Columns layout
 # ----------------------------
-col1, col2 = st.columns([2, 3])
+col1, col2 = st.columns([3, 2])
 
 # ----------------------------
 # Left column: Google Form
