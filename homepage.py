@@ -72,51 +72,38 @@ st.markdown(
 )
 
 #RealTimeData
-st.set_page_config(layout="wide")  # make columns wider
+# ----------------------------
+# Header / Title
+# ----------------------------
+st.image("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e", use_column_width=True)
+st.title("💵💷 Financial Behaviour among University Students 💴💶")
 
 # ----------------------------
-# Google Sheets credentials
+# Google Form Expander
 # ----------------------------
-creds = Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
-)
-client = gspread.authorize(creds)
-
-SHEET_ID = "1vpYf97ioLU7dVFbVCzrb73fALQAnOL9j17C2luNB1To"
-SHEET_NAME = "Form Responses 1"
-
-# ----------------------------
-# Columns layout
-# ----------------------------
-col1, col2 = st.columns(2)
-
-# ----------------------------
-# Left column: Google Form
-# ----------------------------
-with col1:
-    st.header("📝 Fill the Google Form")
+with st.expander("📝 Fill the Google Form", expanded=False):
     FORM_IFRAME = """
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc64KYOt8YZMIo559AdmO8p-4uAhPm7rYE9uY8R36KNIm4dhw/viewform?usp=header"
-    width="100" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc64KYOt8YZMIo559AdmO8p-4uAhPm7rYE9uY8R36KNIm4dhw/viewform?embedded=true"
+    width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     """
-    components.html(FORM_IFRAME, height=820)
+    components.html(FORM_IFRAME, height=920)
 
 # ----------------------------
-# Right column: Live Responses
+# Live Responses Expander
 # ----------------------------
-with col2:
-    st.header("📊 Live Responses")
+with st.expander("📊 Live Responses", expanded=False):
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    )
+    client = gspread.authorize(creds)
 
-    # Use a placeholder for auto-refresh
-    placeholder = st.empty()
-    refresh_interval = 10  # seconds
+    SHEET_ID = "1vpYf97ioLU7dVFbVCzrb73fALQAnOL9j17C2luNB1To"
+    SHEET_NAME = "Form Responses 1"
 
-    while True:
-        sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
-        df = pd.DataFrame(sheet.get_all_records())
-        placeholder.dataframe(df)
-        time.sleep(refresh_interval)
+    sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
+    df = pd.DataFrame(sheet.get_all_records())
+    st.dataframe(df)
 
 
 #PAGE
