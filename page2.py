@@ -213,7 +213,8 @@ with row1_col1:
 
 with row1_col2:
     st.write("###### Score Distribution")
-    st.write("###### This histogram shows the distribution of self-rated financial organization, revealing a normal distribution where most students possess a 'neutral' or average level of money management discipline.")
+    summary_text = "This chart shows the frequency of self-discipline scores, revealing that most students rate themselves as 'average' in organization."
+    st.info(summary_text)
     fig1, ax1 = plt.subplots(figsize=(6, 4))
     sns.histplot(data=df, x='Organised_Money_Management', bins=5, discrete=True, color="#6A0DAD", ax=ax1)
     ax1.set_xticks(range(1, 6))
@@ -221,25 +222,30 @@ with row1_col2:
 
 # --- 6. BOTTOM ROW: TABS FOR DETAILED ANALYSIS ---
 st.subheader("🔍 Deep Dive Analysis")
-tab1, tab2, tab3 = st.tabs(["Demographics (Age & Gender)", "Correlation Matrix", "Raw Dataset"])
+tab1, tab2, tab3 = st.tabs(["Demographics (Age & Gender)", "Correlation Matrix"])
 
 with tab1:
     sub_col1, sub_col2 = st.columns(2)
     with sub_col1:
         st.write("###### Financial Confidence by Age")
-        st.write("###### This histogram shows the distribution of self-rated financial organization, revealing a normal distribution where most students possess a 'neutral' or average level of money management discipline.")
+        summary_text = "This histogram illustrates the demographic spread, showing that our sample is concentrated in the early-to-mid twenties."
+        st.info(summary_text)
         fig2, ax2 = plt.subplots(figsize=(6, 4))
         sns.boxplot(data=df, x='Age', y='Organised_Money_Management', palette='cubehelix', ax=ax2)
         st.pyplot(fig2)
     
     with sub_col2:
         st.write("###### Average Score by Gender")
+        summary_text = "This bar chart illustrates the average level of financial confidence across genders, highlighting that both males and females maintain a comparably high level of perceived competence in managing their money."
+        st.info(summary_text)
         fig3, ax3 = plt.subplots(figsize=(6, 4))
         sns.barplot(data=df, x='Gender', y='Organised_Money_Management', palette='rocket', ax=ax3)
         st.pyplot(fig3)
 
 with tab2:
     st.write("###### Feature Correlation Heatmap")
+    summary_text = "This matrix summarizes the interconnectivity of habits, showing how being 'organized' is strongly linked to 'saving' and 'debt avoidance'."
+    st.info(summary_text)
     # Centering the heatmap to keep it from stretching
     _, mid_col, _ = st.columns([1, 4, 1])
     with mid_col:
@@ -248,7 +254,4 @@ with tab2:
             fig4, ax4 = plt.subplots(figsize=(8, 6))
             sns.heatmap(df[numerical_cols].corr(), annot=True, cmap='coolwarm', fmt=".2f", ax=ax4, annot_kws={"size": 8})
             st.pyplot(fig4)
-
-with tab3:
-    st.dataframe(df, use_container_width=True)
 
