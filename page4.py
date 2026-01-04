@@ -28,17 +28,17 @@ dfraw = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projec
 st.sidebar.header("Data Controls")
 
 # Gender Filter
-gender_options = dfraw_awareness['Gender'].unique().tolist()
+gender_options = dfraw['Gender'].unique().tolist()
 selected_genders = st.sidebar.multiselect("Filter by Gender:", gender_options, default=gender_options)
 
 # Age Filter (Assuming an 'Age_Group' column exists)
-age_options = dfraw_awareness['Age_Group'].unique().tolist()
+age_options = dfraw['Age_Group'].unique().tolist()
 selected_ages = st.sidebar.multiselect("Filter by Age Group:", age_options, default=age_options)
 
 # Apply Filters to the Dataframe
-filtered_df = dfraw_awareness[
-    (dfraw_awareness['Gender'].isin(selected_genders)) & 
-    (dfraw_awareness['Age_Group'].isin(selected_ages))
+filtered_df = dfraw[
+    (dfraw['Gender'].isin(selected_genders)) & 
+    (dfraw['Age_Group'].isin(selected_ages))
 ]
 
 # 3. Main Header & Download Button
