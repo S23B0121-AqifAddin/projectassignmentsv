@@ -71,7 +71,7 @@ except UnicodeDecodeError:
     df = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Khadijah)%20processed_financial_capability_data.csv', encoding='latin-1')
 df
 # Display row × column info
-st.markdown(f"<div style='font-size:12px; color:gray; margin-bottom:4px;'>Rows: {df.shape[0]} × Columns: {df.shape[1]}</div>", unsafe_allow_html=True)
+st.markdown(f"<div style='font-size:12px; color:gray; margin:0; padding:0;'>Rows: {df.shape[0]} × Columns: {df.shape[1]}</div>", unsafe_allow_html=True)
 
 # =========================
 # PLO DATA CALCULATIONS
