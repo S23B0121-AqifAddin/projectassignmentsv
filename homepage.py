@@ -97,7 +97,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.header("📝 Fill the Google Form")
     FORM_IFRAME = """
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc64KYOt8YZMIo559AdmO8p-4uAhPm7rYE9uY8R36KNIm4dhw/viewform?embedded=true"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc64KYOt8YZMIo559AdmO8p-4uAhPm7rYE9uY8R36KNIm4dhw/viewform?usp=header"
     width="700" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     """
     components.html(FORM_IFRAME, height=820)
