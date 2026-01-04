@@ -222,7 +222,7 @@ with row1_col2:
 
 # --- 6. BOTTOM ROW: TABS FOR DETAILED ANALYSIS ---
 st.subheader("🔍 Deep Dive Analysis")
-tab1, tab2, tab3 = st.tabs(["Demographics (Age & Gender)", "Correlation Matrix"])
+tab1, tab2= st.tabs(["Demographics (Age & Gender)", "Correlation Matrix"])
 
 with tab1:
     sub_col1, sub_col2 = st.columns(2)
