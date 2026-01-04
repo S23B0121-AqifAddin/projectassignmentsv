@@ -77,12 +77,27 @@ def create_plot(column, title):
 col1, col2 = st.columns(2)
 
 with col1:
-    create_plot('Search_Info_Before_Buying', 'Search Info Before Buying')
-    create_plot('Compare_Prices_Before_Buying', 'Compare Prices Before Buying')
+    create_plot(
+        COLUMN_MAP["Search_Info"],
+        "Searching for Information Before Buying"
+    )
+
+    create_plot(
+        COLUMN_MAP["Compare_Prices"],
+        "Comparing Prices Before Buying"
+    )
 
 with col2:
-    create_plot('Compare_Products_Services', 'Compare Products/Services')
-    create_plot('Read_Agreement_Carefully', 'Read Agreement Carefully')
+    create_plot(
+        COLUMN_MAP["Compare_Products"],
+        "Comparing Products or Services"
+    )
+
+    create_plot(
+        COLUMN_MAP["Read_Agreement"],
+        "Reading Agreements Carefully"
+    )
+
 
 # 6. Data Summary Section
 st.divider()
