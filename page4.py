@@ -23,21 +23,22 @@ try:
 except UnicodeDecodeError:
     dfkisa = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Kisa)processed_financial_capability_data%20(3).csv', encoding='latin-1')
 
+dfraw = pd.read.csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv')
 # 2. Sidebar Filters
 st.sidebar.header("Data Controls")
 
 # Gender Filter
-gender_options = df_awareness['Gender'].unique().tolist()
+gender_options = dfraw_awareness['Gender'].unique().tolist()
 selected_genders = st.sidebar.multiselect("Filter by Gender:", gender_options, default=gender_options)
 
 # Age Filter (Assuming an 'Age_Group' column exists)
-age_options = df_awareness['Age_Group'].unique().tolist()
+age_options = dfraw_awareness['Age_Group'].unique().tolist()
 selected_ages = st.sidebar.multiselect("Filter by Age Group:", age_options, default=age_options)
 
 # Apply Filters to the Dataframe
-filtered_df = df_awareness[
-    (df_awareness['Gender'].isin(selected_genders)) & 
-    (df_awareness['Age_Group'].isin(selected_ages))
+filtered_df = dfraw_awareness[
+    (dfraw_awareness['Gender'].isin(selected_genders)) & 
+    (dfraw_awareness['Age_Group'].isin(selected_ages))
 ]
 
 # 3. Main Header & Download Button
