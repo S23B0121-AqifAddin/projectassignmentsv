@@ -73,12 +73,6 @@ st.markdown(
 
 #RealTimeData
 # ----------------------------
-# Header / Title
-# ----------------------------
-st.image("https://images.unsplash.com/photo-1526304640581-d334cdbbf45e", use_column_width=True)
-st.title("💵💷 Financial Behaviour among University Students 💴💶")
-
-# ----------------------------
 # Google Form Expander
 # ----------------------------
 with st.expander("📝 Fill the Google Form", expanded=False):
