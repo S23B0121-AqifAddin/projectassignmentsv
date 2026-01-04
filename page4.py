@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 # =========================
 # PAGE CONFIG
@@ -11,22 +10,18 @@ st.set_page_config(
     layout="wide"
 )
 
-sns.set(style="whitegrid")
-
 # =========================
-# PAGE HEADER
+# PAGE TITLE & CONTEXT
 # =========================
 st.title("Consumer Rights & Complaint Behaviour")
 
-st.markdown(
-    """
-    **Individual Goal:**  
-    To investigate students’ awareness of consumer rights and complaint behaviour.
+st.markdown("""
+**Individual Goal:**  
+To investigate students’ awareness of consumer rights and complaint behaviour.
 
-    **Problem Definition:**  
-    Do students understand and exercise their consumer rights when facing unsuitable products or services?
-    """
-)
+**Problem Definition:**  
+Do students understand and exercise their consumer rights when facing unsuitable products or services?
+""")
 
 st.divider()
 
@@ -49,120 +44,150 @@ df = load_data()
 # =========================
 st.sidebar.header("Filter Options")
 
-gender_options = sorted(df["Gender"].dropna().unique())
-selected_genders = st.sidebar.multiselect(
-    "Select Gender",
-    gender_options,
-    default=gender_options
+gender_filter = st.sidebar.multiselect(
+    "Gender",
+    sorted(df["Gender"].dropna().unique()),
+    default=sorted(df["Gender"].dropna().unique())
 )
 
-age_options = sorted(df["Age"].dropna().unique())
-selected_ages = st.sidebar.multiselect(
-    "Select Age Group",
-    age_options,
-    default=age_options
+age_filter = st.sidebar.multiselect(
+    "Age",
+    sorted(df["Age"].dropna().unique()),
+    default=sorted(df["Age"].dropna().unique())
+)
+
+faculty_filter = st.sidebar.multiselect(
+    "Faculty",
+    sorted(df["Faculty"].dropna().unique()),
+    default=sorted(df["Faculty"].dropna().unique())
+)
+
+income_filter = st.sidebar.multiselect(
+    "Monthly Income",
+    sorted(df["Monthly_Income"].dropna().unique()),
+    default=sorted(df["Monthly_Income"].dropna().unique())
 )
 
 filtered_df = df[
-    (df["Gender"].isin(selected_genders)) &
-    (df["Age"].isin(selected_ages))
+    (df["Gender"].isin(gender_filter)) &
+    (df["Age"].isin(age_filter)) &
+    (df["Faculty"].isin(faculty_filter)) &
+    (df["Monthly_Income"].isin(income_filter))
 ]
 
 # =========================
-# VISUAL 1: BAR CHART
+# KPI SUMMARY BOXES
 # =========================
-st.subheader("1. Complaint Behaviour Frequency")
+st.subheader("Key Performance Indicators (KPIs)")
 
-fig1, ax1 = plt.subplots(figsize=(6,4))
-sns.countplot(
-    data=filtered_df,
-    x="Complaint_for_Unsuitable_Product",
-    hue="Complaint_for_Unsuitable_Product",
-    palette="viridis",
-    legend=False,
-    ax=ax1
+total_students = len(filtered_df)
+
+complaint_rate = (
+    (filtered_df["Complaint_for_Unsuitable_Product"] == "Always").mean() * 100
 )
-ax1.set_xlabel("")
-ax1.set_ylabel("Number of Students")
-st.pyplot(fig1)
+
+agreement_reading_rate = (
+    (filtered_df["Read_Agreement_Carefully"] == "Always").mean() * 100
+)
+
+info_search_rate = (
+    (filtered_df["Search_Info_Before_Buying"] == "Always").mean() * 100
+)
+
+kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+
+kpi1.metric("Total Respondents", total_students)
+kpi2.metric("Complaint Rate (%)", f"{complaint_rate:.1f}")
+kpi3.metric("Read Agreement (%)", f"{agreement_reading_rate:.1f}")
+kpi4.metric("Search Info Before Buying (%)", f"{info_search_rate:.1f}")
 
 st.write(
-    "This chart shows how frequently students make complaints when they receive unsuitable products. "
-    "After applying filters, changes in the distribution reflect how complaint behaviour differs across "
-    "demographic groups. A high proportion of 'Never' responses indicates limited exercise of consumer rights."
+    "These KPIs summarise students’ consumer rights behaviour under the selected filters. "
+    "Changes in filters immediately reflect shifts in complaint activity and awareness-related actions."
 )
 
 st.divider()
 
 # =========================
-# VISUAL 2: PIE CHART
+# VISUAL 1: COMPLAINT FREQUENCY
 # =========================
-st.subheader("2. Awareness vs Action Gap")
+st.subheader("1. Complaint Behaviour Frequency")
+
+fig1 = px.histogram(
+    filtered_df,
+    x="Complaint_for_Unsuitable_Product",
+    color="Complaint_for_Unsuitable_Product",
+    title="Frequency of Complaints for Unsuitable Products",
+    text_auto=True
+)
+st.plotly_chart(fig1, use_container_width=True)
+
+st.write(
+    "This bar chart shows how often students make complaints when sold unsuitable products. "
+    "Even after applying demographic and income filters, a substantial proportion of students "
+    "report that they never complain, indicating limited exercise of consumer rights."
+)
+
+st.divider()
+
+# =========================
+# VISUAL 2: AWARENESS VS ACTION
+# =========================
+st.subheader("2. Awareness vs Action Comparison")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    fig2, ax2 = plt.subplots()
-    filtered_df["Read_Agreement_Carefully"].value_counts().plot.pie(
-        autopct="%1.1f%%",
-        startangle=90,
-        ax=ax2
+    fig2 = px.pie(
+        filtered_df,
+        names="Read_Agreement_Carefully",
+        title="Reading Agreements Carefully"
     )
-    ax2.set_ylabel("")
-    ax2.set_title("Reading Agreements Carefully")
-    st.pyplot(fig2)
+    st.plotly_chart(fig2, use_container_width=True)
 
 with col2:
-    fig3, ax3 = plt.subplots()
-    filtered_df["Complaint_for_Unsuitable_Product"].value_counts().plot.pie(
-        autopct="%1.1f%%",
-        startangle=90,
-        ax=ax3
+    fig3 = px.pie(
+        filtered_df,
+        names="Complaint_for_Unsuitable_Product",
+        title="Making Complaints"
     )
-    ax3.set_ylabel("")
-    ax3.set_title("Making Complaints")
-    st.pyplot(fig3)
+    st.plotly_chart(fig3, use_container_width=True)
 
 st.write(
-    "The comparison highlights a clear gap between consumer awareness and action. While many students read agreements "
-    "carefully, fewer take action by making formal complaints. This gap remains visible even after demographic filtering."
+    "The pie charts highlight a clear awareness–action gap. While many students consistently read agreements, "
+    "far fewer take the step of making formal complaints. This pattern remains stable across most filter selections."
 )
 
 st.divider()
 
 # =========================
-# VISUAL 3: STACKED BAR BY FACULTY
+# VISUAL 3: FACULTY COMPARISON
 # =========================
 st.subheader("3. Complaint Behaviour by Faculty")
 
-faculty_data = (
-    filtered_df
-    .groupby(["Faculty", "Complaint_for_Unsuitable_Product"])
-    .size()
-    .unstack(fill_value=0)
+fig4 = px.histogram(
+    filtered_df,
+    x="Faculty",
+    color="Complaint_for_Unsuitable_Product",
+    barmode="stack",
+    title="Complaint Behaviour Across Faculties"
 )
-
-fig4, ax4 = plt.subplots(figsize=(8,5))
-faculty_data.plot(kind="bar", stacked=True, colormap="viridis", ax=ax4)
-ax4.set_xlabel("Faculty")
-ax4.set_ylabel("Number of Students")
-ax4.set_title("Complaint Behaviour Across Faculties")
-st.pyplot(fig4)
+st.plotly_chart(fig4, use_container_width=True)
 
 st.write(
-    "This visual shows how complaint behaviour differs across faculties. Some faculties display higher engagement "
-    "in complaint actions, while others are dominated by students who never complain. This suggests uneven exposure "
-    "to consumer rights knowledge across academic disciplines."
+    "This visual shows noticeable differences in complaint behaviour across faculties. "
+    "Some faculties demonstrate higher complaint engagement, suggesting stronger consumer awareness, "
+    "while others are dominated by non-complaint behaviour."
 )
 
 st.divider()
 
 # =========================
-# VISUAL 4: BOX PLOT (AGE)
+# VISUAL 4: AGE VS RIGHTS SCORE
 # =========================
-st.subheader("4. Consumer Rights Awareness Score by Age")
+st.subheader("4. Consumer Rights Awareness by Age")
 
-mapping = {"Always": 2, "Sometimes": 1, "Never": 0}
+score_map = {"Always": 2, "Sometimes": 1, "Never": 0}
 
 rights_cols = [
     "Read_Agreement_Carefully",
@@ -172,65 +197,55 @@ rights_cols = [
 ]
 
 for col in rights_cols:
-    filtered_df[col + "_score"] = filtered_df[col].map(mapping)
+    filtered_df[col + "_score"] = filtered_df[col].map(score_map)
 
 filtered_df["Consumer_Rights_Score"] = filtered_df[
     [c + "_score" for c in rights_cols]
 ].sum(axis=1)
 
-fig5, ax5 = plt.subplots(figsize=(6,4))
-sns.boxplot(
-    data=filtered_df,
+fig5 = px.box(
+    filtered_df,
     x="Age",
     y="Consumer_Rights_Score",
-    palette="viridis",
-    ax=ax5
+    title="Consumer Rights Awareness Score by Age"
 )
-ax5.set_xlabel("Age Group")
-ax5.set_ylabel("Consumer Rights Awareness Score")
-st.pyplot(fig5)
+st.plotly_chart(fig5, use_container_width=True)
 
 st.write(
-    "The box plot indicates that older students generally have higher and more consistent consumer rights awareness "
-    "scores. Younger age groups show wider variation, suggesting inconsistent understanding and application of rights."
+    "Older students tend to show higher and more consistent consumer rights scores, while younger students "
+    "exhibit wider variation. This suggests that experience plays a role in understanding and exercising rights."
 )
 
 st.divider()
 
 # =========================
-# VISUAL 5: HEATMAP
+# VISUAL 5: CORRELATION HEATMAP
 # =========================
-st.subheader("5. Correlation Between Consumer Rights Behaviours")
+st.subheader("5. Relationship Between Consumer Rights Behaviours")
 
-corr_df = filtered_df[[c + "_score" for c in rights_cols]]
+corr_df = filtered_df[[c + "_score" for c in rights_cols]].corr()
 
-fig6, ax6 = plt.subplots(figsize=(6,4))
-sns.heatmap(
-    corr_df.corr(),
-    annot=True,
-    cmap="RdBu_r",
-    center=0,
-    fmt=".2f",
-    ax=ax6
+fig6 = px.imshow(
+    corr_df,
+    text_auto=".2f",
+    color_continuous_scale="RdBu",
+    title="Correlation Between Consumer Rights Behaviours"
 )
-st.pyplot(fig6)
+st.plotly_chart(fig6, use_container_width=True)
 
 st.write(
-    "The heatmap shows strong correlations between information-seeking behaviours, while complaint behaviour "
-    "has weaker correlations with other actions. This suggests that awareness does not always lead to active "
-    "exercise of consumer rights."
+    "Information-seeking behaviours show strong positive relationships with one another. "
+    "However, complaint behaviour is less strongly correlated, reinforcing that awareness does not always "
+    "translate into action."
 )
 
 # =========================
-# DATA SUMMARY
+# DATA TABLE
 # =========================
 st.divider()
-st.subheader("Filtered Data Summary")
+st.subheader("Filtered Dataset")
 
-st.write(
-    f"A total of **{len(filtered_df)} respondents** are included based on the selected filters. "
-    "All visuals above update dynamically to support focused interpretation."
-)
+st.write(f"Total records shown: **{len(filtered_df)}**")
 
-if st.checkbox("Show Filtered Dataset"):
+if st.checkbox("Show Filtered Data"):
     st.dataframe(filtered_df, use_container_width=True)
