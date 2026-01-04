@@ -98,6 +98,8 @@ with st.expander("📊 Live Responses", expanded=False):
     sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
     df = pd.DataFrame(sheet.get_all_records())
     st.dataframe(df)
+     # Show dynamic rows × columns info
+    st.markdown(f"**Rows:** {df.shape[0]} × **Columns:** {df.shape[1]}")
 
 
 #PAGE
