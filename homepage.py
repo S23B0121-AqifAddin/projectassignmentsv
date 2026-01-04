@@ -100,6 +100,7 @@ with st.expander("📊 Live Responses", expanded=False):
     st.dataframe(df)
      # Show dynamic rows × columns info
     st.markdown(f"**Rows:** {df.shape[0]} × **Columns:** {df.shape[1]}")
+    time.sleep(1)  # refresh every 1 second
 
 
 #PAGE
