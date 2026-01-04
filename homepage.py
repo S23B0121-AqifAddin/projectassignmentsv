@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
+import streamlit.components.v1 as components
+import time
 
 #SETUP SETTING
 st.markdown(
@@ -70,22 +72,51 @@ st.markdown(
 )
 
 #RealTimeData
+st.set_page_config(layout="wide")  # make columns wider
+
+# ----------------------------
+# Google Sheets credentials
+# ----------------------------
 creds = Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
 )
-
 client = gspread.authorize(creds)
 
 SHEET_ID = "1vpYf97ioLU7dVFbVCzrb73fALQAnOL9j17C2luNB1To"
 SHEET_NAME = "Form Responses 1"
 
-st.title("📊 Live Google Form Responses")
+# ----------------------------
+# Columns layout
+# ----------------------------
+col1, col2 = st.columns(2)
 
-sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
-df = pd.DataFrame(sheet.get_all_records())
+# ----------------------------
+# Left column: Google Form
+# ----------------------------
+with col1:
+    st.header("📝 Fill the Google Form")
+    FORM_IFRAME = """
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc64KYOt8YZMIo559AdmO8p-4uAhPm7rYE9uY8R36KNIm4dhw/viewform?embedded=true"
+    width="700" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    """
+    components.html(FORM_IFRAME, height=820)
 
-st.dataframe(df)
+# ----------------------------
+# Right column: Live Responses
+# ----------------------------
+with col2:
+    st.header("📊 Live Responses")
+
+    # Use a placeholder for auto-refresh
+    placeholder = st.empty()
+    refresh_interval = 10  # seconds
+
+    while True:
+        sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
+        df = pd.DataFrame(sheet.get_all_records())
+        placeholder.dataframe(df)
+        time.sleep(refresh_interval)
 
 
 #PAGE
