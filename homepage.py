@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import gspread
+from google.oauth2.service_account import Credentials
 
 #SETUP SETTING
 st.markdown(
@@ -66,6 +68,25 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+#RealTimeData
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
+)
+
+client = gspread.authorize(creds)
+
+SHEET_ID = "1vpYf97ioLU7dVFbVCzrb73fALQAnOL9j17C2luNB1To/edit"
+SHEET_NAME = "Form Responses 1"
+
+st.title("📊 Live Google Form Responses")
+
+sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
+df = pd.DataFrame(sheet.get_all_records())
+
+st.dataframe(df)
+
 
 #PAGE
 # Set Streamlit page configuration (must be the first Streamlit command)
