@@ -23,7 +23,7 @@ try:
 except UnicodeDecodeError:
     dfkisa = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Kisa)processed_financial_capability_data%20(3).csv', encoding='latin-1')
 
-dfraw = pd.read.csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv')
+dfraw = pd.read_csv('https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/Financial%20Capability%20around%20Student%20.csv')
 # 2. Sidebar Filters
 st.sidebar.header("Data Controls")
 
