@@ -77,7 +77,7 @@ creds = Credentials.from_service_account_info(
 
 client = gspread.authorize(creds)
 
-SHEET_ID = "1vpYf97ioLU7dVFbVCzrb73fALQAnOL9j17C2luNB1To/edit"
+SHEET_ID = "1vpYf97ioLU7dVFbVCzrb73fALQAnOL9j17C2luNB1To"
 SHEET_NAME = "Form Responses 1"
 
 st.title("📊 Live Google Form Responses")
