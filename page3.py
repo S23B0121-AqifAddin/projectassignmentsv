@@ -600,7 +600,7 @@ with col2:
     # Center buttons in this column
     st.markdown('<div style="display:flex; flex-direction:column; align-items:center;">', unsafe_allow_html=True)
 
-     if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
+    if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
         st.switch_page("page1.py")
 
     if st.button("👥 Group Overview", use_container_width=True):  # New button
