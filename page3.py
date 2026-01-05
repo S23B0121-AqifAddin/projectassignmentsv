@@ -580,6 +580,7 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
     st.plotly_chart(fig, use_container_width=True)
 
 
+st.markdown("---")
 st.markdown("""
 <style>
 .no-box {
