@@ -580,7 +580,10 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
     st.plotly_chart(fig, use_container_width=True)
 
 
-st.markdown("Click a section below to view another page.")
+st.markdown(
+    "<p class='no-box'>Click a section below to view another page.</p>",
+    unsafe_allow_html=True
+)
 
 col1, col2 = st.columns(2)
 
