@@ -393,12 +393,10 @@ viz_option = st.radio(
 if viz_option == "Correlation Heatmap":
     st.subheader("Correlation of Financial Management and Planning Behaviours")
     st.write("""
-    The *Correlation Heatmap of Financial Management and Planning Behaviours* illustrates 
-    the relationships between key financial behaviours. Organised money management shows 
-    a strong positive relationship with saving for a rainy day and being more of a saver 
-    than a spender. In contrast, behaviours such as preferring to live for today or buying 
-    on credit exhibit weaker or negative relationships. Overall, the heatmap highlights 
-    how structured financial practices tend to support positive saving behaviour.
+     The "Correlation Heatmap of Financial Management and Planning Behaviours" illustrates the relationships between financial behaviours. 
+    Organised money management, saving for a rainy day (0.67), and being more of a saver than a spender (0.71) all show strong positive relationships. 
+    Additionally, there is a moderate correlation (0.45) between saving for a rainy day and being a saver. On the other hand, behaviours such as living in the now or 
+    preferring credit purchases indicate weaker or unfavourable connections. Overall, the heatmap shows how saving habits and organised money management typically support one another.
     """)
 
     selected_numerical_cols = [
@@ -427,11 +425,9 @@ if viz_option == "Correlation Heatmap":
 elif viz_option == "Complaint Behaviour (Pie Chart)":
     st.subheader("Complaint Behavior for Unsuitable Products")
     st.write("""
-    The *Distribution of Complaint Behaviour for Unsuitable Products* illustrates how 
-    students respond when they encounter unsuitable products. A large proportion of 
-    respondents report complaining either frequently or occasionally, while a smaller 
-    percentage choose not to complain at all. This suggests that most students are willing 
-    to express dissatisfaction rather than remain passive.
+   The "Distribution of Complaint Behaviour for Unsuitable Products" pie chart has shows how students react when they come with unacceptable products. 
+    Those who frequently complain make up the biggest population (41.2%), followed closely by those who complain occasionally (39.2%). 
+    Just 19.6% of people never complain. This implies that the majority of people actively express their dissatisfaction, with only a small percentage choosing to do nothing.
     """)
 
     complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts().reset_index()
@@ -463,17 +459,26 @@ elif viz_option == "Age vs Complaint (Violin Plot)":
     median age in each category further highlights differences in complaint tendencies 
     across age groups.
     """)
+    # Create the figure
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    fig = px.violin(
-        df,
+    sns.violinplot(
         x='Complaint_for_Unsuitable_Product',
         y='Age',
-        box=True,
-        points='all',
-        title='Age Distribution by Complaint Behaviour'
+        data=df,
+        hue='Complaint_for_Unsuitable_Product',
+        palette='viridis',
+        legend=False,
+        ax=ax
     )
+ax.set_title('Age Distribution by Complaint Behavior for Unsuitable Products (Violin Plot)')
+ax.set_xlabel('Complaint_for_Unsuitable_Product')
+ax.set_ylabel('Age')
 
-    st.plotly_chart(fig, use_container_width=True)
+plt.tight_layout()
+# Display in Streamlit
+st.pyplot(fig)
+
 
 # ============================
 # 4️⃣ GROUPED BAR
@@ -481,11 +486,11 @@ elif viz_option == "Age vs Complaint (Violin Plot)":
 elif viz_option == "Complaint by Gender (Grouped Bar)":
     st.subheader("Complaint Behaviour by Gender")
     st.write("""
-    The *Complaint Behaviour by Gender* visualization compares how male and female students 
-    respond to unsuitable products. Female students show higher frequencies in both 
-    "Always" and "Sometimes" complaint categories, while male students are less represented. 
-    Notably, the "Never" category is minimal, suggesting that most students express some 
-    level of dissatisfaction regardless of gender.
+    The "Complaint Behaviour by Gender" visualisation shows how men's student and women's student react to inappropriate items in three different complaint categories 
+    which is Always, Sometimes, and Never. Complaints are more common among student by women, with "Always" accounting for the largest percentage, followed by "Sometimes". 
+    Although they are less common than females, men's students also fall into the "Always" and "Sometimes" categories. unexpectedly, the "Never" group only includes females, 
+    suggesting that every guy in the dataset expresses a sense of dissatisfaction. This implies that while men's students usually express a sense of unhappiness, women's students 
+    have a greater variety of complaint behaviours.
     """)
 
     fig = px.histogram(
@@ -504,11 +509,11 @@ elif viz_option == "Complaint by Gender (Grouped Bar)":
 elif viz_option == "Complaint by Monthly Income (Stacked Bar)":
     st.subheader("Complaint Behaviour by Monthly Income")
     st.write("""
-    The *Complaint Behaviour by Monthly Income* chart shows how students from different 
-    income groups react to unsuitable products. Across all income levels, the majority 
-    of students either sometimes or always complain, while very few never complain. 
-    This indicates that income level does not significantly discourage students from 
-    voicing dissatisfaction.
+    The "Complaint Behaviour by Monthly Income" illustration has shows how student in different income categories react to inappropriate products. 
+    Most students in all three income groups is below RM 99, between RM 100 and RM 500, and above RM 600, either often or sometimes complain. The "Never" 
+    category is always the smallest, suggesting that relatively few students decide not to express their dissatisfaction. "Always" and "Sometimes" 
+    are distributed fairly evenly in the RM 100–RM 500 category, although "Always" is more common in the other two categories. Given that most people voice 
+    complaints no matter their financial status, this shows that income level does not considerably prevent complaint behaviour.
     """)
 
     fig = px.histogram(
@@ -531,11 +536,12 @@ elif viz_option == "Complaint by Monthly Income (Stacked Bar)":
 elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
     st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
     st.write("""
-    The *Complaint Behaviour by Financial Knowledge Increase* visualization illustrates 
-    how complaint tendencies vary with financial awareness. Students who report frequent 
-    improvements in financial knowledge are more likely to complain, whereas those whose 
-    knowledge never improves tend to complain less. This pattern suggests a relationship 
-    between financial confidence and willingness to express dissatisfaction.
+     The "Complaint Behaviour by Financial Knowledge Increase" visualisation has illustrates how student's complaint behaviour changes 
+    according to their level of financial understanding. "Sometimes" is the most frequent complaint behaviour among people who say their financial 
+    understanding sometimes improves, followed by "Always" and "Never". Most people who are always learning more about finance always complain, while a 
+    smaller percentage choose to complain is sometimes or never. On the other hand, those whose financial literacy never improves are more likely to never 
+    complain, and very few of them actually do. This trend shows a relationship between consumer confidence and financial awareness, those who are more 
+    knowledgeable about finances are more likely to express their disapproval.
     """)
 
     fig = px.histogram(
