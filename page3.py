@@ -583,6 +583,12 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
 st.markdown("---")
 st.markdown("""
 <style>
+.center-only {
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 .no-box {
     color: var(--text-color) !important;
     background: none !important;
@@ -590,14 +596,8 @@ st.markdown("""
     padding: 0 !important;
     box-shadow: none !important;
 }
-
-.center-only {
-    text-align: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-</style>
 <p class="no-box">Click a section below to view another page.</p>
+</style>
 """, unsafe_allow_html=True)
 
 # Centered instruction text (no box, no gap)
