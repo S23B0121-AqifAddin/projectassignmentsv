@@ -418,7 +418,7 @@ if viz_option == "Correlation Heatmap":
     )
 
     fig.update_layout(
-    height=450,   # ↓ smaller than default
+    height=500,   # ↓ smaller than default
     width=700,    # optional (Streamlit usually auto-scales)
     margin=dict(t=60, b=40, l=40, r=40)
     )
@@ -451,7 +451,7 @@ elif viz_option == "Complaint Behaviour (Pie Chart)":
     )
 
     fig.update_layout(
-    height=450,   # ↓ smaller than default
+    height=500,   # ↓ smaller than default
     width=700,    # optional (Streamlit usually auto-scales)
     margin=dict(t=60, b=40, l=40, r=40)
     )
@@ -511,7 +511,7 @@ elif viz_option == "Complaint by Gender (Grouped Bar)":
     )
 
     fig.update_layout(
-    height=450,   # ↓ smaller than default
+    height=500,   # ↓ smaller than default
     width=700,    # optional (Streamlit usually auto-scales)
     margin=dict(t=60, b=40, l=40, r=40)
     )
@@ -543,7 +543,7 @@ elif viz_option == "Complaint by Monthly Income (Stacked Bar)":
     )
 
     fig.update_layout(
-    height=450,   # ↓ smaller than default
+    height=500,   # ↓ smaller than default
     width=700,    # optional (Streamlit usually auto-scales)
     margin=dict(t=60, b=40, l=40, r=40)
     )
@@ -572,7 +572,7 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
     )
 
     fig.update_layout(
-    height=450,   # ↓ smaller than default
+    height=500,   # ↓ smaller than default
     width=700,    # optional (Streamlit usually auto-scales)
     margin=dict(t=60, b=40, l=40, r=40)
     )
