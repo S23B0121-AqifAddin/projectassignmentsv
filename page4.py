@@ -253,9 +253,7 @@ if st.checkbox("Show Filtered Data"):
 
 
 st.divider()
-st.write("""
-Click a section below to view another page.
-""")
+st.write("Click a section below to view another page.")
 
 col1, col2 = st.columns(2)
 
