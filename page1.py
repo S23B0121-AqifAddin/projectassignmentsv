@@ -94,7 +94,7 @@ col3.metric("PLO 4", plo_scores["PLO 4"], help="Saving Life Changes", border=Tru
 col4.metric("PLO 5", plo_scores["PLO 5"], help="Saver or Spender", border=True)
 
 
-st.header("Budgeting and spending behavior")
+st.header("Budgeting and Spending Behavior")
 #Objective
 st.title("Objective")
 st.write("To analyze budgeting and spending behaviour among students and its impact on financial management.")
@@ -113,7 +113,12 @@ st.write(
 
 # Tajuk aplikasi
 st.title("Correlation Heatmap of Financial Attitudes")
-st.write("This heatmap shows the correlation between different financial attitudes of respondents.")
+st.write("""
+This heatmap shows the correlation between different financial attitudes of respondents such as organised money management,
+saving for emergencies, retirement, and future life changes are strongly related to each other, indicating that students who plan well 
+financially tend to practice multiple good financial habits. In contrast, buying on credit and a “live for today” attitude show weak or 
+negative relationships with saving and long-term planning, suggesting these behaviours are largely independent of responsible financial management.
+""")
 
 # Load dataset dari GitHub
 url = "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/(Aisyah)%20financial_capability_data.csv"
