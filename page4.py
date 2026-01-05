@@ -256,7 +256,7 @@ st.write("""
 Click a section below to view another page.
 """)
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
     if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
@@ -269,9 +269,5 @@ with col2:
     if st.button("🧾 Khadijah – Consumer Rights", use_container_width=True):
         st.switch_page("page3.py")
 
-    if st.button("🔍 Kisantini – Consumer Awareness", use_container_width=True):
-        st.switch_page("page4.py")
-
-with col3:
     if st.button("👥 Group Overview", use_container_width=True):  # New button
         st.switch_page("homepage.py")  # Replace with your homepage file
