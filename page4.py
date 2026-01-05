@@ -252,7 +252,7 @@ if st.checkbox("Show Filtered Data"):
 
 
 
-st.markdown("---")
+st.divider()
 st.write("""
 Click a section below to view another page.
 """)
