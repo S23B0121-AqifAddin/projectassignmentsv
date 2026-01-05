@@ -161,7 +161,12 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Distribution of Monthly Income")
-st.write("This bar chart to visualize the distribution of Monthly_Income to understand students' income levels.")
+st.write("""
+This bar chart show the distribution of Monthly_Income to understand students' income levels, 
+where most respondents fall within the RM 100–RM 500 range, indicating this is the most common income level. 
+In comparison, fewer students earn below RM 99 or above RM 600, suggesting that very low and relatively higher
+monthly incomes are less common among the respondents.
+""")
 
 # Plot
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -186,7 +191,12 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Money Management Difficulty by Age Group")
-st.write("This grouped bar chart to analyze how 'Money_Management_Difficulty' varies across different 'Age' groups.")
+st.write("""
+This grouped bar chart to analyze how 'Money_Management_Difficulty' varies across different 'Age' groups, 
+indicating that most students around age 21 report having some difficulty managing their money, followed by those who always experience difficulty, 
+while fewer report never having issues. In contrast, younger (age 18) and older (age 26) students appear in much smaller numbers, 
+suggesting that money management challenges are most common among students in the main university age group.
+""")
 
 # Plot
 fig, ax = plt.subplots(figsize=(12, 7))
@@ -210,7 +220,10 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Distribution of Gender")
-st.write("To visualize the overall distribution of 'Gender' using a pie chart.")
+st.write("""
+This visualize the overall distribution of 'Gender' using a pie chart 
+shows a significant majority of Females at 73.5% compared to Males at 26.5%.
+""")
 
 # Kiraan jantina
 gender_counts = data['Gender'].value_counts()
@@ -234,7 +247,13 @@ st.pyplot(fig)
 
 # Tajuk aplikasi
 st.title("Organised Money Management vs Saver/Spender by Gender")
-st.write("This scatter plot to visualize the relationship between 'Organised_Money_Management' and 'Saver_or_Spender', colored by 'Gender'.")
+st.write("""
+This scatter plot show the relationship between 'Organised_Money_Management' and 'Saver_or_Spender', colored by 'Gender'. 
+The graph displays data points for both females (blue) and males (green) across two five-point scales. Notably, 
+the female data points are more widely distributed across the entire grid, appearing at almost every intersection of the scales from 1 to 5. 
+In contrast, the male data points are much more sparse, appearing primarily at specific intersections such as (2, 2), (3, 2), and (4, 4). 
+This suggests that in this specific dataset, females exhibit a broader range of financial behaviors, while the male sample is smaller and more clustered.
+""")
 
 # Plot scatter
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -258,7 +277,12 @@ plt.tight_layout()
 st.pyplot(fig)
 
 st.subheader("Relationship between Budget Following and Monthly Savings")
-st.write("This stacked bar chart to explore the relationship between 'Follow_Budget' and 'Monthly_Savings' to understand budgeting and saving habits.")
+st.write("""
+This stacked bar chart to explore the relationship between 'Follow_Budget' and 'Monthly_Savings' to understand budgeting and saving habits students
+who always follow a budget are the most successful savers, with approximately 75% of them managing to save every month. 
+Conversely, those who never follow a budget face the most difficulty, as roughly 30% of that group never saves and less than 10% save consistently, 
+Sometimes Follow Budget the majority of these students (about 65%) manage to save.
+""")
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Cross-tabulation
