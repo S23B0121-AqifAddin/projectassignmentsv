@@ -605,6 +605,7 @@ with col1:
 
     if st.button("🧠 Aqif – Financial Decision-Making", use_container_width=True):
         st.switch_page("page2.py")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
     # Center buttons in this column
@@ -614,6 +615,5 @@ with col2:
         st.switch_page("page1.py")
 
     if st.button("👥 Group Overview", use_container_width=True):  # New button
-        st.switch_page("homepage.py")  # Replace with your homepage file
-        
+        st.switch_page("homepage.py")  # Replace with your homepage file       
     st.markdown('</div>', unsafe_allow_html=True)
