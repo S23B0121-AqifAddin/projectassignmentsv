@@ -373,198 +373,177 @@ with st.container():
         st.pyplot(fig)
 st.markdown("---")  # this creates a horizontal line
 
-#Heatmap
-st.subheader("Correlation of Financial Management and Planning Behaviours")
-st.write(
-    """
-    The "Correlation Heatmap of Financial Management and Planning Behaviours" illustrates the relationships between financial behaviours. 
-    Organised money management, saving for a rainy day (0.67), and being more of a saver than a spender (0.71) all show strong positive relationships. 
-    Additionally, there is a moderate correlation (0.45) between saving for a rainy day and being a saver. On the other hand, behaviours such as living in the now or 
-    preferring credit purchases indicate weaker or unfavourable connections. Overall, the heatmap shows how saving habits and organised money management typically support one another.
-    """
-)
-# Select the numerical columns related to financial management and planning behaviors
-selected_numerical_cols = [
-    'Age',
-    'Organised_Money_Management',
-    'More_of_a_Saver_Than_a_Spender',
-    'Prefer_to_Buy_on_Credit',
-    'Savings_for_Rainy_Day',
-    'Prefer_to_Live_for_Today',
-]
-# Calculate the correlation matrix
-correlation_matrix = df[selected_numerical_cols].corr()
-# Create the matplotlib figure
-fig, ax = plt.subplots(figsize=(12, 10))
-sns.heatmap(
-    correlation_matrix,
-    annot=True,
-    cmap='coolwarm',
-    fmt=".2f",
-    linewidths=0.5,
-    ax=ax
+
+viz_option = st.radio(
+    "Select a visualization",
+    [
+        "Correlation Heatmap",
+        "Complaint Behaviour (Pie Chart)",
+        "Age vs Complaint (Violin Plot)",
+        "Complaint by Gender (Grouped Bar)",
+        "Complaint by Monthly Income (Stacked Bar)",
+        "Financial Knowledge vs Complaint (Faceted Bar)"
+    ],
+    horizontal=True
 )
 
-ax.set_title("Correlation Heatmap of Financial Management and Planning Behaviors")
-# Display the plot inside Streamlit
-st.pyplot(fig)
+# ============================
+# 1️⃣ CORRELATION HEATMAP
+# ============================
+if viz_option == "Correlation Heatmap":
+    st.subheader("Correlation of Financial Management and Planning Behaviours")
+    st.write("""
+    The *Correlation Heatmap of Financial Management and Planning Behaviours* illustrates 
+    the relationships between key financial behaviours. Organised money management shows 
+    a strong positive relationship with saving for a rainy day and being more of a saver 
+    than a spender. In contrast, behaviours such as preferring to live for today or buying 
+    on credit exhibit weaker or negative relationships. Overall, the heatmap highlights 
+    how structured financial practices tend to support positive saving behaviour.
+    """)
 
-#Pie Chart
-st.subheader("Complaint Behavior for Unsuitable Products")
-st.write(
-    """
-    The "Distribution of Complaint Behaviour for Unsuitable Products" pie chart has shows how students react when they come with unacceptable products. 
-    Those who frequently complain make up the biggest population (41.2%), followed closely by those who complain occasionally (39.2%). 
-    Just 19.6% of people never complain. This implies that the majority of people actively express their dissatisfaction, with only a small percentage choosing to do nothing.
-    """
-)
-# Calculate the value counts for 'Complaint_for_Unsuitable_Product'
-complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts()
-# Create the figure
-fig, ax = plt.subplots(figsize=(4, 4))
-colors = plt.cm.Set3.colors  # Distinct qualitative colormap
+    selected_numerical_cols = [
+        'Age',
+        'Organised_Money_Management',
+        'More_of_a_Saver_Than_a_Spender',
+        'Prefer_to_Buy_on_Credit',
+        'Savings_for_Rainy_Day',
+        'Prefer_to_Live_for_Today',
+    ]
 
-ax.pie(
-    complaint_counts,
-    labels=complaint_counts.index,
-    autopct='%1.1f%%',
-    startangle=90,
-    colors=colors
-)
+    corr = df[selected_numerical_cols].corr()
 
-ax.set_title('Distribution of Complaint Behavior for Unsuitable Products')
-ax.axis('equal')  # Ensures pie is a circle
-# Display in Streamlit
-st.pyplot(fig)
+    fig = px.imshow(
+        corr,
+        text_auto=".2f",
+        color_continuous_scale="RdBu",
+        title="Correlation Heatmap of Financial Behaviours"
+    )
 
-#Violin Plot
-st.subheader("Age Distribution and Complaint Behaviour")
-st.write(
-    """
-    The "Age Distribution by Complaint Behaviour for Unsuitable Products" has been illustrated by violin plot, 
-    the differences in age between the three types of complaint behaviour which is Never, Sometimes, and Always. 
-    Wider violin shapes in the "Always" and "Sometimes" groups suggest a wider age range and greater range in the complaints. 
-    However, the "Never" group shows up as a thin line, indicating that those who never complain are either focused at a single age or have very little age variation. 
-    In order to look into core patterns among behaviours, each white small line inside the violins represents the median age for that category. 
-    This graphic shows that age may have an impact on complaint behaviour, with complaints coming from a wider range of age groups while non-complainers are often more specific to age.
-    """
-)
-# Create the figure
-fig, ax = plt.subplots(figsize=(10, 6))
+    st.plotly_chart(fig, use_container_width=True)
 
-sns.violinplot(
-    x='Complaint_for_Unsuitable_Product',
-    y='Age',
-    data=df,
-    hue='Complaint_for_Unsuitable_Product',
-    palette='viridis',
-    legend=False,
-    ax=ax
-)
+# ============================
+# 2️⃣ PIE CHART
+# ============================
+elif viz_option == "Complaint Behaviour (Pie Chart)":
+    st.subheader("Complaint Behavior for Unsuitable Products")
+    st.write("""
+    The *Distribution of Complaint Behaviour for Unsuitable Products* illustrates how 
+    students respond when they encounter unsuitable products. A large proportion of 
+    respondents report complaining either frequently or occasionally, while a smaller 
+    percentage choose not to complain at all. This suggests that most students are willing 
+    to express dissatisfaction rather than remain passive.
+    """)
 
-ax.set_title('Age Distribution by Complaint Behavior for Unsuitable Products (Violin Plot)')
-ax.set_xlabel('Complaint_for_Unsuitable_Product')
-ax.set_ylabel('Age')
+    complaint_counts = df['Complaint_for_Unsuitable_Product'].value_counts().reset_index()
+    complaint_counts.columns = ['Behaviour', 'Count']
 
-plt.tight_layout()
-# Display in Streamlit
-st.pyplot(fig)
+    fig = px.pie(
+        complaint_counts,
+        names='Behaviour',
+        values='Count',
+        title='Distribution of Complaint Behaviour'
+    )
 
-#Grouped Bar Plot
-st.subheader("Complaint Behaviour by Gender")
-st.write(
-    """
-    The "Complaint Behaviour by Gender" visualisation shows how men's student and women's student react to inappropriate items in three different complaint categories 
-    which is Always, Sometimes, and Never. Complaints are more common among student by women, with "Always" accounting for the largest percentage, followed by "Sometimes". 
-    Although they are less common than females, men's students also fall into the "Always" and "Sometimes" categories. unexpectedly, the "Never" group only includes females, 
-    suggesting that every guy in the dataset expresses a sense of dissatisfaction. This implies that while men's students usually express a sense of unhappiness, women's students 
-    have a greater variety of complaint behaviours.
-    """
-)
-# Create figure
-fig, ax = plt.subplots(figsize=(10, 6))
+    fig.update_traces(
+        hovertemplate="<b>%{label}</b><br>Count: %{value}<br>Percentage: %{percent}"
+    )
 
-sns.countplot(
-    x='Complaint_for_Unsuitable_Product',
-    hue='Gender',
-    data=df,
-    palette='viridis',
-    ax=ax
-)
+    st.plotly_chart(fig, use_container_width=True)
 
-ax.set_title('Complaint Behavior by Gender')
-ax.set_xlabel('Complaint_for_Unsuitable_Product')
-ax.set_ylabel('Count')
+# ============================
+# 3️⃣ VIOLIN PLOT
+# ============================
+elif viz_option == "Age vs Complaint (Violin Plot)":
+    st.subheader("Age Distribution and Complaint Behaviour")
+    st.write("""
+    The *Age Distribution by Complaint Behaviour* violin plot illustrates the variation 
+    in age across different complaint categories. Wider distributions among students who 
+    complain sometimes or always indicate greater age diversity, whereas the narrow 
+    distribution among those who never complain suggests limited age variation. The 
+    median age in each category further highlights differences in complaint tendencies 
+    across age groups.
+    """)
 
-plt.tight_layout()
-# Display in Streamlit
-st.pyplot(fig)
+    fig = px.violin(
+        df,
+        x='Complaint_for_Unsuitable_Product',
+        y='Age',
+        box=True,
+        points='all',
+        title='Age Distribution by Complaint Behaviour'
+    )
 
-#Stacked Bar Plot
-# Streamlit section
-st.subheader("Complaint Behavior by Monthly Income")
-st.write(
-    """
-    The "Complaint Behaviour by Monthly Income" illustration has shows how student in different income categories react to inappropriate products. 
-    Most students in all three income groups is below RM 99, between RM 100 and RM 500, and above RM 600, either often or sometimes complain. The "Never" 
-    category is always the smallest, suggesting that relatively few students decide not to express their dissatisfaction. "Always" and "Sometimes" 
-    are distributed fairly evenly in the RM 100–RM 500 category, although "Always" is more common in the other two categories. Given that most people voice 
-    complaints no matter their financial status, this shows that income level does not considerably prevent complaint behaviour.
-    """
-)
-# Create a cross-tabulation (contingency table) of the two categorical variables
-contingency_table = pd.crosstab(df['Monthly_Income'], df['Complaint_for_Unsuitable_Product'])
-# Define the order for Monthly_Income categories
-monthly_income_order = ['Below RM 99', 'RM 100 - RM 500', 'Above RM 600']
-contingency_table = contingency_table.reindex(monthly_income_order)
-# Normalize the table to show proportions within each 'Monthly_Income' category
-contingency_table_normalized = contingency_table.div(contingency_table.sum(1).astype(float), axis=0)
-# Plot the stacked bar chart using matplotlib
-fig, ax = plt.subplots(figsize=(12, 8))
-contingency_table_normalized.plot(kind='bar', stacked=True, colormap='viridis', ax=ax)
+    st.plotly_chart(fig, use_container_width=True)
 
-ax.set_xlabel('Monthly Income')
-ax.set_ylabel('Proportion')
-ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-ax.legend(title='Complaint for Unsuitable Product', bbox_to_anchor=(1.05, 1), loc='upper left')
-plt.tight_layout()
-# Display the plot in Streamlit
-st.pyplot(fig)
+# ============================
+# 4️⃣ GROUPED BAR
+# ============================
+elif viz_option == "Complaint by Gender (Grouped Bar)":
+    st.subheader("Complaint Behaviour by Gender")
+    st.write("""
+    The *Complaint Behaviour by Gender* visualization compares how male and female students 
+    respond to unsuitable products. Female students show higher frequencies in both 
+    "Always" and "Sometimes" complaint categories, while male students are less represented. 
+    Notably, the "Never" category is minimal, suggesting that most students express some 
+    level of dissatisfaction regardless of gender.
+    """)
 
-#Faceted Bar Plot
-st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
-st.write(
-    """
-    The "Complaint Behaviour by Financial Knowledge Increase" visualisation has illustrates how student's complaint behaviour changes 
-    according to their level of financial understanding. "Sometimes" is the most frequent complaint behaviour among people who say their financial 
-    understanding sometimes improves, followed by "Always" and "Never". Most people who are always learning more about finance always complain, while a 
-    smaller percentage choose to complain is sometimes or never. On the other hand, those whose financial literacy never improves are more likely to never 
-    complain, and very few of them actually do. This trend shows a relationship between consumer confidence and financial awareness, those who are more 
-    knowledgeable about finances are more likely to express their disapproval.
-    """
-)
-# Define the order for Increase_Financial_Knowledge categories
-financial_knowledge_order = df['Increase_Financial_Knowledge'].value_counts().index.tolist()
-# Define the order for Complaint_for_Unsuitable_Product categories
-complaint_order = ['Never', 'Sometimes', 'Always']
-# Create a faceted bar plot (kind='count')
-g = sns.catplot(
-    data=df,
-    x='Complaint_for_Unsuitable_Product',
-    col='Increase_Financial_Knowledge',
-    kind='count',
-    col_order=financial_knowledge_order,
-    order=complaint_order,
-    height=5, aspect=1,
-    palette='viridis',
-    sharey=True,
-    hue='Complaint_for_Unsuitable_Product',
-    legend=False  # Share the y-axis limit across facets for better comparison
-)
+    fig = px.histogram(
+        df,
+        x='Complaint_for_Unsuitable_Product',
+        color='Gender',
+        barmode='group',
+        title='Complaint Behaviour by Gender'
+    )
 
-g.set_axis_labels('Complaint Behavior', 'Count')
-g.set_titles('Financial Knowledge: {col_name}')
-plt.suptitle('Complaint Behavior by Financial Knowledge Increase', y=1.05)  # Adjust suptitle position
-plt.tight_layout()
-# Streamlit: display the plot
-st.pyplot(g.fig)
+    st.plotly_chart(fig, use_container_width=True)
+
+# ============================
+# 5️⃣ STACKED BAR
+# ============================
+elif viz_option == "Complaint by Monthly Income (Stacked Bar)":
+    st.subheader("Complaint Behaviour by Monthly Income")
+    st.write("""
+    The *Complaint Behaviour by Monthly Income* chart shows how students from different 
+    income groups react to unsuitable products. Across all income levels, the majority 
+    of students either sometimes or always complain, while very few never complain. 
+    This indicates that income level does not significantly discourage students from 
+    voicing dissatisfaction.
+    """)
+
+    fig = px.histogram(
+        df,
+        x='Monthly_Income',
+        color='Complaint_for_Unsuitable_Product',
+        barnorm='percent',
+        title='Complaint Behaviour by Monthly Income'
+    )
+
+    fig.update_traces(
+        hovertemplate="<b>%{x}</b><br>%{legendgroup}<br>Percentage: %{y:.1f}%"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+# ============================
+# 6️⃣ FACETED BAR
+# ============================
+elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
+    st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
+    st.write("""
+    The *Complaint Behaviour by Financial Knowledge Increase* visualization illustrates 
+    how complaint tendencies vary with financial awareness. Students who report frequent 
+    improvements in financial knowledge are more likely to complain, whereas those whose 
+    knowledge never improves tend to complain less. This pattern suggests a relationship 
+    between financial confidence and willingness to express dissatisfaction.
+    """)
+
+    fig = px.histogram(
+        df,
+        x='Complaint_for_Unsuitable_Product',
+        facet_col='Increase_Financial_Knowledge',
+        color='Complaint_for_Unsuitable_Product',
+        title='Complaint Behaviour by Financial Knowledge Increase'
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
