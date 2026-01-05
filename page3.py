@@ -417,8 +417,14 @@ if viz_option == "Correlation Heatmap":
         title="Correlation Heatmap of Financial Behaviours"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    fig.update_layout(
+    height=450,   # ↓ smaller than default
+    width=700,    # optional (Streamlit usually auto-scales)
+    margin=dict(t=60, b=40, l=40, r=40)
+    )
 
+
+    st.plotly_chart(fig, use_container_width=True)
 # ============================
 # 2️⃣ PIE CHART
 # ============================
@@ -444,8 +450,13 @@ elif viz_option == "Complaint Behaviour (Pie Chart)":
         hovertemplate="<b>%{label}</b><br>Count: %{value}<br>Percentage: %{percent}"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    fig.update_layout(
+    height=450,   # ↓ smaller than default
+    width=700,    # optional (Streamlit usually auto-scales)
+    margin=dict(t=60, b=40, l=40, r=40)
+    )
 
+    st.plotly_chart(fig, use_container_width=True)
 # ============================
 # 3️⃣ VIOLIN PLOT
 # ============================
@@ -478,8 +489,6 @@ elif viz_option == "Age vs Complaint (Violin Plot)":
     plt.tight_layout()
     # Display in Streamlit
     st.pyplot(fig)
-
-
 # ============================
 # 4️⃣ GROUPED BAR
 # ============================
@@ -501,8 +510,13 @@ elif viz_option == "Complaint by Gender (Grouped Bar)":
         title='Complaint Behaviour by Gender'
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    fig.update_layout(
+    height=450,   # ↓ smaller than default
+    width=700,    # optional (Streamlit usually auto-scales)
+    margin=dict(t=60, b=40, l=40, r=40)
+    )
 
+    st.plotly_chart(fig, use_container_width=True)
 # ============================
 # 5️⃣ STACKED BAR
 # ============================
@@ -528,8 +542,13 @@ elif viz_option == "Complaint by Monthly Income (Stacked Bar)":
         hovertemplate="<b>%{x}</b><br>%{legendgroup}<br>Percentage: %{y:.1f}%"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    fig.update_layout(
+    height=450,   # ↓ smaller than default
+    width=700,    # optional (Streamlit usually auto-scales)
+    margin=dict(t=60, b=40, l=40, r=40)
+    )
 
+    st.plotly_chart(fig, use_container_width=True)
 # ============================
 # 6️⃣ FACETED BAR
 # ============================
@@ -550,6 +569,12 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
         facet_col='Increase_Financial_Knowledge',
         color='Complaint_for_Unsuitable_Product',
         title='Complaint Behaviour by Financial Knowledge Increase'
+    )
+
+    fig.update_layout(
+    height=450,   # ↓ smaller than default
+    width=700,    # optional (Streamlit usually auto-scales)
+    margin=dict(t=60, b=40, l=40, r=40)
     )
 
     st.plotly_chart(fig, use_container_width=True)
