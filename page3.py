@@ -581,10 +581,10 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
 
 
 st.write("""
-Click a section below to view each member’s contribution.
+Click a section below to view another page.
 """)
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
@@ -599,3 +599,7 @@ with col2:
 
     if st.button("🔍 Kisantini – Consumer Awareness", use_container_width=True):
         st.switch_page("page4.py")
+
+with col3:
+    if st.button("👥 Group Overview", use_container_width=True):  # New button
+        st.switch_page("homepage.py")  # Replace with your homepage file
