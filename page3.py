@@ -418,7 +418,7 @@ if viz_option == "Correlation Heatmap":
     )
 
     fig.update_layout(
-    height=700,   # ↓ smaller than default
+    height=600,   # ↓ smaller than default
     width=700,    # optional (Streamlit usually auto-scales)
     margin=dict(t=60, b=40, l=40, r=40)
     )
