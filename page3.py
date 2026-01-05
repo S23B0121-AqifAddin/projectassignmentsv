@@ -590,11 +590,6 @@ st.markdown("""
     padding: 0 !important;
     box-shadow: none !important;
 }
-.center-only {
-    text-align: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
 </style>
 <p class="no-box">Click a section below to view another page.</p>
 """, unsafe_allow_html=True)
