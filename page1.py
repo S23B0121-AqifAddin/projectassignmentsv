@@ -88,6 +88,11 @@ for plo, info in plo_mapping.items():
 
 # ================== DISPLAY ==================
 
+col1.metric("Money Management", plo_scores["PLO 2"], help="Money Management", border=True)
+col2.metric("Buy on Credit", plo_scores["PLO 3"], help="Buy on Credit", border=True)
+col3.metric("Saving Life Changes", plo_scores["PLO 4"], help="Saving Life Changes", border=True)
+col4.metric("Saver or Spender", plo_scores["PLO 5"], help="Saver or Spender", border=True)
+
 
 st.header("Budgeting and Spending Behavior")
 #Objective
