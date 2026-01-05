@@ -590,16 +590,24 @@ st.markdown("""
     padding: 0 !important;
     box-shadow: none !important;
 }
+
+.center-only {
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 </style>
 <p class="no-box">Click a section below to view another page.</p>
 """, unsafe_allow_html=True)
 
+# Centered instruction text (no box, no gap)
+st.markdown(
+    "<p class='center-only'>Click a section below to view another page.</p>",
+    unsafe_allow_html=True
+)
 col1, col2 = st.columns(2)
 
 with col1:
-    # Center buttons in this column
-    st.markdown('<div style="display:flex; flex-direction:column; align-items:center;">', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
     if st.button("🔍 Kisantini – Consumer Awareness", use_container_width=True):
         st.switch_page("page4.py")
 
@@ -607,9 +615,6 @@ with col1:
         st.switch_page("page2.py")
 
 with col2:
-    # Center buttons in this column
-    st.markdown('<div style="display:flex; flex-direction:column; align-items:center;">', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
     if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
         st.switch_page("page1.py")
 
