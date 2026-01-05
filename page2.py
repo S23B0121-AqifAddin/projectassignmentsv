@@ -257,6 +257,7 @@ with tab2:
 
 
 
+st.markdown("---")
 st.write("""
 Click a section below to view another page.
 """)
