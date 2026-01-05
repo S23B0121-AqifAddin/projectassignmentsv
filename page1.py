@@ -309,6 +309,7 @@ plt.tight_layout()
 st.pyplot(fig)
 
 
+st.markdown("---")
 st.write("""
 Click a section below to view another page.
 """)
