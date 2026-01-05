@@ -580,9 +580,7 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
     st.plotly_chart(fig, use_container_width=True)
 
 
-st.write("""
-Click a section below to view another page.
-""")
+st.markdown("Click a section below to view another page.")
 
 col1, col2 = st.columns(2)
 
