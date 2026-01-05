@@ -257,10 +257,8 @@ with tab2:
 
 
 
-st.markdown("---")
-st.write("""
-Click a section below to view another page.
-""")
+st.divider()
+st.write("Click a section below to view another page.")
 
 col1, col2 = st.columns(2)
 
