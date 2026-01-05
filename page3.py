@@ -599,21 +599,19 @@ col1, col2 = st.columns(2)
 with col1:
     # Center buttons in this column
     st.markdown('<div style="display:flex; flex-direction:column; align-items:center;">', unsafe_allow_html=True)
-    
+    st.markdown('</div>', unsafe_allow_html=True)
     if st.button("🔍 Kisantini – Consumer Awareness", use_container_width=True):
         st.switch_page("page4.py")
 
     if st.button("🧠 Aqif – Financial Decision-Making", use_container_width=True):
         st.switch_page("page2.py")
-    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
     # Center buttons in this column
     st.markdown('<div style="display:flex; flex-direction:column; align-items:center;">', unsafe_allow_html=True)
-
+    st.markdown('</div>', unsafe_allow_html=True)
     if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
         st.switch_page("page1.py")
 
     if st.button("👥 Group Overview", use_container_width=True):  # New button
         st.switch_page("homepage.py")  # Replace with your homepage file       
-    st.markdown('</div>', unsafe_allow_html=True)
