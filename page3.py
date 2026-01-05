@@ -471,13 +471,13 @@ elif viz_option == "Age vs Complaint (Violin Plot)":
         legend=False,
         ax=ax
     )
-ax.set_title('Age Distribution by Complaint Behavior for Unsuitable Products (Violin Plot)')
-ax.set_xlabel('Complaint_for_Unsuitable_Product')
-ax.set_ylabel('Age')
+    ax.set_title('Age Distribution by Complaint Behavior for Unsuitable Products (Violin Plot)')
+    ax.set_xlabel('Complaint_for_Unsuitable_Product')
+    ax.set_ylabel('Age')
 
-plt.tight_layout()
-# Display in Streamlit
-st.pyplot(fig)
+    plt.tight_layout()
+    # Display in Streamlit
+    st.pyplot(fig)
 
 
 # ============================
