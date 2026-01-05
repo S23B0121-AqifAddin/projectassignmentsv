@@ -92,7 +92,7 @@ st.markdown("---")
 # ----------------------------
 # Google Form Expander
 # ----------------------------
-with st.expander("📝 Fill the Google Form", expanded=False):
+with st.expander("📝 Google Form", expanded=False):
     FORM_IFRAME = """
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc64KYOt8YZMIo559AdmO8p-4uAhPm7rYE9uY8R36KNIm4dhw/viewform?embedded=true"
     width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
@@ -102,7 +102,7 @@ with st.expander("📝 Fill the Google Form", expanded=False):
 # ----------------------------
 # Live Responses Expander
 # ----------------------------
-with st.expander("📊 Live Responses", expanded=False):
+with st.expander("📊 Live Respondent", expanded=False):
     creds = Credentials.from_service_account_info(
         st.secrets["gcp_service_account"],
         scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
