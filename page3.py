@@ -583,6 +583,7 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
 st.markdown("""
 <style>
 .no-box {
+    color: var(--text-color) !important;
     background: none !important;
     border: none !important;
     padding: 0 !important;
