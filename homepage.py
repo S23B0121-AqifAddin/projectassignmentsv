@@ -210,12 +210,12 @@ with col1:
     if st.button("📊 Aisyah – Budgeting & Spending Behaviour", use_container_width=True):
         st.switch_page("page1.py")
 
-    if st.button("🧠 Aqif – Financial Decision-Making", use_container_width=True):
-        st.switch_page("page2.py")
-
-with col2:
     if st.button("🧾 Khadijah – Consumer Rights", use_container_width=True):
         st.switch_page("page3.py")
+
+with col2:
+    if st.button("🧠 Aqif – Financial Decision-Making", use_container_width=True):
+        st.switch_page("page2.py")
 
     if st.button("🔍 Kisantini – Consumer Awareness", use_container_width=True):
         st.switch_page("page4.py")
