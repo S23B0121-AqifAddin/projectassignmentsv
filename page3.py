@@ -59,7 +59,7 @@ st.markdown(
 
 # DATASET UPLOAD AND SUMMARY BOX
 # Page header
-st.title("💷Financial Behaviour among University Students(KHADIJAH)")
+st.title("💷Financial Behaviour among University Students")
 st.markdown("---")  # this creates a horizontal line
 # Summary Box
 col1, col2, col3, col4 = st.columns(4)
