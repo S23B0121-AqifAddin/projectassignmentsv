@@ -71,6 +71,23 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
+#INTRO
+# =========================
+# 1. Intro
+# =========================
+st.subheader("Introduction")
+st.write(
+    """
+    As university students start to manage their own finances and make own financial decisions, financial literacy is a crucial skill. Students' 
+    spending habits and financial planning are strongly influenced by their fundamental understanding of topics like budgeting, credit management, 
+    and fundamental investing concepts. Students' financial knowledge and behavioural control relate to digital financial environments and impact 
+    their overall financial practices as financial services increasingly finds its way into everyday transactions through tools, like mobile wallets and buy-now, pay-later initiatives.
+    """
+)
+st.markdown("---")
+
+
 #RealTimeData
 # ----------------------------
 # Google Form Expander
@@ -122,6 +139,37 @@ df
 st.markdown(f"<div style='font-size:12px; color:gray; margin:0; padding:0;'>Rows: {df.shape[0]} × Columns: {df.shape[1]}</div>", unsafe_allow_html=True)
 st.markdown("---")
 
+
+#Ethical
+# =========================
+# 1. Ethical
+# =========================
+st.subheader("Data Collection and Ethics")
+st.markdown("<u>Data Collection</u>", unsafe_allow_html=True)
+st.write(
+    """
+    - **Survey Method:** Google Forms is used to make a survey.
+    - **Sections of the survey:**
+      - **Section A:** Demographics (income, faculty, age, gender and etc.)
+      - **Section B:** Financial Attitudes (Yes/No questions on a five-level Likert scale)
+      - **Section C:** Financial Behaviour (3-point frequency scale: Always, Sometimes, Never) 
+      - The survey was created with clear instructions, took five to seven minutes, and was evaluated for usability before being distributed.
+      - University students from all sorts of faculties and backgrounds are the target respondents.
+      - Quick sampling by Telegram and WhatsApp is the sample technique that chose.
+      - 102 actual replies, including 25 responses that were gathered separately, form the sample size.
+      """
+)
+st.markdown("<u>Ethical Considerations</u>", unsafe_allow_html=True)
+st.write(
+    """
+      - Verified permission is required for any involvement.
+      - Privacy and anonymity are preserved, no personally identifiable information is gathered.
+      - data that is securely saved and utilised only for academic reasons.
+      - Without fraud, analysis revealed true patterns.
+    """
+)
+st.markdown("---")
+
 #OBJECTIVE AND PROBLEM
 # =========================
 # 1. Objective
@@ -134,7 +182,6 @@ st.write(
     with successful financial education and industry activities.
     """
 )
-
 # =========================
 # 2. Problem Definition
 # =========================
@@ -149,8 +196,8 @@ st.write(
 )
 
 st.markdown("---")
+st.subheader("Group Overview")
 st.write("""
-### Group Overview
 This dashboard presents an analysis of **financial behaviour among university students**.
 """)
 st.write("""
