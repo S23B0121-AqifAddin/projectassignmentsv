@@ -594,10 +594,6 @@ st.markdown("""
 <p class="no-box">Click a section below to view another page.</p>
 """, unsafe_allow_html=True)
 
-# Centered instruction text (no box, no gap)
-st.markdown(
-    "<p class='center-only'>Click a section below to view another page.</p>",
-    unsafe_allow_html=True
 )
 col1, col2 = st.columns(2)
 
