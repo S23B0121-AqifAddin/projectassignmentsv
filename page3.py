@@ -563,22 +563,69 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
     knowledgeable about finances are more likely to express their disapproval.
     """)
 
-    fig = px.histogram(
-        df,
-        x='Complaint_for_Unsuitable_Product',
-        facet_col='Increase_Financial_Knowledge',
-        color='Complaint_for_Unsuitable_Product',
-        title='Complaint Behaviour by Financial Knowledge Increase'
+    # Define category order
+financial_knowledge_order = ['Never', 'Sometimes', 'Always']
+# Calculate counts
+financial_knowledge_counts = (
+    df['Increase_Financial_Knowledge']
+    .value_counts()
+    .reindex(financial_knowledge_order)
+)
+# Contingency table
+contingency_table = pd.crosstab(
+    df['Increase_Financial_Knowledge'],
+    df['Complaint_for_Unsuitable_Product']
+).reindex(financial_knowledge_order)
+# Proportion of "Always" complainers
+proportion_always_complaining = (
+    contingency_table['Always'] / contingency_table.sum(axis=1)
+)
+# Create Plotly figure
+fig = go.Figure()
+# Bar plot (counts)
+fig.add_trace(
+    go.Bar(
+        x=financial_knowledge_counts.index,
+        y=financial_knowledge_counts.values,
+        name='Total Respondents',
+        marker_color='blue',
+        yaxis='y1'
     )
-
-    fig.update_layout(
-    height=550,   # ↓ smaller than default
-    width=700,    # optional (Streamlit usually auto-scales)
-    margin=dict(t=60, b=40, l=40, r=40)
+)
+# Line plot (proportion)
+fig.add_trace(
+    go.Scatter(
+        x=proportion_always_complaining.index,
+        y=proportion_always_complaining.values,
+        name="Proportion of 'Always' Complainers",
+        mode='lines+markers',
+        marker=dict(color='red'),
+        yaxis='y2'
     )
-
-    st.plotly_chart(fig, use_container_width=True)
-
+)
+# Layout with dual axes
+fig.update_layout(
+    title="Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge",
+    xaxis=dict(title='Increase Financial Knowledge'),
+    yaxis=dict(
+        title='Total Number of Respondents',
+        titlefont=dict(color='blue'),
+        tickfont=dict(color='blue')
+    ),
+    yaxis2=dict(
+        title="Proportion of 'Always' Complainers",
+        titlefont=dict(color='red'),
+        tickfont=dict(color='red'),
+        overlaying='y',
+        side='right',
+        range=[0, 1]
+    ),
+    legend=dict(x=0.01, y=0.99),
+    template='plotly_white',
+    hovermode='x unified'
+)
+# Streamlit display (zoom enabled)
+st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 st.markdown("""
