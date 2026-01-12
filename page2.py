@@ -246,14 +246,31 @@ with tab2:
     st.write("###### Feature Correlation Heatmap")
     summary_text = "This matrix summarizes the interconnectivity of habits, showing how being 'organized' is strongly linked to 'saving' and 'debt avoidance'."
     st.info(summary_text)
-    # Centering the heatmap to keep it from stretching
-    _, mid_col, _ = st.columns([1, 4, 1])
-    with mid_col:
-        numerical_cols = df.select_dtypes(include=['number']).columns
-        if not numerical_cols.empty:
-            fig4, ax4 = plt.subplots(figsize=(8, 6))
-            sns.heatmap(df[numerical_cols].corr(), annot=True, cmap='coolwarm', fmt=".2f", ax=ax4, annot_kws={"size": 8})
-            st.pyplot(fig4)
+
+    # 1. REMOVED the _, mid_col, _ columns to allow the chart to use the FULL width
+    numerical_cols = df.select_dtypes(include=['number']).columns
+    
+    if not numerical_cols.empty:
+        # 2. INCREASED figsize (Width 12, Height 8) for a much bigger display
+        fig4, ax4 = plt.subplots(figsize=(12, 8)) 
+        
+        # 3. Adjusted sns.heatmap to make annotations clearer on a larger scale
+        sns.heatmap(
+            df[numerical_cols].corr(), 
+            annot=True, 
+            cmap='coolwarm', 
+            fmt=".2f", 
+            ax=ax4, 
+            annot_kws={"size": 10}, # Slightly larger font for numbers
+            cbar_kws={'shrink': .8}  # Keeps the color bar proportional
+        )
+        
+        # 4. Use tight_layout to prevent label overlapping
+        plt.tight_layout()
+        
+        # 5. Use use_container_width=True to ensure it fits the Streamlit layout perfectly
+        st.pyplot(fig4, use_container_width=True)
+        plt.close(fig4)
 
 
 
