@@ -382,7 +382,7 @@ viz_option = st.radio(
         "Age vs Complaint (Violin Plot)",
         "Complaint by Gender (Grouped Bar)",
         "Complaint by Monthly Income (Stacked Bar)",
-        "Financial Knowledge vs Complaint (Faceted Bar)"
+        "Financial Knowledge vs Complaint (Combined Bar and Line)"
     ],
     horizontal=True
 )
