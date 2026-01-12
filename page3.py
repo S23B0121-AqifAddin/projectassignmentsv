@@ -552,7 +552,7 @@ elif viz_option == "Complaint by Monthly Income (Stacked Bar)":
 # ============================
 # 6️⃣ FACETED BAR
 # ============================
-elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
+elif viz_option == "Financial Knowledge vs Complaint (Combined Bar and Line)":
     st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
     st.write("""
      The "Complaint Behaviour by Financial Knowledge Increase" visualisation has illustrates how student's complaint behaviour changes 
@@ -569,16 +569,17 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
         df['Increase_Financial_Knowledge']
         .value_counts()
         .reindex(financial_knowledge_order)
+        .fillna(0)
     )
     # Crosstab for proportions
     contingency_table = pd.crosstab(
         df['Increase_Financial_Knowledge'],
         df['Complaint_for_Unsuitable_Product']
-    ).reindex(financial_knowledge_order)
+    ).reindex(financial_knowledge_order).fillna(0)
     # Proportion of "Always" complainers
     proportion_always_complaining = (
         contingency_table['Always'] / contingency_table.sum(axis=1)
-    )
+    ).fillna(0)
     # Create Plotly figure
     fig = go.Figure()
     # Bar chart (counts)
@@ -586,42 +587,49 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
         go.Bar(
             x=financial_knowledge_counts.index,
             y=financial_knowledge_counts.values,
-            name='Total Respondents',
-            marker_color='blue',
-            yaxis='y'
+            name="Total Respondents"
         )
     )
     # Line chart (proportion)
     fig.add_trace(
         go.Scatter(
-            x=proportion_always_complaining.index,
-            y=proportion_always_complaining.values,
-            mode='lines+markers',
+            x=proportion_always_complaining.index.tolist(),
+            y=proportion_always_complaining.values.tolist(),
+            mode="lines+markers",
             name="Proportion of 'Always' Complainers",
-            marker=dict(color='red'),
             yaxis='y2'
         )
     )
     # Layout with dual axes
     fig.update_layout(
-        title="Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge",
-        xaxis=dict(title='Increase Financial Knowledge'),
+        title=dict(
+        text="Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge"
+        ),
+        xaxis=dict(
+            title=dict(
+                text="Increase Financial Knowledge"
+            )
+        ),
         yaxis=dict(
-            title='Total Number of Respondents',
-            titlefont=dict(color='blue'),
-            tickfont=dict(color='blue')
+            title=dict(
+                text="Total Number of Respondents",
+                font=dict(color="blue")
+            ),
+            tickfont=dict(color="blue")
         ),
         yaxis2=dict(
-            title="Proportion of 'Always' Complainers",
-            titlefont=dict(color='red'),
-            tickfont=dict(color='red'),
-            overlaying='y',
-            side='right',
+            title=dict(
+                text="Proportion of 'Always' Complainers",
+                font=dict(color="red")
+            ),
+            tickfont=dict(color="red"),
+            overlaying="y",
+            side="right",
             range=[0, 1]
         ),
-        hovermode='x unified',
+        hovermode="x unified",
         height=550,
-        template='plotly_white'
+        template="plotly_white"
     )
     # Display in Streamlit (zoom enabled)
     st.plotly_chart(fig, use_container_width=True)
