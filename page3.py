@@ -550,17 +550,16 @@ elif viz_option == "Complaint by Monthly Income (Stacked Bar)":
 
     st.plotly_chart(fig, use_container_width=True)
 # ============================
-# 6️⃣ FACETED BAR
+# 6️⃣ COMBINED GRAPH
 # ============================
 elif viz_option == "Financial Knowledge vs Complaint (Combined Bar and Line)":
     st.subheader("Financial Knowledge Increase vs Complaint Behaviour")
     st.write("""
-     The "Complaint Behaviour by Financial Knowledge Increase" visualisation has illustrates how student's complaint behaviour changes 
-    according to their level of financial understanding. "Sometimes" is the most frequent complaint behaviour among people who say their financial 
-    understanding sometimes improves, followed by "Always" and "Never". Most people who are always learning more about finance always complain, while a 
-    smaller percentage choose to complain is sometimes or never. On the other hand, those whose financial literacy never improves are more likely to never 
-    complain, and very few of them actually do. This trend shows a relationship between consumer confidence and financial awareness, those who are more 
-    knowledgeable about finances are more likely to express their disapproval.
+     The "Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge" figure illustrates the relationship between financial
+     knowledge levels and a need to always complain. The largest category includes of those whose financial knowledge sometimes improves, followed
+     by people who's knowledge usually improves and finally people who knowledge never improves. From the lowest in the "Never" group to the highest
+     in the "Always" group, the red line shows that the amount of "Always" complainers increases steadily with financial literacy. This implies that
+     when student provided with inappropriate items, those who are more financially aware are more likely to regularly voice their disappointment.
     """)
     # Define order
     financial_knowledge_order = ['Never', 'Sometimes', 'Always']
