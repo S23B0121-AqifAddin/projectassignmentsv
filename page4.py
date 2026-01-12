@@ -83,15 +83,19 @@ st.subheader("Key Performance Indicators (KPIs)")
 total_students = len(filtered_df)
 
 complaint_rate = (
-    (filtered_df["Complaint_for_Unsuitable_Product"] == "Always").mean() * 100
+    (filtered_df["Complaint_for_Unsuitable_Product"] == "Always","Sometimes").mean() * 100
 )
 
 agreement_reading_rate = (
-    (filtered_df["Read_Agreement_Carefully"] == "Always").mean() * 100
+    filtered_df["Read_Agreement_Carefully"]
+    .isin(["Always", "Sometimes"])
+    .mean() * 100
 )
 
 info_search_rate = (
-    (filtered_df["Search_Info_Before_Buying"] == "Always").mean() * 100
+    filtered_df["Search_Info_Before_Buying"]
+    .isin(["Always", "Sometimes"])
+    .mean() * 100
 )
 
 kpi1, kpi2, kpi3, kpi4 = st.columns(4)
