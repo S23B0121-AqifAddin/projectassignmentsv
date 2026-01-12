@@ -562,70 +562,71 @@ elif viz_option == "Financial Knowledge vs Complaint (Faceted Bar)":
     complain, and very few of them actually do. This trend shows a relationship between consumer confidence and financial awareness, those who are more 
     knowledgeable about finances are more likely to express their disapproval.
     """)
-
-    # Define category order
-    financial_knowledge_order = ['Never', 'Sometimes', 'Always']
-    # Calculate counts
+    # Define order
+    financial_knowledge_order = ['Never', 'Somaetimes', 'Always']
+    # Counts for bars
     financial_knowledge_counts = (
-       df['Increase_Financial_Knowledge']
-       .value_counts()
-       .reindex(financial_knowledge_order)
+        df['Increase_Financial_Knowledge']
+        .value_counts()
+        .reindex(financial_knowledge_order)
     )
-    # Contingency table
+    # Crosstab for proportions
     contingency_table = pd.crosstab(
-       df['Increase_Financial_Knowledge'],
-       df['Complaint_for_Unsuitable_Product']
+        df['Increase_Financial_Knowledge'],
+        df['Complaint_for_Unsuitable_Product']
     ).reindex(financial_knowledge_order)
     # Proportion of "Always" complainers
     proportion_always_complaining = (
-       contingency_table['Always'] / contingency_table.sum(axis=1)
+        contingency_table['Always'] / contingency_table.sum(axis=1)
     )
     # Create Plotly figure
     fig = go.Figure()
-    # Bar plot (counts)
+    # Bar chart (counts)
     fig.add_trace(
-       go.Bar(
-           x=financial_knowledge_counts.index,
-           y=financial_knowledge_counts.values,
-           name='Total Respondents',
-           marker_color='blue',
-           yaxis='y1'
-       )
-    ) 
-   # Line plot (proportion)
-   fig.add_trace(
-      go.Scatter(
-          x=proportion_always_complaining.index,
-          y=proportion_always_complaining.values,
-          name="Proportion of 'Always' Complainers",
-          mode='lines+markers',
-          marker=dict(color='red'),
-          yaxis='y2'
-      )
-   )
-   # Layout with dual axes
-   fig.update_layout(
-      title="Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge",
-      xaxis=dict(title='Increase Financial Knowledge'),
-      yaxis=dict(
-          title='Total Number of Respondents',
-          titlefont=dict(color='blue'),
-          tickfont=dict(color='blue')
-      ),
-      yaxis2=dict(
-          title="Proportion of 'Always' Complainers",
-          titlefont=dict(color='red'),
-          tickfont=dict(color='red'),
-          overlaying='y',
-          side='right',
-          range=[0, 1]
-      ),
-      legend=dict(x=0.01, y=0.99),
-      template='plotly_white',
-      hovermode='x unified'
-   )
-   # Streamlit display (zoom enabled)
-   st.plotly_chart(fig, use_container_width=True)
+        go.Bar(
+            x=financial_knowledge_counts.index,
+            y=financial_knowledge_counts.values,
+            name='Total Respondents',
+            marker_color='blue',
+            yaxis='y'
+        )
+    )
+    # Line chart (proportion)
+    fig.add_trace(
+        go.Scatter(
+            x=proportion_always_complaining.index,
+            y=proportion_always_complaining.values,
+            mode='lines+markers',
+            name="Proportion of 'Always' Complainers",
+            marker=dict(color='red'),
+            yaxis='y2'
+        )
+    )
+    # Layout with dual axes
+    fig.update_layout(
+        title="Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge",
+        xaxis=dict(title='Increase Financial Knowledge'),
+        yaxis=dict(
+            title='Total Number of Respondents',
+            titlefont=dict(color='blue'),
+            tickfont=dict(color='blue')
+        ),
+        yaxis2=dict(
+            title="Proportion of 'Always' Complainers",
+            titlefont=dict(color='red'),
+            tickfont=dict(color='red'),
+            overlaying='y',
+            side='right',
+            range=[0, 1]
+        ),
+        hovermode='x unified',
+        height=550,
+        template='plotly_white'
+    )
+    # Display in Streamlit (zoom enabled)
+    st.plotly_chart(fig, use_container_width=True)
+
+
 
 st.markdown("---")
 st.markdown("""
