@@ -563,77 +563,71 @@ elif viz_option == "Financial Knowledge vs Complaint (Combined Bar and Line)":
     knowledgeable about finances are more likely to express their disapproval.
     """)
     # Define order
-    financial_knowledge_order = ['Never', 'Somaetimes', 'Always']
-    # Counts for bars
+    financial_knowledge_order = ['Never', 'Sometimes', 'Always']
+    # Total counts (bars)
     financial_knowledge_counts = (
         df['Increase_Financial_Knowledge']
         .value_counts()
         .reindex(financial_knowledge_order)
-        .fillna(0)
     )
-    # Crosstab for proportions
+    # Crosstab for proportions (line)
     contingency_table = pd.crosstab(
         df['Increase_Financial_Knowledge'],
         df['Complaint_for_Unsuitable_Product']
-    ).reindex(financial_knowledge_order).fillna(0)
-    # Proportion of "Always" complainers
+    ).reindex(financial_knowledge_order)
+
     proportion_always_complaining = (
-        contingency_table['Always'] / contingency_table.sum(axis=1)
-    ).fillna(0)
-    # Create Plotly figure
+        contingency_table['Always'] /
+        contingency_table.sum(axis=1)
+    )
+    # Create Plotly figure with secondary y-axis
     fig = go.Figure()
-    # Bar chart (counts)
+    # Bar chart (primary y-axis)
     fig.add_trace(
         go.Bar(
             x=financial_knowledge_counts.index,
             y=financial_knowledge_counts.values,
-            name="Total Respondents"
+            name='Total Respondents',
+            marker=dict(color=financial_knowledge_counts.values),
+            yaxis='y1'
         )
     )
-    # Line chart (proportion)
+    # Line chart (secondary y-axis)
     fig.add_trace(
         go.Scatter(
-            x=proportion_always_complaining.index.tolist(),
-            y=proportion_always_complaining.values.tolist(),
-            mode="lines+markers",
+            x=proportion_always_complaining.index,
+            y=proportion_always_complaining.values,
             name="Proportion of 'Always' Complainers",
+            mode='lines+markers',
             yaxis='y2'
         )
     )
-    # Layout with dual axes
+    # Layout
     fig.update_layout(
-        title=dict(
-        text="Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge"
-        ),
-        xaxis=dict(
-            title=dict(
-                text="Increase Financial Knowledge"
-            )
-        ),
+        title="Total Respondents and Proportion of 'Always' Complainers by Financial Knowledge",
+        xaxis=dict(title='Increase Financial Knowledge'),
         yaxis=dict(
-            title=dict(
-                text="Total Number of Respondents",
-                font=dict(color="blue")
-            ),
-            tickfont=dict(color="blue")
+            title='Total Number of Respondents',
+            showgrid=False
         ),
         yaxis2=dict(
-            title=dict(
-                text="Proportion of 'Always' Complainers",
-                font=dict(color="red")
-            ),
-            tickfont=dict(color="red"),
-            overlaying="y",
-            side="right",
+            title="Proportion of 'Always' Complainers",
+            overlaying='y',
+            side='right',
             range=[0, 1]
         ),
-        hovermode="x unified",
-        height=550,
-        template="plotly_white"
+        legend=dict(
+            orientation='h',
+            yanchor='bottom',
+            y=1.02,
+            xanchor='center',
+            x=0.5
+        ),
+        bargap=0.3,
+        template='plotly_white'
     )
-    # Display in Streamlit (zoom enabled)
+    # Streamlit display
     st.plotly_chart(fig, use_container_width=True)
-
 
 
 st.markdown("---")
