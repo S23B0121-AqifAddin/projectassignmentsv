@@ -83,7 +83,9 @@ st.subheader("Key Performance Indicators (KPIs)")
 total_students = len(filtered_df)
 
 complaint_rate = (
-    (filtered_df["Complaint_for_Unsuitable_Product"] == "Always","Sometimes").mean() * 100
+    filtered_df["Complaint_for_Unsuitable_Product"]
+    .isin(["Always", "Sometimes"])
+    .mean() * 100
 )
 
 agreement_reading_rate = (
