@@ -141,31 +141,32 @@ st.divider()
 # =========================
 # VISUAL 2: AWARENESS VS ACTION
 # =========================
-st.subheader("2. Awareness vs Action Comparison")
+st.subheader("Awareness vs Action Funnel")
 
-awareness_df = pd.DataFrame({
-    "Behaviour": [
-        "Read Agreement",
+funnel_df = pd.DataFrame({
+    "Stage": [
+        "Total Students",
         "Search Info Before Buying",
+        "Read Agreement Carefully",
         "Make Complaint"
     ],
-    "Percentage": [
-        agreement_reading_rate,
-        info_search_rate,
-        complaint_rate
+    "Count": [
+        total_students,
+        (filtered_df["Search_Info_Before_Buying"] == "Yes").sum(),
+        (filtered_df["Read_Agreement_Carefully"] == "Yes").sum(),
+        filtered_df["Complaint_for_Unsuitable_Product"]
+        .isin(["Always", "Sometimes"]).sum()
     ]
 })
 
-fig_awareness = px.bar(
-    awareness_df,
-    x="Behaviour",
-    y="Percentage",
-    text_auto=".1f",
-    title="Awareness vs Action Gap in Consumer Rights",
+fig_funnel = px.funnel(
+    funnel_df,
+    x="Count",
+    y="Stage",
+    title="Drop-off from Consumer Awareness to Action"
 )
-fig_awareness.update_yaxes(range=[0, 100])
 
-st.plotly_chart(fig_awareness, use_container_width=True)
+st.plotly_chart(fig_funnel, use_container_width=True)
 
 st.write(
     "The pie charts highlight a clear awareness–action gap. While many students consistently read agreements, "
