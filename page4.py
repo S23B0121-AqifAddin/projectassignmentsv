@@ -351,7 +351,7 @@ else:
             "Only one age category is available under the current filters, so comparison across age groups is limited."
         )
 # =========================
-# VISUAL 5 (NEW): CONSUMER RIGHTS BEHAVIOUR PROFILE (AVERAGE SCORES)
+# VISUAL 5: CONSUMER RIGHTS BEHAVIOUR PROFILE (AVERAGE SCORES)
 # =========================
 st.subheader("5. Relationship Between Consumer Rights Behaviours")
 
@@ -369,7 +369,6 @@ profile_df = pd.DataFrame({
     "Average Score": [filtered_df[col].mean() for col in score_cols.values()]
 })
 
-# Keep chart type = bar (still Plotly Express)
 fig5_new = px.bar(
     profile_df,
     x="Behaviour",
