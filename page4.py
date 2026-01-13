@@ -74,30 +74,41 @@ filtered_df = df[
 ]
 
 # =========================
-# KPI SUMMARY BOXES
+# KPI SUMMARY BOXES (FIXED)
 # =========================
 st.subheader("Key Performance Indicators (KPIs)")
 
 total_students = len(filtered_df)
 
+# Complaint behaviour (action-based)
 complaint_rate = (
     filtered_df["Complaint_for_Unsuitable_Product"]
     .isin(["Always", "Sometimes"])
     .mean() * 100
 )
 
+# Awareness behaviours (Yes/No based)
 agreement_reading_rate = (
-    filtered_df["Read_Agreement_Carefully"]
-    .isin(["Always", "Sometimes"])
+    (filtered_df["Read_Agreement_Carefully"] == "Yes")
     .mean() * 100
 )
 
 info_search_rate = (
-    filtered_df["Search_Info_Before_Buying"]
-    .isin(["Always", "Sometimes"])
+    (filtered_df["Search_Info_Before_Buying"] == "Yes")
     .mean() * 100
 )
 
+kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+
+kpi1.metric("Total Respondents", total_students)
+kpi2.metric("Complaint Engagement (%)", f"{complaint_rate:.1f}")
+kpi3.metric("Read Agreement (%)", f"{agreement_reading_rate:.1f}")
+kpi4.metric("Search Info Before Buying (%)", f"{info_search_rate:.1f}")
+
+st.caption(
+    "KPIs reflect awareness (reading agreements, searching information) "
+    "and action (making complaints) under current filters."
+)
 kpi1, kpi2, kpi3, kpi4 = st.columns(4)
 
 kpi1.metric("Total Respondents", total_students)
