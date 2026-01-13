@@ -73,9 +73,9 @@ filtered_df = df[
     (df["Monthly_Income"].isin(income_filter))
 ]
 
-# =========================
-# KPI SUMMARY BOXES (FIXED)
-# =========================
+# ==================
+# KPI SUMMARY BOXES 
+# ==================
 st.subheader("Key Performance Indicators (KPIs)")
 
 total_students = len(filtered_df)
@@ -108,17 +108,6 @@ kpi4.metric("Search Info Before Buying (%)", f"{info_search_rate:.1f}")
 st.caption(
     "KPIs reflect awareness (reading agreements, searching information) "
     "and action (making complaints) under current filters."
-)
-kpi1, kpi2, kpi3, kpi4 = st.columns(4)
-
-kpi1.metric("Total Respondents", total_students)
-kpi2.metric("Complaint Rate (%)", f"{complaint_rate:.1f}")
-kpi3.metric("Read Agreement (%)", f"{agreement_reading_rate:.1f}")
-kpi4.metric("Search Info Before Buying (%)", f"{info_search_rate:.1f}")
-
-st.write(
-    "These KPIs summarise students’ consumer rights behaviour under the selected filters. "
-    "Changes in filters immediately reflect shifts in complaint activity and awareness-related actions."
 )
 
 st.divider()
