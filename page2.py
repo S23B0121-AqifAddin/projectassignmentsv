@@ -264,7 +264,7 @@ with tab1:
 
 with tab2:
     st.write("###### Feature Correlation Heatmap")
-    summary_text = "This matrix summarizes the interconnectivity of habits, showing how being 'organized' is strongly linked to 'saving' and 'debt avoidance'."
+    summary_text = "This matrix summarizes the interconnectivity of habits, showing how being organized is strongly linked to saving and debt avoidance."
     st.info(summary_text)
 
     # 1. REMOVED the _, mid_col, _ columns to allow the chart to use the FULL width
