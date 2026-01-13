@@ -351,56 +351,75 @@ else:
             "Only one age category is available under the current filters, so comparison across age groups is limited."
         )
 # =========================
-# VISUAL 5: RELATIONSHIP BETWEEN BEHAVIOURS
+# VISUAL 5: RELATIONSHIP BETWEEN CONSUMER RIGHTS BEHAVIOURS
 # =========================
 st.subheader("5. Relationship Between Consumer Rights Behaviours")
 
-# Use only the behaviour scores (not raw text)
+# Use only numeric behaviour scores
 behaviour_scores = filtered_df[
     ["Read_Agreement_score", "Compare_Products_score", "Search_Info_score", "Complaint_score"]
 ].copy()
 
-# Change correlation method to Spearman (better for ordinal/behaviour data)
-corr_df = behaviour_scores.corr(method="spearman")
+# Ensure numeric and handle missing values
+behaviour_scores = behaviour_scores.apply(pd.to_numeric, errors="coerce").fillna(0)
 
-# Keep visual type = HEATMAP (px.imshow)
-fig6 = px.imshow(
-    corr_df,
-    text_auto=".2f",
-    color_continuous_scale="RdBu",
-    title="Spearman Correlation Between Consumer Rights Behaviours"
-)
-st.plotly_chart(fig6, use_container_width=True)
+# If filtered dataset too small, correlation is meaningless
+if len(behaviour_scores) < 3:
+    st.warning(
+        "Not enough records under the current filters to compute a reliable correlation heatmap. "
+        "Please expand the filter selection."
+    )
+else:
+    # Use Spearman correlation (best for ordinal survey data)
+    corr_df = behaviour_scores.corr(method="spearman")
 
-# Dynamic interpretation of strongest positive + strongest negative correlation
-corr_pairs = corr_df.unstack().reset_index()
-corr_pairs.columns = ["Var1", "Var2", "Correlation"]
+    # Replace NaN correlations with 0 so the heatmap always renders
+    corr_df = corr_df.fillna(0)
 
-# Remove self-correlation
-corr_pairs = corr_pairs[corr_pairs["Var1"] != corr_pairs["Var2"]]
+    # --- Plot heatmap (same visual type: px.imshow) ---
+    fig6 = px.imshow(
+        corr_df,
+        text_auto=".2f",
+        color_continuous_scale="RdBu",
+        title="Spearman Correlation Between Consumer Rights Behaviours (Filtered)"
+    )
+    st.plotly_chart(fig6, use_container_width=True)
 
-# Remove duplicates (Var1-Var2 same as Var2-Var1)
-corr_pairs["pair"] = corr_pairs.apply(lambda r: "-".join(sorted([r["Var1"], r["Var2"]])), axis=1)
-corr_pairs = corr_pairs.drop_duplicates(subset="pair").drop(columns=["pair"])
+    # =========================
+    # Dynamic interpretation (strongest + weakest)
+    # =========================
+    corr_pairs = corr_df.unstack().reset_index()
+    corr_pairs.columns = ["Var1", "Var2", "Correlation"]
 
-# Sort for positive and negative
-strongest_positive = corr_pairs.sort_values("Correlation", ascending=False).head(1)
-strongest_negative = corr_pairs.sort_values("Correlation", ascending=True).head(1)
+    # Remove self correlation
+    corr_pairs = corr_pairs[corr_pairs["Var1"] != corr_pairs["Var2"]]
 
-pos_v1, pos_v2, pos_val = strongest_positive.iloc[0].tolist()
-neg_v1, neg_v2, neg_val = strongest_negative.iloc[0].tolist()
+    # Remove duplicates (A-B same as B-A)
+    corr_pairs["pair"] = corr_pairs.apply(lambda r: "-".join(sorted([r["Var1"], r["Var2"]])), axis=1)
+    corr_pairs = corr_pairs.drop_duplicates(subset="pair").drop(columns=["pair"])
 
-st.write(
-    "This heatmap explains how different consumer rights behaviours move together under the current filters. "
-    f"The **strongest positive relationship** is between **{pos_v1}** and **{pos_v2}** "
-    f"(Spearman correlation = {pos_val:.2f}). "
-    f"The **weakest/most negative relationship** is between **{neg_v1}** and **{neg_v2}** "
-    f"(Spearman correlation = {neg_val:.2f}). "
-    "Overall, awareness behaviours typically show stronger alignment with each other compared to complaint action, "
-    "supporting the idea that students may have knowledge but still hesitate to take formal action."
-)
+    # If still empty (rare case)
+    if corr_pairs.empty:
+        st.write(
+            "Correlation interpretation is limited under the current filters because the behavioural values do not vary enough."
+        )
+    else:
+        strongest_positive = corr_pairs.sort_values("Correlation", ascending=False).head(1)
+        strongest_negative = corr_pairs.sort_values("Correlation", ascending=True).head(1)
 
-st.divider()
+        pos_v1, pos_v2, pos_val = strongest_positive.iloc[0].tolist()
+        neg_v1, neg_v2, neg_val = strongest_negative.iloc[0].tolist()
+
+        st.write(
+            "This heatmap shows how consumer rights behaviours are related under the selected filters. "
+            f"The **strongest positive relationship** is between **{pos_v1}** and **{pos_v2}** "
+            f"(Spearman correlation = {pos_val:.2f}). "
+            f"The **weakest (lowest) relationship** is between **{neg_v1}** and **{neg_v2}** "
+            f"(Spearman correlation = {neg_val:.2f}). "
+            "In general, awareness behaviours (reading agreements, comparing options, searching information) "
+            "tend to be more aligned with each other, while complaint action may behave more independently."
+        )
+
 
 # =========================
 # DATA TABLE
