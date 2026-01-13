@@ -250,7 +250,6 @@ with tab1:
         st.write("###### Financial Confidence by Age")
         summary_text = "This histogram illustrates the demographic spread, showing that our sample is concentrated in the early-to-mid twenties."
         st.info(summary_text)
-        ax2.set_title('Financial Confidence Score by Age', fontsize=14, fontweight='bold', pad=20 )
         fig2, ax2 = plt.subplots(figsize=(6, 4))
         sns.boxplot(data=df, x='Age', y='Organised_Money_Management', palette='cubehelix', ax=ax2)
         st.pyplot(fig2)
