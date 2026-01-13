@@ -120,11 +120,15 @@ st.subheader("1. Complaint Behaviour Frequency")
 fig1 = px.histogram(
     filtered_df,
     x="Complaint_for_Unsuitable_Product",
+    category_orders={
+        "Complaint_for_Unsuitable_Product": ["Never", "Sometimes", "Always"]
+    },
     color="Complaint_for_Unsuitable_Product",
-    title="Frequency of Complaints for Unsuitable Products",
+    title="Complaint Behaviour for Unsuitable Products",
     text_auto=True
 )
 st.plotly_chart(fig1, use_container_width=True)
+
 
 st.write(
     "This bar chart shows how often students make complaints when sold unsuitable products. "
