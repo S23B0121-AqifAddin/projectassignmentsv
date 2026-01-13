@@ -143,23 +143,29 @@ st.divider()
 # =========================
 st.subheader("2. Awareness vs Action Comparison")
 
-col1, col2 = st.columns(2)
+awareness_df = pd.DataFrame({
+    "Behaviour": [
+        "Read Agreement",
+        "Search Info Before Buying",
+        "Make Complaint"
+    ],
+    "Percentage": [
+        agreement_reading_rate,
+        info_search_rate,
+        complaint_rate
+    ]
+})
 
-with col1:
-    fig2 = px.pie(
-        filtered_df,
-        names="Read_Agreement_Carefully",
-        title="Reading Agreements Carefully"
-    )
-    st.plotly_chart(fig2, use_container_width=True)
+fig_awareness = px.bar(
+    awareness_df,
+    x="Behaviour",
+    y="Percentage",
+    text_auto=".1f",
+    title="Awareness vs Action Gap in Consumer Rights",
+)
+fig_awareness.update_yaxes(range=[0, 100])
 
-with col2:
-    fig3 = px.pie(
-        filtered_df,
-        names="Complaint_for_Unsuitable_Product",
-        title="Making Complaints"
-    )
-    st.plotly_chart(fig3, use_container_width=True)
+st.plotly_chart(fig_awareness, use_container_width=True)
 
 st.write(
     "The pie charts highlight a clear awareness–action gap. While many students consistently read agreements, "
