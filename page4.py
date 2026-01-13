@@ -31,9 +31,7 @@ st.divider()
 @st.cache_data
 def load_data():
     url = (
-        "https://raw.githubusercontent.com/"
-        "S23B0121-AqifAddin/projectassignmentsv/"
-        "main/Datasets/(Kisa)processed_financial_capability_data%20(3).csv"
+        "https://raw.githubusercontent.com/S23B0121-AqifAddin/projectassignmentsv/refs/heads/main/Datasets/processed%20data%20(KIisantini).csv"
     )
     return pd.read_csv(url, encoding="utf-8")
 
