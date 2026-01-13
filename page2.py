@@ -213,7 +213,7 @@ with row1_col1:
 
 with row1_col2:
     st.write("###### Score Distribution (Proportional)")
-    summary_text = "This pie chart summarizes the composition of student confidence, revealing the part-to-whole relationship of management levels. adawiyahwanijdnwaudnwauodnwaiodwnaioadwniodnawiofnaiof."
+    summary_text = "This pie chart summarizes the composition of student confidence, revealing the part-to-whole relationship of management levels. adawiyahwanijdnwaudnwauodnwaio."
     st.info(summary_text)
 
     # 1. Prepare the data
