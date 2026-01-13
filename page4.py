@@ -267,69 +267,91 @@ else:
 st.divider()
 
 # =========================
-# VISUAL 4 (UPDATED): AGE vs AWARENESS (BUT STILL A BOXPLOT)
+# VISUAL 4 : AGE vs AWARENESS (BOXPLOT)
 # =========================
 st.subheader("4. Consumer Rights Awareness by Age")
+
+# Make sure Age is treated as text/category (prevents boxplot issues)
+filtered_df["Age"] = filtered_df["Age"].astype(str)
 
 # ---- Correct scoring maps ----
 yesno_map = {"Yes": 1, "No": 0}
 complaint_map = {"Never": 0, "Sometimes": 1, "Always": 2}
 
+# Clean spaces (sometimes CSV has " Yes" / "No ")
+filtered_df["Read_Agreement_Carefully"] = filtered_df["Read_Agreement_Carefully"].astype(str).str.strip()
+filtered_df["Compare_Products_Services"] = filtered_df["Compare_Products_Services"].astype(str).str.strip()
+filtered_df["Search_Info_Before_Buying"] = filtered_df["Search_Info_Before_Buying"].astype(str).str.strip()
+filtered_df["Complaint_for_Unsuitable_Product"] = filtered_df["Complaint_for_Unsuitable_Product"].astype(str).str.strip()
+
+# Create score columns safely
 filtered_df["Read_Agreement_score"] = filtered_df["Read_Agreement_Carefully"].map(yesno_map)
 filtered_df["Compare_Products_score"] = filtered_df["Compare_Products_Services"].map(yesno_map)
 filtered_df["Search_Info_score"] = filtered_df["Search_Info_Before_Buying"].map(yesno_map)
 filtered_df["Complaint_score"] = filtered_df["Complaint_for_Unsuitable_Product"].map(complaint_map)
 
-# New improved score: weighted awareness + action (still numeric)
-# Awareness (0-3) + Complaint (0-2) => Total max = 5
+# Fill missing values so boxplot always has numbers
+score_cols = [
+    "Read_Agreement_score",
+    "Compare_Products_score",
+    "Search_Info_score",
+    "Complaint_score"
+]
+filtered_df[score_cols] = filtered_df[score_cols].fillna(0)
+
+# Compute final score
 filtered_df["Awareness_Score"] = (
     filtered_df["Read_Agreement_score"]
     + filtered_df["Compare_Products_score"]
     + filtered_df["Search_Info_score"]
 )
-filtered_df["Consumer_Rights_Score"] = filtered_df["Awareness_Score"] + filtered_df["Complaint_score"]
 
-# Keep visual type = BOXPLOT
-fig5 = px.box(
-    filtered_df,
-    x="Age",
-    y="Consumer_Rights_Score",
-    points="all",  # added points to make it more informative (still boxplot)
-    title="Consumer Rights Score by Age (Awareness + Complaint Action)"
-)
-st.plotly_chart(fig5, use_container_width=True)
-
-# Better interpretation using median + spread
-age_stats = (
-    filtered_df.groupby("Age")["Consumer_Rights_Score"]
-    .agg(["median", "mean", "count", "min", "max"])
-    .sort_values("median", ascending=False)
+filtered_df["Consumer_Rights_Score"] = (
+    filtered_df["Awareness_Score"] + filtered_df["Complaint_score"]
 )
 
-if len(age_stats) > 1:
-    best_age = age_stats.index[0]
-    best_median = age_stats.iloc[0]["median"]
+# Remove rows where Age is missing/invalid after filters
+plot_age_df = filtered_df.dropna(subset=["Age", "Consumer_Rights_Score"]).copy()
 
-    worst_age = age_stats.index[-1]
-    worst_median = age_stats.iloc[-1]["median"]
-
-    st.write(
-        "This boxplot compares consumer rights performance across age groups (combining awareness and complaint action). "
-        f"The **highest median score** is observed in **{best_age}** (median = {best_median:.1f}), while the "
-        f"**lowest median score** is observed in **{worst_age}** (median = {worst_median:.1f}). "
-        "The presence of wide score ranges within some age groups indicates that students’ consumer rights behaviour "
-        "may vary strongly even among the same age category."
-    )
+# If still empty, show warning
+if plot_age_df.empty:
+    st.warning("Not enough valid data to generate the Age vs Consumer Rights boxplot under the current filters.")
 else:
-    st.write(
-        "This boxplot displays consumer rights scores by age, but only one age category is available under the "
-        "current filters, so comparisons between age groups cannot be interpreted."
+    fig5 = px.box(
+        plot_age_df,
+        x="Age",
+        y="Consumer_Rights_Score",
+        points="all",
+        title="Consumer Rights Score by Age (Awareness + Complaint Action)"
+    )
+    st.plotly_chart(fig5, use_container_width=True)
+
+    # Interpretation
+    age_stats = (
+        plot_age_df.groupby("Age")["Consumer_Rights_Score"]
+        .agg(["median", "mean", "count"])
+        .sort_values("median", ascending=False)
     )
 
-st.divider()
+    if len(age_stats) > 1:
+        best_age = age_stats.index[0]
+        best_median = age_stats.iloc[0]["median"]
 
+        worst_age = age_stats.index[-1]
+        worst_median = age_stats.iloc[-1]["median"]
+
+        st.write(
+            "This boxplot compares consumer rights performance across age groups (combining awareness and complaint action). "
+            f"The **highest median score** is observed in **{best_age}** (median = {best_median:.1f}), while the "
+            f"**lowest median score** is observed in **{worst_age}** (median = {worst_median:.1f}). "
+            "This indicates that age and experience may influence consumer rights awareness and action."
+        )
+    else:
+        st.write(
+            "Only one age category is available under the current filters, so comparison across age groups is limited."
+        )
 # =========================
-# VISUAL 5 (UPDATED): RELATIONSHIP BETWEEN BEHAVIOURS
+# VISUAL 5: RELATIONSHIP BETWEEN BEHAVIOURS
 # =========================
 st.subheader("5. Relationship Between Consumer Rights Behaviours")
 
