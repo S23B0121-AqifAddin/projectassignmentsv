@@ -351,74 +351,60 @@ else:
             "Only one age category is available under the current filters, so comparison across age groups is limited."
         )
 # =========================
-# VISUAL 5: RELATIONSHIP BETWEEN CONSUMER RIGHTS BEHAVIOURS
+# VISUAL 5: AWARENESS vs COMPLAINT ACTION (SCATTER)
 # =========================
-st.subheader("5. Relationship Between Consumer Rights Behaviours")
+st.subheader("5. Awareness vs Complaint Action")
 
-# Use only numeric behaviour scores
-behaviour_scores = filtered_df[
-    ["Read_Agreement_score", "Compare_Products_score", "Search_Info_score", "Complaint_score"]
-].copy()
+# Ensure scores exist (created in Visual 4)
+# Awareness_Score: 0–3
+# Complaint_score: 0–2
 
-# Ensure numeric and handle missing values
-behaviour_scores = behaviour_scores.apply(pd.to_numeric, errors="coerce").fillna(0)
+plot_scatter_df = filtered_df.dropna(subset=["Awareness_Score", "Complaint_score"]).copy()
 
-# If filtered dataset too small, correlation is meaningless
-if len(behaviour_scores) < 3:
+# If not enough data points, prevent blank chart
+if len(plot_scatter_df) < 3:
     st.warning(
-        "Not enough records under the current filters to compute a reliable correlation heatmap. "
+        "Not enough data under the current filters to display the Awareness vs Complaint Action relationship. "
         "Please expand the filter selection."
     )
 else:
-    # Use Spearman correlation (best for ordinal survey data)
-    corr_df = behaviour_scores.corr(method="spearman")
-
-    # Replace NaN correlations with 0 so the heatmap always renders
-    corr_df = corr_df.fillna(0)
-
-    # --- Plot heatmap (same visual type: px.imshow) ---
-    fig6 = px.imshow(
-        corr_df,
-        text_auto=".2f",
-        color_continuous_scale="RdBu",
-        title="Spearman Correlation Between Consumer Rights Behaviours (Filtered)"
+    fig_scatter = px.scatter(
+        plot_scatter_df,
+        x="Awareness_Score",
+        y="Complaint_score",
+        color="Faculty",
+        title="Relationship Between Consumer Awareness and Complaint Action",
+        labels={
+            "Awareness_Score": "Awareness Score (0–3)",
+            "Complaint_score": "Complaint Action Score (0–2)"
+        },
+        trendline="ols"  # trendline helps show overall relationship
     )
-    st.plotly_chart(fig6, use_container_width=True)
+
+    st.plotly_chart(fig_scatter, use_container_width=True)
 
     # =========================
-    # Dynamic interpretation (strongest + weakest)
+    # Dynamic Interpretation
     # =========================
-    corr_pairs = corr_df.unstack().reset_index()
-    corr_pairs.columns = ["Var1", "Var2", "Correlation"]
+    avg_awareness = plot_scatter_df["Awareness_Score"].mean()
+    avg_complaint = plot_scatter_df["Complaint_score"].mean()
 
-    # Remove self correlation
-    corr_pairs = corr_pairs[corr_pairs["Var1"] != corr_pairs["Var2"]]
+    high_awareness = plot_scatter_df[plot_scatter_df["Awareness_Score"] >= 2]
+    high_awareness_complaint_rate = (
+        high_awareness["Complaint_score"].ge(1).mean() * 100
+        if len(high_awareness) > 0 else 0
+    )
 
-    # Remove duplicates (A-B same as B-A)
-    corr_pairs["pair"] = corr_pairs.apply(lambda r: "-".join(sorted([r["Var1"], r["Var2"]])), axis=1)
-    corr_pairs = corr_pairs.drop_duplicates(subset="pair").drop(columns=["pair"])
-
-    # If still empty (rare case)
-    if corr_pairs.empty:
-        st.write(
-            "Correlation interpretation is limited under the current filters because the behavioural values do not vary enough."
-        )
-    else:
-        strongest_positive = corr_pairs.sort_values("Correlation", ascending=False).head(1)
-        strongest_negative = corr_pairs.sort_values("Correlation", ascending=True).head(1)
-
-        pos_v1, pos_v2, pos_val = strongest_positive.iloc[0].tolist()
-        neg_v1, neg_v2, neg_val = strongest_negative.iloc[0].tolist()
-
-        st.write(
-            "This heatmap shows how consumer rights behaviours are related under the selected filters. "
-            f"The **strongest positive relationship** is between **{pos_v1}** and **{pos_v2}** "
-            f"(Spearman correlation = {pos_val:.2f}). "
-            f"The **weakest (lowest) relationship** is between **{neg_v1}** and **{neg_v2}** "
-            f"(Spearman correlation = {neg_val:.2f}). "
-            "In general, awareness behaviours (reading agreements, comparing options, searching information) "
-            "tend to be more aligned with each other, while complaint action may behave more independently."
-        )
+    st.write(
+        f"This scatter plot examines whether higher consumer rights awareness leads to stronger complaint behaviour "
+        f"under the current sidebar filters (**n = {len(plot_scatter_df)}**). "
+        f"On average, students show an awareness score of **{avg_awareness:.2f}** (out of 3), "
+        f"but complaint action remains lower with an average score of **{avg_complaint:.2f}** (out of 2). "
+        f"Among students with **high awareness (score ≥ 2)**, approximately **{high_awareness_complaint_rate:.1f}%** "
+        "demonstrate complaint engagement (Complaint score ≥ 1). "
+        "Overall, the trend indicates that awareness does not always translate into direct complaint action, "
+        "highlighting an awareness–action gap."
+    )
 
 
 # =========================
