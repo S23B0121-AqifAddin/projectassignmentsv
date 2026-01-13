@@ -351,60 +351,47 @@ else:
             "Only one age category is available under the current filters, so comparison across age groups is limited."
         )
 # =========================
-# VISUAL 5: AWARENESS vs COMPLAINT ACTION (SCATTER)
+# VISUAL 5 (NEW): CONSUMER RIGHTS BEHAVIOUR PROFILE (AVERAGE SCORES)
 # =========================
-st.subheader("5. Awareness vs Complaint Action")
+st.subheader("5. Relationship Between Consumer Rights Behaviours")
 
-# Ensure scores exist (created in Visual 4)
-# Awareness_Score: 0–3
-# Complaint_score: 0–2
+# Make sure score columns exist (from Visual 4 section)
+score_cols = {
+    "Read Agreement Carefully": "Read_Agreement_score",
+    "Compare Products/Services": "Compare_Products_score",
+    "Search Info Before Buying": "Search_Info_score",
+    "Complaint Action": "Complaint_score"
+}
 
-plot_scatter_df = filtered_df.dropna(subset=["Awareness_Score", "Complaint_score"]).copy()
+# Build summary table
+profile_df = pd.DataFrame({
+    "Behaviour": list(score_cols.keys()),
+    "Average Score": [filtered_df[col].mean() for col in score_cols.values()]
+})
 
-# If not enough data points, prevent blank chart
-if len(plot_scatter_df) < 3:
-    st.warning(
-        "Not enough data under the current filters to display the Awareness vs Complaint Action relationship. "
-        "Please expand the filter selection."
-    )
-else:
-    fig_scatter = px.scatter(
-        plot_scatter_df,
-        x="Awareness_Score",
-        y="Complaint_score",
-        color="Faculty",
-        title="Relationship Between Consumer Awareness and Complaint Action",
-        labels={
-            "Awareness_Score": "Awareness Score (0–3)",
-            "Complaint_score": "Complaint Action Score (0–2)"
-        },
-        trendline="ols"  # trendline helps show overall relationship
-    )
+# Keep chart type = bar (still Plotly Express)
+fig5_new = px.bar(
+    profile_df,
+    x="Behaviour",
+    y="Average Score",
+    text_auto=".2f",
+    title="Average Behaviour Scores (Filtered Respondents)"
+)
 
-    st.plotly_chart(fig_scatter, use_container_width=True)
+st.plotly_chart(fig5_new, use_container_width=True)
 
-    # =========================
-    # Dynamic Interpretation
-    # =========================
-    avg_awareness = plot_scatter_df["Awareness_Score"].mean()
-    avg_complaint = plot_scatter_df["Complaint_score"].mean()
+# Dynamic interpretation
+top_behaviour = profile_df.sort_values("Average Score", ascending=False).iloc[0]
+lowest_behaviour = profile_df.sort_values("Average Score", ascending=True).iloc[0]
 
-    high_awareness = plot_scatter_df[plot_scatter_df["Awareness_Score"] >= 2]
-    high_awareness_complaint_rate = (
-        high_awareness["Complaint_score"].ge(1).mean() * 100
-        if len(high_awareness) > 0 else 0
-    )
+st.write(
+    f"This bar chart summarises the **average behaviour score** for each consumer rights activity under the current filters "
+    f"(n = {len(filtered_df)}). "
+    f"The strongest behaviour is **{top_behaviour['Behaviour']}** with an average score of **{top_behaviour['Average Score']:.2f}**, "
+    f"while the weakest behaviour is **{lowest_behaviour['Behaviour']}** with an average score of **{lowest_behaviour['Average Score']:.2f}**. "
+    "Overall, awareness-related behaviours tend to score higher than complaint action, suggesting that knowledge does not always translate into formal action."
+)
 
-    st.write(
-        f"This scatter plot examines whether higher consumer rights awareness leads to stronger complaint behaviour "
-        f"under the current sidebar filters (**n = {len(plot_scatter_df)}**). "
-        f"On average, students show an awareness score of **{avg_awareness:.2f}** (out of 3), "
-        f"but complaint action remains lower with an average score of **{avg_complaint:.2f}** (out of 2). "
-        f"Among students with **high awareness (score ≥ 2)**, approximately **{high_awareness_complaint_rate:.1f}%** "
-        "demonstrate complaint engagement (Complaint score ≥ 1). "
-        "Overall, the trend indicates that awareness does not always translate into direct complaint action, "
-        "highlighting an awareness–action gap."
-    )
 
 
 # =========================
