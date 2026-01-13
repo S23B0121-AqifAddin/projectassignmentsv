@@ -79,7 +79,7 @@ filtered_df = df[
 def pct(part, whole):
     return 0 if whole == 0 else (part / whole) * 100
 
-# Stop if no records after filtering
+# Stop if no records
 if filtered_df.empty:
     st.warning("No data matches the selected filters. Please adjust the sidebar filters.")
     st.stop()
@@ -121,6 +121,41 @@ st.caption(
     "and action (making complaints) under current filters."
 )
 
+# =========================
+# INSIGHT SUMMARY BOX (NEW)
+# =========================
+st.markdown("### Filter-Based Insight Summary")
+
+# Breakdown complaint categories
+never_count = (filtered_df["Complaint_for_Unsuitable_Product"] == "Never").sum()
+sometimes_count = (filtered_df["Complaint_for_Unsuitable_Product"] == "Sometimes").sum()
+always_count = (filtered_df["Complaint_for_Unsuitable_Product"] == "Always").sum()
+
+most_common = filtered_df["Complaint_for_Unsuitable_Product"].mode()
+most_common_value = most_common.iloc[0] if len(most_common) > 0 else "N/A"
+
+# Faculty with highest complaint engagement
+faculty_summary = (
+    filtered_df.assign(
+        Complaint_Engaged=filtered_df["Complaint_for_Unsuitable_Product"].isin(["Always", "Sometimes"])
+    )
+    .groupby("Faculty")["Complaint_Engaged"]
+    .mean()
+    .sort_values(ascending=False)
+)
+
+top_faculty = faculty_summary.index[0] if len(faculty_summary) > 0 else "N/A"
+top_faculty_rate = (faculty_summary.iloc[0] * 100) if len(faculty_summary) > 0 else 0
+
+# Create summary box
+st.info(
+    f"**Current filter results (n = {total_students})** show that the most common complaint behaviour is "
+    f"**{most_common_value}**. Under these filters, **{pct(never_count, total_students):.1f}%** of students "
+    f"**never complain**, while **{pct(sometimes_count, total_students):.1f}%** complain **sometimes** and "
+    f"**{pct(always_count, total_students):.1f}%** complain **always**. "
+    f"Complaint engagement is currently highest in **{top_faculty}** (**{top_faculty_rate:.1f}%**)."
+)
+
 st.divider()
 
 # =========================
@@ -139,14 +174,6 @@ fig1 = px.histogram(
     text_auto=True
 )
 st.plotly_chart(fig1, use_container_width=True)
-
-# Dynamic interpretation
-never_count = (filtered_df["Complaint_for_Unsuitable_Product"] == "Never").sum()
-sometimes_count = (filtered_df["Complaint_for_Unsuitable_Product"] == "Sometimes").sum()
-always_count = (filtered_df["Complaint_for_Unsuitable_Product"] == "Always").sum()
-
-most_common = filtered_df["Complaint_for_Unsuitable_Product"].mode()
-most_common_value = most_common.iloc[0] if len(most_common) > 0 else "N/A"
 
 st.write(
     f"Based on the current sidebar filters (**n = {total_students} respondents**), "
@@ -220,20 +247,7 @@ fig4 = px.histogram(
 )
 st.plotly_chart(fig4, use_container_width=True)
 
-# Dynamic interpretation (top vs bottom faculty)
-faculty_summary = (
-    filtered_df.assign(
-        Complaint_Engaged=filtered_df["Complaint_for_Unsuitable_Product"].isin(["Always", "Sometimes"])
-    )
-    .groupby("Faculty")["Complaint_Engaged"]
-    .mean()
-    .sort_values(ascending=False)
-)
-
 if len(faculty_summary) > 1:
-    top_faculty = faculty_summary.index[0]
-    top_faculty_rate = faculty_summary.iloc[0] * 100
-
     lowest_faculty = faculty_summary.index[-1]
     lowest_faculty_rate = faculty_summary.iloc[-1] * 100
 
@@ -253,11 +267,11 @@ else:
 st.divider()
 
 # =========================
-# VISUAL 4: AGE VS RIGHTS SCORE (BOXPLOT)
+# VISUAL 4 (UPDATED): AGE vs AWARENESS (BUT STILL A BOXPLOT)
 # =========================
 st.subheader("4. Consumer Rights Awareness by Age")
 
-# Correct scoring maps (Do not change chart type)
+# ---- Correct scoring maps ----
 yesno_map = {"Yes": 1, "No": 0}
 complaint_map = {"Never": 0, "Sometimes": 1, "Always": 2}
 
@@ -266,25 +280,29 @@ filtered_df["Compare_Products_score"] = filtered_df["Compare_Products_Services"]
 filtered_df["Search_Info_score"] = filtered_df["Search_Info_Before_Buying"].map(yesno_map)
 filtered_df["Complaint_score"] = filtered_df["Complaint_for_Unsuitable_Product"].map(complaint_map)
 
-filtered_df["Consumer_Rights_Score"] = (
+# New improved score: weighted awareness + action (still numeric)
+# Awareness (0-3) + Complaint (0-2) => Total max = 5
+filtered_df["Awareness_Score"] = (
     filtered_df["Read_Agreement_score"]
     + filtered_df["Compare_Products_score"]
     + filtered_df["Search_Info_score"]
-    + filtered_df["Complaint_score"]
 )
+filtered_df["Consumer_Rights_Score"] = filtered_df["Awareness_Score"] + filtered_df["Complaint_score"]
 
+# Keep visual type = BOXPLOT
 fig5 = px.box(
     filtered_df,
     x="Age",
     y="Consumer_Rights_Score",
-    title="Consumer Rights Awareness Score by Age"
+    points="all",  # added points to make it more informative (still boxplot)
+    title="Consumer Rights Score by Age (Awareness + Complaint Action)"
 )
 st.plotly_chart(fig5, use_container_width=True)
 
-# Dynamic interpretation using median
+# Better interpretation using median + spread
 age_stats = (
     filtered_df.groupby("Age")["Consumer_Rights_Score"]
-    .agg(["median", "mean", "count"])
+    .agg(["median", "mean", "count", "min", "max"])
     .sort_values("median", ascending=False)
 )
 
@@ -296,63 +314,76 @@ if len(age_stats) > 1:
     worst_median = age_stats.iloc[-1]["median"]
 
     st.write(
-        "This boxplot summarizes consumer rights awareness scores across age groups based on current filters. "
-        f"The age group with the **highest median score** is **{best_age}** (median = {best_median:.1f}), "
-        f"while the **lowest median score** is **{worst_age}** (median = {worst_median:.1f}). "
-        "This suggests that older or more experienced students may demonstrate stronger consumer rights awareness and behaviour."
+        "This boxplot compares consumer rights performance across age groups (combining awareness and complaint action). "
+        f"The **highest median score** is observed in **{best_age}** (median = {best_median:.1f}), while the "
+        f"**lowest median score** is observed in **{worst_age}** (median = {worst_median:.1f}). "
+        "The presence of wide score ranges within some age groups indicates that students’ consumer rights behaviour "
+        "may vary strongly even among the same age category."
     )
 else:
     st.write(
-        "This boxplot shows consumer rights awareness scores by age, but only one age category is available "
-        "after filtering, so comparisons between age groups are limited."
+        "This boxplot displays consumer rights scores by age, but only one age category is available under the "
+        "current filters, so comparisons between age groups cannot be interpreted."
     )
 
 st.divider()
 
 # =========================
-# VISUAL 5: CORRELATION HEATMAP
+# VISUAL 5 (UPDATED): RELATIONSHIP BETWEEN BEHAVIOURS
 # =========================
 st.subheader("5. Relationship Between Consumer Rights Behaviours")
 
-corr_df = filtered_df[
+# Use only the behaviour scores (not raw text)
+behaviour_scores = filtered_df[
     ["Read_Agreement_score", "Compare_Products_score", "Search_Info_score", "Complaint_score"]
-].corr()
+].copy()
 
+# Change correlation method to Spearman (better for ordinal/behaviour data)
+corr_df = behaviour_scores.corr(method="spearman")
+
+# Keep visual type = HEATMAP (px.imshow)
 fig6 = px.imshow(
     corr_df,
     text_auto=".2f",
     color_continuous_scale="RdBu",
-    title="Correlation Between Consumer Rights Behaviours"
+    title="Spearman Correlation Between Consumer Rights Behaviours"
 )
 st.plotly_chart(fig6, use_container_width=True)
 
-# Dynamic interpretation for strongest correlation
-corr_pairs = corr_df.unstack().sort_values(ascending=False)
-corr_pairs = corr_pairs[corr_pairs.index.get_level_values(0) != corr_pairs.index.get_level_values(1)]
+# Dynamic interpretation of strongest positive + strongest negative correlation
+corr_pairs = corr_df.unstack().reset_index()
+corr_pairs.columns = ["Var1", "Var2", "Correlation"]
 
-if len(corr_pairs) > 0:
-    top_pair = corr_pairs.index[0]
-    top_value = corr_pairs.iloc[0]
+# Remove self-correlation
+corr_pairs = corr_pairs[corr_pairs["Var1"] != corr_pairs["Var2"]]
 
-    st.write(
-        "This heatmap shows relationships between consumer rights behaviours under the selected filters. "
-        f"The strongest relationship appears between **{top_pair[0]}** and **{top_pair[1]}** "
-        f"(correlation = {top_value:.2f}). "
-        "Overall, awareness-related behaviours tend to move together, but complaint behaviour may remain weaker—"
-        "reinforcing that awareness does not always translate into action."
-    )
-else:
-    st.write(
-        "This heatmap summarizes behavioural relationships, but correlation interpretation is limited "
-        "because the filtered dataset contains insufficient variation."
-    )
+# Remove duplicates (Var1-Var2 same as Var2-Var1)
+corr_pairs["pair"] = corr_pairs.apply(lambda r: "-".join(sorted([r["Var1"], r["Var2"]])), axis=1)
+corr_pairs = corr_pairs.drop_duplicates(subset="pair").drop(columns=["pair"])
+
+# Sort for positive and negative
+strongest_positive = corr_pairs.sort_values("Correlation", ascending=False).head(1)
+strongest_negative = corr_pairs.sort_values("Correlation", ascending=True).head(1)
+
+pos_v1, pos_v2, pos_val = strongest_positive.iloc[0].tolist()
+neg_v1, neg_v2, neg_val = strongest_negative.iloc[0].tolist()
+
+st.write(
+    "This heatmap explains how different consumer rights behaviours move together under the current filters. "
+    f"The **strongest positive relationship** is between **{pos_v1}** and **{pos_v2}** "
+    f"(Spearman correlation = {pos_val:.2f}). "
+    f"The **weakest/most negative relationship** is between **{neg_v1}** and **{neg_v2}** "
+    f"(Spearman correlation = {neg_val:.2f}). "
+    "Overall, awareness behaviours typically show stronger alignment with each other compared to complaint action, "
+    "supporting the idea that students may have knowledge but still hesitate to take formal action."
+)
+
+st.divider()
 
 # =========================
 # DATA TABLE
 # =========================
-st.divider()
 st.subheader("Filtered Dataset")
-
 st.write(f"Total records shown: **{len(filtered_df)}**")
 
 if st.checkbox("Show Filtered Data"):
