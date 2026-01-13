@@ -223,7 +223,7 @@ with row1_col2:
     fig1, ax1 = plt.subplots(figsize=(6, 5)) # Adjusted for column fit
     
     # Use the 'magma' palette for a professional look
-    colors = sns.color_palette('magma', len(score_counts))
+    colors = sns.color_palette('coolwarm', len(score_counts))
     
     ax1.pie(
         score_counts, 
