@@ -224,7 +224,7 @@ with row1_col2:
     
     # Use the 'magma' palette for a professional look
     colors = sns.color_palette('coolwarm', len(score_counts))
-    
+    ax1.set_title('Financial Confidence Score Distribution', fontsize=14, fontweight='bold', pad=20)
     ax1.pie(
         score_counts, 
         labels=score_counts.index, 
