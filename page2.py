@@ -212,12 +212,32 @@ with row1_col1:
     st.pyplot(fig0)
 
 with row1_col2:
-    st.write("###### Score Distribution")
-    summary_text = "This chart shows the frequency of self-discipline scores, revealing that most students rate themselves as 'average' in organization."
+    st.write("###### Score Distribution (Proportional)")
+    summary_text = "This pie chart summarizes the composition of student confidence, revealing the part-to-whole relationship of management levels."
     st.info(summary_text)
-    fig1, ax1 = plt.subplots(figsize=(6, 4))
-    sns.histplot(data=df, x='Organised_Money_Management', bins=5, discrete=True, color="#6A0DAD", ax=ax1)
-    ax1.set_xticks(range(1, 6))
+
+    # 1. Prepare the data
+    score_counts = df['Organised_Money_Management'].value_counts().sort_index()
+
+    # 2. Define the Plot (Matplotlib)
+    fig1, ax1 = plt.subplots(figsize=(6, 5)) # Adjusted for column fit
+    
+    # Use the 'magma' palette for a professional look
+    colors = sns.color_palette('magma', len(score_counts))
+    
+    ax1.pie(
+        score_counts, 
+        labels=score_counts.index, 
+        autopct='%1.1f%%', 
+        startangle=90, 
+        colors=colors,
+        textprops={'fontsize': 10}
+    )
+    
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.tight_layout()
+    
+    # 3. Display in Streamlit
     st.pyplot(fig1)
 
 # --- 6. BOTTOM ROW: TABS FOR DETAILED ANALYSIS ---
